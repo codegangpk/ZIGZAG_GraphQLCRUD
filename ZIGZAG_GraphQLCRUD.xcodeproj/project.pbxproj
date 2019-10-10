@@ -7,15 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00B1234F785B000157DD /* GraphQLAPI.swift */; };
 		698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */; };
 		698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */; };
 		698BFE5F234F14CC00FCFB38 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5E234F14CC00FCFB38 /* ViewController.swift */; };
 		698BFE62234F14CC00FCFB38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE60234F14CC00FCFB38 /* Main.storyboard */; };
 		698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE63234F14CF00FCFB38 /* Assets.xcassets */; };
 		698BFE67234F14CF00FCFB38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE65234F14CF00FCFB38 /* LaunchScreen.storyboard */; };
+		698BFE70234F1A0100FCFB38 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698BFE6F234F1A0100FCFB38 /* Apollo.framework */; };
+		698BFE71234F1A0100FCFB38 /* Apollo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 698BFE6F234F1A0100FCFB38 /* Apollo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		698BFE75234F1DBB00FCFB38 /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE74234F1DBB00FCFB38 /* Queries.graphql */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		698BFE72234F1A0100FCFB38 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				698BFE71234F1A0100FCFB38 /* Apollo.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		694C00B1234F785B000157DD /* GraphQLAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQLAPI.swift; sourceTree = "<group>"; };
 		698BFE57234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZIGZAG_GraphQLCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +43,8 @@
 		698BFE63234F14CF00FCFB38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		698BFE66234F14CF00FCFB38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		698BFE68234F14CF00FCFB38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		698BFE6F234F1A0100FCFB38 /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/iOS/Apollo.framework; sourceTree = "<group>"; };
+		698BFE74234F1DBB00FCFB38 /* Queries.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				698BFE70234F1A0100FCFB38 /* Apollo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +64,7 @@
 			children = (
 				698BFE59234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD */,
 				698BFE58234F14CC00FCFB38 /* Products */,
+				698BFE6E234F1A0100FCFB38 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +79,8 @@
 		698BFE59234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD */ = {
 			isa = PBXGroup;
 			children = (
+				698BFE74234F1DBB00FCFB38 /* Queries.graphql */,
+				694C00B1234F785B000157DD /* GraphQLAPI.swift */,
 				698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */,
 				698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */,
 				698BFE5E234F14CC00FCFB38 /* ViewController.swift */,
@@ -67,6 +92,14 @@
 			path = ZIGZAG_GraphQLCRUD;
 			sourceTree = "<group>";
 		};
+		698BFE6E234F1A0100FCFB38 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				698BFE6F234F1A0100FCFB38 /* Apollo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +107,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 698BFE6B234F14CF00FCFB38 /* Build configuration list for PBXNativeTarget "ZIGZAG_GraphQLCRUD" */;
 			buildPhases = (
+				691A477D234F286400F4F3E7 /* Generate Apollo GraphQL API */,
 				698BFE53234F14CC00FCFB38 /* Sources */,
 				698BFE54234F14CC00FCFB38 /* Frameworks */,
 				698BFE55234F14CC00FCFB38 /* Resources */,
+				698BFE72234F1A0100FCFB38 /* Embed Frameworks */,
+				698BFE73234F1A1600FCFB38 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -125,6 +161,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				698BFE75234F1DBB00FCFB38 /* Queries.graphql in Resources */,
 				698BFE67234F14CF00FCFB38 /* LaunchScreen.storyboard in Resources */,
 				698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */,
 				698BFE62234F14CC00FCFB38 /* Main.storyboard in Resources */,
@@ -133,11 +170,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		691A477D234F286400F4F3E7 /* Generate Apollo GraphQL API */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Apollo GraphQL API";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT_PATH=\"${SRCROOT}/Carthage/Checkouts/apollo-ios/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" GraphQLAPI.swift\n";
+		};
+		698BFE73234F1A1600FCFB38 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Apollo.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		698BFE53234F14CC00FCFB38 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */,
 				698BFE5F234F14CC00FCFB38 /* ViewController.swift in Sources */,
 				698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */,
 				698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */,
@@ -285,6 +362,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4EF6BS625Y;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ZIGZAG_GraphQLCRUD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -302,6 +383,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4EF6BS625Y;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ZIGZAG_GraphQLCRUD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
