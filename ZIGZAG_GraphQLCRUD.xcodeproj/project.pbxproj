@@ -15,6 +15,7 @@
 		698BFE67234F14CF00FCFB38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE65234F14CF00FCFB38 /* LaunchScreen.storyboard */; };
 		698BFE70234F1A0100FCFB38 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698BFE6F234F1A0100FCFB38 /* Apollo.framework */; };
 		698BFE71234F1A0100FCFB38 /* Apollo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 698BFE6F234F1A0100FCFB38 /* Apollo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		698BFE75234F1DBB00FCFB38 /* schema.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE74234F1DBB00FCFB38 /* schema.graphql */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,7 @@
 		698BFE66234F14CF00FCFB38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		698BFE68234F14CF00FCFB38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		698BFE6F234F1A0100FCFB38 /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/iOS/Apollo.framework; sourceTree = "<group>"; };
+		698BFE74234F1DBB00FCFB38 /* schema.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema.graphql; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 		698BFE59234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD */ = {
 			isa = PBXGroup;
 			children = (
+				698BFE74234F1DBB00FCFB38 /* schema.graphql */,
 				698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */,
 				698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */,
 				698BFE5E234F14CC00FCFB38 /* ViewController.swift */,
@@ -154,6 +157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				698BFE75234F1DBB00FCFB38 /* schema.graphql in Resources */,
 				698BFE67234F14CF00FCFB38 /* LaunchScreen.storyboard in Resources */,
 				698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */,
 				698BFE62234F14CC00FCFB38 /* Main.storyboard in Resources */,
