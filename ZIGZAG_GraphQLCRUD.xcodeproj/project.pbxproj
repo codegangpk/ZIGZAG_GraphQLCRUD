@@ -10,8 +10,6 @@
 		694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00B1234F785B000157DD /* GraphQLAPI.swift */; };
 		698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */; };
 		698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */; };
-		698BFE5F234F14CC00FCFB38 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5E234F14CC00FCFB38 /* ViewController.swift */; };
-		698BFE62234F14CC00FCFB38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE60234F14CC00FCFB38 /* Main.storyboard */; };
 		698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE63234F14CF00FCFB38 /* Assets.xcassets */; };
 		698BFE67234F14CF00FCFB38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE65234F14CF00FCFB38 /* LaunchScreen.storyboard */; };
 		698BFE70234F1A0100FCFB38 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698BFE6F234F1A0100FCFB38 /* Apollo.framework */; };
@@ -38,8 +36,6 @@
 		698BFE57234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZIGZAG_GraphQLCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		698BFE5E234F14CC00FCFB38 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		698BFE61234F14CC00FCFB38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		698BFE63234F14CF00FCFB38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		698BFE66234F14CF00FCFB38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		698BFE68234F14CF00FCFB38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,6 +55,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		694C00B3234F8F46000157DD /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				698BFE63234F14CF00FCFB38 /* Assets.xcassets */,
+				698BFE65234F14CF00FCFB38 /* LaunchScreen.storyboard */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		694C00B4234F8F50000157DD /* GraphQL */ = {
+			isa = PBXGroup;
+			children = (
+				698BFE74234F1DBB00FCFB38 /* Queries.graphql */,
+				694C00B1234F785B000157DD /* GraphQLAPI.swift */,
+			);
+			path = GraphQL;
+			sourceTree = "<group>";
+		};
 		698BFE4E234F14CC00FCFB38 = {
 			isa = PBXGroup;
 			children = (
@@ -79,14 +93,10 @@
 		698BFE59234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD */ = {
 			isa = PBXGroup;
 			children = (
-				698BFE74234F1DBB00FCFB38 /* Queries.graphql */,
-				694C00B1234F785B000157DD /* GraphQLAPI.swift */,
 				698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */,
 				698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */,
-				698BFE5E234F14CC00FCFB38 /* ViewController.swift */,
-				698BFE60234F14CC00FCFB38 /* Main.storyboard */,
-				698BFE63234F14CF00FCFB38 /* Assets.xcassets */,
-				698BFE65234F14CF00FCFB38 /* LaunchScreen.storyboard */,
+				694C00B4234F8F50000157DD /* GraphQL */,
+				694C00B3234F8F46000157DD /* Assets */,
 				698BFE68234F14CF00FCFB38 /* Info.plist */,
 			);
 			path = ZIGZAG_GraphQLCRUD;
@@ -164,7 +174,6 @@
 				698BFE75234F1DBB00FCFB38 /* Queries.graphql in Resources */,
 				698BFE67234F14CF00FCFB38 /* LaunchScreen.storyboard in Resources */,
 				698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */,
-				698BFE62234F14CC00FCFB38 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,7 +196,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SCRIPT_PATH=\"${SRCROOT}/Carthage/Checkouts/apollo-ios/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" GraphQLAPI.swift\n";
+			shellScript = "SCRIPT_PATH=\"${SRCROOT}/Carthage/Checkouts/apollo-ios/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}/GraphQL\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" GraphQLAPI.swift\n";
 		};
 		698BFE73234F1A1600FCFB38 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -215,7 +224,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */,
-				698BFE5F234F14CC00FCFB38 /* ViewController.swift in Sources */,
 				698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */,
 				698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */,
 			);
@@ -224,14 +232,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		698BFE60234F14CC00FCFB38 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				698BFE61234F14CC00FCFB38 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		698BFE65234F14CF00FCFB38 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
