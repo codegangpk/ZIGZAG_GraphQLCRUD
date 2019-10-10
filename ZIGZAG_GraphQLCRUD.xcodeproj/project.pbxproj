@@ -11,6 +11,7 @@
 		694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E0234F9D2C000157DD /* ProductsViewController.swift */; };
 		694C00E3234F9D35000157DD /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductsViewController.xib */; };
 		694C00E5234F9F4E000157DD /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E4234F9F4E000157DD /* NSObject+Extension.swift */; };
+		694C00E8234FA72B000157DD /* Apollo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E7234FA72B000157DD /* Apollo.swift */; };
 		698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */; };
 		698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */; };
 		698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE63234F14CF00FCFB38 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		694C00E0234F9D2C000157DD /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		694C00E2234F9D35000157DD /* ProductsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
 		694C00E4234F9F4E000157DD /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		694C00E7234FA72B000157DD /* Apollo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apollo.swift; sourceTree = "<group>"; };
 		698BFE57234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZIGZAG_GraphQLCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,15 @@
 			path = GraphQL;
 			sourceTree = "<group>";
 		};
+		694C00E6234FA71F000157DD /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				694C00E0234F9D2C000157DD /* ProductsViewController.swift */,
+				694C00E2234F9D35000157DD /* ProductsViewController.xib */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		698BFE4E234F14CC00FCFB38 = {
 			isa = PBXGroup;
 			children = (
@@ -101,8 +112,8 @@
 			children = (
 				698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */,
 				698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */,
-				694C00E0234F9D2C000157DD /* ProductsViewController.swift */,
-				694C00E2234F9D35000157DD /* ProductsViewController.xib */,
+				694C00E7234FA72B000157DD /* Apollo.swift */,
+				694C00E6234FA71F000157DD /* ViewControllers */,
 				694C00E4234F9F4E000157DD /* NSObject+Extension.swift */,
 				694C00B4234F8F50000157DD /* GraphQL */,
 				694C00B3234F8F46000157DD /* Assets */,
@@ -237,6 +248,7 @@
 				694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */,
 				698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */,
 				694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */,
+				694C00E8234FA72B000157DD /* Apollo.swift in Sources */,
 				698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
