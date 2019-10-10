@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		698BFE57234F14CC00FCFB38 /* ZIGZIG_GraphQLCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZIGZIG_GraphQLCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		698BFE57234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZIGZAG_GraphQLCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		698BFE5E234F14CC00FCFB38 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,7 +40,7 @@
 		698BFE4E234F14CC00FCFB38 = {
 			isa = PBXGroup;
 			children = (
-				698BFE59234F14CC00FCFB38 /* ZIGZIG_GraphQLCRUD */,
+				698BFE59234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD */,
 				698BFE58234F14CC00FCFB38 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,12 +48,12 @@
 		698BFE58234F14CC00FCFB38 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				698BFE57234F14CC00FCFB38 /* ZIGZIG_GraphQLCRUD.app */,
+				698BFE57234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		698BFE59234F14CC00FCFB38 /* ZIGZIG_GraphQLCRUD */ = {
+		698BFE59234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD */ = {
 			isa = PBXGroup;
 			children = (
 				698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */,
@@ -64,15 +64,15 @@
 				698BFE65234F14CF00FCFB38 /* LaunchScreen.storyboard */,
 				698BFE68234F14CF00FCFB38 /* Info.plist */,
 			);
-			path = ZIGZIG_GraphQLCRUD;
+			path = ZIGZAG_GraphQLCRUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		698BFE56234F14CC00FCFB38 /* ZIGZIG_GraphQLCRUD */ = {
+		698BFE56234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 698BFE6B234F14CF00FCFB38 /* Build configuration list for PBXNativeTarget "ZIGZIG_GraphQLCRUD" */;
+			buildConfigurationList = 698BFE6B234F14CF00FCFB38 /* Build configuration list for PBXNativeTarget "ZIGZAG_GraphQLCRUD" */;
 			buildPhases = (
 				698BFE53234F14CC00FCFB38 /* Sources */,
 				698BFE54234F14CC00FCFB38 /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = ZIGZIG_GraphQLCRUD;
+			name = ZIGZAG_GraphQLCRUD;
 			productName = ZIGZIG_GraphQLCRUD;
-			productReference = 698BFE57234F14CC00FCFB38 /* ZIGZIG_GraphQLCRUD.app */;
+			productReference = 698BFE57234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +102,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 698BFE52234F14CC00FCFB38 /* Build configuration list for PBXProject "ZIGZIG_GraphQLCRUD" */;
+			buildConfigurationList = 698BFE52234F14CC00FCFB38 /* Build configuration list for PBXProject "ZIGZAG_GraphQLCRUD" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +115,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				698BFE56234F14CC00FCFB38 /* ZIGZIG_GraphQLCRUD */,
+				698BFE56234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD */,
 			);
 		};
 /* End PBXProject section */
@@ -283,16 +283,15 @@
 		698BFE6C234F14CF00FCFB38 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4EF6BS625Y;
-				INFOPLIST_FILE = ZIGZIG_GraphQLCRUD/Info.plist;
+				INFOPLIST_FILE = ZIGZAG_GraphQLCRUD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "codegangpk.ZIGZIG-GraphQLCRUD";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "codegangpk.ZIGZAG-GraphQLCRUD";
+				PRODUCT_NAME = ZIGZAG_GraphQLCRUD;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -301,16 +300,15 @@
 		698BFE6D234F14CF00FCFB38 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4EF6BS625Y;
-				INFOPLIST_FILE = ZIGZIG_GraphQLCRUD/Info.plist;
+				INFOPLIST_FILE = ZIGZAG_GraphQLCRUD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "codegangpk.ZIGZIG-GraphQLCRUD";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "codegangpk.ZIGZAG-GraphQLCRUD";
+				PRODUCT_NAME = ZIGZAG_GraphQLCRUD;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -319,7 +317,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		698BFE52234F14CC00FCFB38 /* Build configuration list for PBXProject "ZIGZIG_GraphQLCRUD" */ = {
+		698BFE52234F14CC00FCFB38 /* Build configuration list for PBXProject "ZIGZAG_GraphQLCRUD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				698BFE69234F14CF00FCFB38 /* Debug */,
@@ -328,7 +326,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		698BFE6B234F14CF00FCFB38 /* Build configuration list for PBXNativeTarget "ZIGZIG_GraphQLCRUD" */ = {
+		698BFE6B234F14CF00FCFB38 /* Build configuration list for PBXNativeTarget "ZIGZAG_GraphQLCRUD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				698BFE6C234F14CF00FCFB38 /* Debug */,

@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  ZIGZIG_GraphQLCRUD
+//  ZIGZAG_GraphQLCRUD
 //
 //  Created by Paul Kim on 2019/10/10.
 //  Copyright © 2019 Paul Kim. All rights reserved.
