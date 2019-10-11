@@ -165,6 +165,8 @@ extension ProductViewController: UITableViewDelegate {
 extension ProductViewController {
     private func updateDataSource(with product: Product) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
+        snapshot.deleteAllItems()
+        
         snapshot.appendSections(Section.allCases)
         
         if case .add = mode {

@@ -118,6 +118,8 @@ extension SelectSupplierViewController {
     
     private func updateDataSource(with suppliers: [Supplier]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
+        snapshot.deleteAllItems()
+        
         snapshot.appendSections(Section.allCases)
         
         var rows: [Row] = []

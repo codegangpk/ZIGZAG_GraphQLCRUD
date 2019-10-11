@@ -102,6 +102,8 @@ extension ProductsViewController {
     
     private func updateDataSource(with products: [Product]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
+        snapshot.deleteAllItems()
+        
         snapshot.appendSections(Section.allCases)
         
         var rows: [Row] = []
