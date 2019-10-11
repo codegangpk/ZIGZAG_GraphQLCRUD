@@ -87,12 +87,12 @@ extension ProductsViewController: UITableViewDelegate {
 
 extension ProductsViewController {
     private func fetchProducts() {
-        let _ = Apollo.shared.client.fetch(query: ProductListQuery(id_list: nil)) { [weak self] result in
+        ZigZagAPI.fetch(query: ProductListQuery(id_list: nil)) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let graphQLResult):
-                self.products = graphQLResult.data?.productList.itemList.compactMap { Product(productFragment: $0.fragments.productFragment) } ?? []
+                self.products = graphQLResult.data?.productList.itemList.compactMap { Product(productListFragment: $0.fragments.productListFragment) } ?? []
                 print(self.products)
             case .failure(let error):
                 NSLog("Error while fetching query: \(error.localizedDescription)")

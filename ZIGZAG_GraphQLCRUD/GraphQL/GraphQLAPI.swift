@@ -135,16 +135,16 @@ public final class ProductListQuery: GraphQLQuery {
   ///     __typename
   ///     item_list {
   ///       __typename
-  ///       ...productFragment
+  ///       ...productListFragment
   ///     }
   ///   }
   /// }
   public let operationDefinition =
-    "query ProductList($id_list: [ID!]) { product_list(id_list: $id_list) { __typename item_list { __typename ...productFragment } } }"
+    "query ProductList($id_list: [ID!]) { product_list(id_list: $id_list) { __typename item_list { __typename ...productListFragment } } }"
 
   public let operationName = "ProductList"
 
-  public var queryDocument: String { return operationDefinition.appending(ProductFragment.fragmentDefinition).appending(SupplierFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(ProductListFragment.fragmentDefinition).appending(SupplierFragment.fragmentDefinition) }
 
   public var id_list: [GraphQLID]?
 
@@ -226,7 +226,7 @@ public final class ProductListQuery: GraphQLQuery {
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(ProductFragment.self),
+          GraphQLFragmentSpread(ProductListFragment.self),
         ]
 
         public private(set) var resultMap: ResultMap
@@ -260,9 +260,9 @@ public final class ProductListQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public var productFragment: ProductFragment {
+          public var productListFragment: ProductListFragment {
             get {
-              return ProductFragment(unsafeResultMap: resultMap)
+              return ProductListFragment(unsafeResultMap: resultMap)
             }
             set {
               resultMap += newValue.resultMap
@@ -278,15 +278,15 @@ public final class ProductQuery: GraphQLQuery {
   /// query Product($id: ID) {
   ///   product(id: $id) {
   ///     __typename
-  ///     ...productFragment
+  ///     ...productDetailFragment
   ///   }
   /// }
   public let operationDefinition =
-    "query Product($id: ID) { product(id: $id) { __typename ...productFragment } }"
+    "query Product($id: ID) { product(id: $id) { __typename ...productDetailFragment } }"
 
   public let operationName = "Product"
 
-  public var queryDocument: String { return operationDefinition.appending(ProductFragment.fragmentDefinition).appending(SupplierFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(ProductDetailFragment.fragmentDefinition).appending(SupplierFragment.fragmentDefinition) }
 
   public var id: GraphQLID?
 
@@ -332,7 +332,7 @@ public final class ProductQuery: GraphQLQuery {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(ProductFragment.self),
+        GraphQLFragmentSpread(ProductDetailFragment.self),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -366,9 +366,9 @@ public final class ProductQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public var productFragment: ProductFragment {
+        public var productDetailFragment: ProductDetailFragment {
           get {
-            return ProductFragment(unsafeResultMap: resultMap)
+            return ProductDetailFragment(unsafeResultMap: resultMap)
           }
           set {
             resultMap += newValue.resultMap
@@ -532,15 +532,15 @@ public final class CreateProductMutation: GraphQLMutation {
   /// mutation CreateProduct($input: CreateProductInput!) {
   ///   createProduct(input: $input) {
   ///     __typename
-  ///     ...productFragment
+  ///     ...productDetailFragment
   ///   }
   /// }
   public let operationDefinition =
-    "mutation CreateProduct($input: CreateProductInput!) { createProduct(input: $input) { __typename ...productFragment } }"
+    "mutation CreateProduct($input: CreateProductInput!) { createProduct(input: $input) { __typename ...productDetailFragment } }"
 
   public let operationName = "CreateProduct"
 
-  public var queryDocument: String { return operationDefinition.appending(ProductFragment.fragmentDefinition).appending(SupplierFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(ProductDetailFragment.fragmentDefinition).appending(SupplierFragment.fragmentDefinition) }
 
   public var input: CreateProductInput
 
@@ -584,7 +584,7 @@ public final class CreateProductMutation: GraphQLMutation {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(ProductFragment.self),
+        GraphQLFragmentSpread(ProductDetailFragment.self),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -618,9 +618,9 @@ public final class CreateProductMutation: GraphQLMutation {
           self.resultMap = unsafeResultMap
         }
 
-        public var productFragment: ProductFragment {
+        public var productDetailFragment: ProductDetailFragment {
           get {
-            return ProductFragment(unsafeResultMap: resultMap)
+            return ProductDetailFragment(unsafeResultMap: resultMap)
           }
           set {
             resultMap += newValue.resultMap
@@ -635,15 +635,15 @@ public final class DeleteProductMutation: GraphQLMutation {
   /// mutation DeleteProduct($input: DeleteProductInput!) {
   ///   deleteProduct(input: $input) {
   ///     __typename
-  ///     ...productFragment
+  ///     ...productDetailFragment
   ///   }
   /// }
   public let operationDefinition =
-    "mutation DeleteProduct($input: DeleteProductInput!) { deleteProduct(input: $input) { __typename ...productFragment } }"
+    "mutation DeleteProduct($input: DeleteProductInput!) { deleteProduct(input: $input) { __typename ...productDetailFragment } }"
 
   public let operationName = "DeleteProduct"
 
-  public var queryDocument: String { return operationDefinition.appending(ProductFragment.fragmentDefinition).appending(SupplierFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(ProductDetailFragment.fragmentDefinition).appending(SupplierFragment.fragmentDefinition) }
 
   public var input: DeleteProductInput
 
@@ -687,7 +687,7 @@ public final class DeleteProductMutation: GraphQLMutation {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(ProductFragment.self),
+        GraphQLFragmentSpread(ProductDetailFragment.self),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -721,9 +721,9 @@ public final class DeleteProductMutation: GraphQLMutation {
           self.resultMap = unsafeResultMap
         }
 
-        public var productFragment: ProductFragment {
+        public var productDetailFragment: ProductDetailFragment {
           get {
-            return ProductFragment(unsafeResultMap: resultMap)
+            return ProductDetailFragment(unsafeResultMap: resultMap)
           }
           set {
             resultMap += newValue.resultMap
@@ -738,15 +738,15 @@ public final class UpdateProductMutation: GraphQLMutation {
   /// mutation UpdateProduct($input: UpdateProductInput!) {
   ///   updateProduct(input: $input) {
   ///     __typename
-  ///     ...productFragment
+  ///     ...productDetailFragment
   ///   }
   /// }
   public let operationDefinition =
-    "mutation UpdateProduct($input: UpdateProductInput!) { updateProduct(input: $input) { __typename ...productFragment } }"
+    "mutation UpdateProduct($input: UpdateProductInput!) { updateProduct(input: $input) { __typename ...productDetailFragment } }"
 
   public let operationName = "UpdateProduct"
 
-  public var queryDocument: String { return operationDefinition.appending(ProductFragment.fragmentDefinition).appending(SupplierFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(ProductDetailFragment.fragmentDefinition).appending(SupplierFragment.fragmentDefinition) }
 
   public var input: UpdateProductInput
 
@@ -790,7 +790,7 @@ public final class UpdateProductMutation: GraphQLMutation {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(ProductFragment.self),
+        GraphQLFragmentSpread(ProductDetailFragment.self),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -824,9 +824,9 @@ public final class UpdateProductMutation: GraphQLMutation {
           self.resultMap = unsafeResultMap
         }
 
-        public var productFragment: ProductFragment {
+        public var productDetailFragment: ProductDetailFragment {
           get {
-            return ProductFragment(unsafeResultMap: resultMap)
+            return ProductDetailFragment(unsafeResultMap: resultMap)
           }
           set {
             resultMap += newValue.resultMap
@@ -894,13 +894,12 @@ public struct SupplierFragment: GraphQLFragment {
   }
 }
 
-public struct ProductFragment: GraphQLFragment {
-  /// fragment productFragment on Product {
+public struct ProductListFragment: GraphQLFragment {
+  /// fragment productListFragment on Product {
   ///   __typename
   ///   id
   ///   name_ko
   ///   name_en
-  ///   description_ko
   ///   price
   ///   supplier {
   ///     __typename
@@ -910,7 +909,7 @@ public struct ProductFragment: GraphQLFragment {
   ///   date_updated
   /// }
   public static let fragmentDefinition =
-    "fragment productFragment on Product { __typename id name_ko name_en description_ko price supplier { __typename ...supplierFragment } date_created date_updated }"
+    "fragment productListFragment on Product { __typename id name_ko name_en price supplier { __typename ...supplierFragment } date_created date_updated }"
 
   public static let possibleTypes = ["Product"]
 
@@ -919,7 +918,6 @@ public struct ProductFragment: GraphQLFragment {
     GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
     GraphQLField("name_ko", type: .scalar(String.self)),
     GraphQLField("name_en", type: .scalar(String.self)),
-    GraphQLField("description_ko", type: .scalar(String.self)),
     GraphQLField("price", type: .scalar(Int.self)),
     GraphQLField("supplier", type: .object(Supplier.selections)),
     GraphQLField("date_created", type: .nonNull(.scalar(Double.self))),
@@ -932,8 +930,180 @@ public struct ProductFragment: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: GraphQLID, nameKo: String? = nil, nameEn: String? = nil, descriptionKo: String? = nil, price: Int? = nil, supplier: Supplier? = nil, dateCreated: Double, dateUpdated: Double) {
-    self.init(unsafeResultMap: ["__typename": "Product", "id": id, "name_ko": nameKo, "name_en": nameEn, "description_ko": descriptionKo, "price": price, "supplier": supplier.flatMap { (value: Supplier) -> ResultMap in value.resultMap }, "date_created": dateCreated, "date_updated": dateUpdated])
+  public init(id: GraphQLID, nameKo: String? = nil, nameEn: String? = nil, price: Int? = nil, supplier: Supplier? = nil, dateCreated: Double, dateUpdated: Double) {
+    self.init(unsafeResultMap: ["__typename": "Product", "id": id, "name_ko": nameKo, "name_en": nameEn, "price": price, "supplier": supplier.flatMap { (value: Supplier) -> ResultMap in value.resultMap }, "date_created": dateCreated, "date_updated": dateUpdated])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  /// 기본 키
+  public var id: GraphQLID {
+    get {
+      return resultMap["id"]! as! GraphQLID
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  /// 한국어 상품명
+  public var nameKo: String? {
+    get {
+      return resultMap["name_ko"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "name_ko")
+    }
+  }
+
+  /// 영어 상품명
+  public var nameEn: String? {
+    get {
+      return resultMap["name_en"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "name_en")
+    }
+  }
+
+  /// 가격
+  public var price: Int? {
+    get {
+      return resultMap["price"] as? Int
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "price")
+    }
+  }
+
+  /// 공급사
+  public var supplier: Supplier? {
+    get {
+      return (resultMap["supplier"] as? ResultMap).flatMap { Supplier(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "supplier")
+    }
+  }
+
+  /// 생성일자
+  public var dateCreated: Double {
+    get {
+      return resultMap["date_created"]! as! Double
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "date_created")
+    }
+  }
+
+  /// 수정일자
+  public var dateUpdated: Double {
+    get {
+      return resultMap["date_updated"]! as! Double
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "date_updated")
+    }
+  }
+
+  public struct Supplier: GraphQLSelectionSet {
+    public static let possibleTypes = ["Supplier"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLFragmentSpread(SupplierFragment.self),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(id: GraphQLID, name: String) {
+      self.init(unsafeResultMap: ["__typename": "Supplier", "id": id, "name": name])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var fragments: Fragments {
+      get {
+        return Fragments(unsafeResultMap: resultMap)
+      }
+      set {
+        resultMap += newValue.resultMap
+      }
+    }
+
+    public struct Fragments {
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public var supplierFragment: SupplierFragment {
+        get {
+          return SupplierFragment(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+    }
+  }
+}
+
+public struct ProductDetailFragment: GraphQLFragment {
+  /// fragment productDetailFragment on Product {
+  ///   __typename
+  ///   id
+  ///   name_ko
+  ///   name_en
+  ///   description_ko
+  ///   price
+  ///   supplier {
+  ///     __typename
+  ///     ...supplierFragment
+  ///   }
+  /// }
+  public static let fragmentDefinition =
+    "fragment productDetailFragment on Product { __typename id name_ko name_en description_ko price supplier { __typename ...supplierFragment } }"
+
+  public static let possibleTypes = ["Product"]
+
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+    GraphQLField("name_ko", type: .scalar(String.self)),
+    GraphQLField("name_en", type: .scalar(String.self)),
+    GraphQLField("description_ko", type: .scalar(String.self)),
+    GraphQLField("price", type: .scalar(Int.self)),
+    GraphQLField("supplier", type: .object(Supplier.selections)),
+  ]
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public init(id: GraphQLID, nameKo: String? = nil, nameEn: String? = nil, descriptionKo: String? = nil, price: Int? = nil, supplier: Supplier? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Product", "id": id, "name_ko": nameKo, "name_en": nameEn, "description_ko": descriptionKo, "price": price, "supplier": supplier.flatMap { (value: Supplier) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -1002,26 +1172,6 @@ public struct ProductFragment: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue?.resultMap, forKey: "supplier")
-    }
-  }
-
-  /// 생성일자
-  public var dateCreated: Double {
-    get {
-      return resultMap["date_created"]! as! Double
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "date_created")
-    }
-  }
-
-  /// 수정일자
-  public var dateUpdated: Double {
-    get {
-      return resultMap["date_updated"]! as! Double
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "date_updated")
     }
   }
 

@@ -104,7 +104,7 @@ extension SelectSupplierViewController: UITableViewDelegate {
 
 extension SelectSupplierViewController {
     private func fetchProducts() {
-        let _ = Apollo.shared.client.fetch(query: SupplierListQuery(id_list: nil)) { [weak self] (result) in
+        ZigZagAPI.fetch(query: SupplierListQuery(id_list: nil)) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
