@@ -48,8 +48,8 @@ class ProductsViewController: UIViewController {
         setupNavigationItem()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
-        
         tableView.dataSource = dataSource
+        
         fetchProducts()
     }
 }

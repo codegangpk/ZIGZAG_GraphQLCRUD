@@ -37,7 +37,11 @@ class ProductViewController: UIViewController {
     
     private let mode: Mode
     
-    private var product: Product
+    private var product: Product {
+        didSet {
+            updateDataSource(with: product)
+        }
+    }
     
     init(mode: Mode) {
         self.mode = mode
@@ -63,8 +67,8 @@ class ProductViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.reuseIdentifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
-        
         tableView.dataSource = dataSource
+        
         updateDataSource(with: product)
     }
 }
@@ -100,6 +104,12 @@ extension ProductViewController {
                 } else if case .supplier = row {
                     cell.textField.text = self.product.supplier?.name
                     cell.textField.placeholder = "%L%: 공급사"
+                    cell.textField.isUserInteractionEnabled = false
+                    if case .view = self.mode {
+                        cell.accessoryType = .none
+                    } else {
+                        cell.accessoryType = .disclosureIndicator
+                    }
                 }
                 return cell
             }
@@ -108,6 +118,27 @@ extension ProductViewController {
 }
 
 extension ProductViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let row = dataSource.itemIdentifier(for: indexPath) else { return }
+        
+        if case .supplier = row {
+            switch mode {
+            case .add, .edit:
+                let suppliersViewController = SelectSupplierViewController(selectedSupplier: product.supplier) { [weak self] (selectSupplierViewController, selectedSupplier) in
+                    guard let self = self else { return }
+                    
+                    self.product.supplier = selectedSupplier
+                    self.navigationController?.popViewController(animated: true)
+                }
+                navigationController?.pushViewController(suppliersViewController, animated: true)
+            default:
+                break
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .leastNonzeroMagnitude
     }

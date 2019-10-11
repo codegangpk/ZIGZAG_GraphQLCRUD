@@ -15,6 +15,8 @@ struct Product {
     var descriptionKo: String?
     var price: Int?
     var supplier: Supplier?
+    var dateCreated: Double?
+    var dateUpdatd: Double?
     
     init() { }
     
@@ -40,6 +42,8 @@ struct Product {
         
         self.nameEn = productFragment.nameEn
         self.descriptionKo = productFragment.descriptionKo
+        self.dateCreated = productFragment.dateCreated
+        self.dateUpdatd = productFragment.dateUpdated
     }
 }
 

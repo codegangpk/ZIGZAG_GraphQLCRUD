@@ -19,6 +19,8 @@
 		69866D2123504FF7008B8318 /* TextViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */; };
 		69866D23235054CC008B8318 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69866D22235054CC008B8318 /* Product.swift */; };
 		69866D27235062EC008B8318 /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69866D26235062EC008B8318 /* ProductsViewController.xib */; };
+		69866D29235076C2008B8318 /* SelectSupplierViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69866D28235076C2008B8318 /* SelectSupplierViewController.swift */; };
+		69866D2B235076CC008B8318 /* SelectSupplierViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69866D2A235076CC008B8318 /* SelectSupplierViewController.xib */; };
 		698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */; };
 		698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */; };
 		698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE63234F14CF00FCFB38 /* Assets.xcassets */; };
@@ -55,6 +57,8 @@
 		69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewTableViewCell.xib; sourceTree = "<group>"; };
 		69866D22235054CC008B8318 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		69866D26235062EC008B8318 /* ProductsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
+		69866D28235076C2008B8318 /* SelectSupplierViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSupplierViewController.swift; sourceTree = "<group>"; };
+		69866D2A235076CC008B8318 /* SelectSupplierViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectSupplierViewController.xib; sourceTree = "<group>"; };
 		698BFE57234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZIGZAG_GraphQLCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 				69866D26235062EC008B8318 /* ProductsViewController.xib */,
 				697C45802350465900A4583D /* ProductViewController.swift */,
 				694C00E2234F9D35000157DD /* ProductViewController.xib */,
+				69866D28235076C2008B8318 /* SelectSupplierViewController.swift */,
+				69866D2A235076CC008B8318 /* SelectSupplierViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -246,6 +252,7 @@
 			files = (
 				698BFE75234F1DBB00FCFB38 /* Queries.graphql in Resources */,
 				69866D2123504FF7008B8318 /* TextViewTableViewCell.xib in Resources */,
+				69866D2B235076CC008B8318 /* SelectSupplierViewController.xib in Resources */,
 				698BFE67234F14CF00FCFB38 /* LaunchScreen.storyboard in Resources */,
 				69866D27235062EC008B8318 /* ProductsViewController.xib in Resources */,
 				697C458423504C7800A4583D /* TextFieldTableViewCell.xib in Resources */,
@@ -305,6 +312,7 @@
 				698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */,
 				697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */,
 				694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */,
+				69866D29235076C2008B8318 /* SelectSupplierViewController.swift in Sources */,
 				694C00E8234FA72B000157DD /* Apollo.swift in Sources */,
 				697C45812350465900A4583D /* ProductViewController.swift in Sources */,
 				69866D23235054CC008B8318 /* Product.swift in Sources */,
