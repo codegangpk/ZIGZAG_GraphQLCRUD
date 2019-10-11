@@ -1,62 +1,57 @@
-fragment productListFragment on Product {
+fragment supplierFragment on Supplier {
     id
-    name_ko
-    name_en
-    price
-    supplier {
-        name
-    }
+    name
 }
 
-fragment productDetailFragment on Product {
+fragment productFragment on Product {
     id
     name_ko
     name_en
     description_ko
     price
     supplier {
-        id
-        name
+        ...supplierFragment
     }
+    date_created
+    date_updated
 }
 
 query ProductList($id_list: [ID!]) {
     product_list(id_list: $id_list) {
         item_list {
-            ...productListFragment
+            ...productFragment
         }
     }
 }
 
 query Product($id: ID) {
     product(id: $id) {
-        ...productDetailFragment
+        ...productFragment
     }
 }
 
 query SupplierList($id_list: [ID!]) {
     supplier_list(id_list: $id_list) {
         item_list {
-            id
-            name
+            ...supplierFragment
         }
     }
 }
 
 mutation CreateProduct($input: CreateProductInput!) {
     createProduct(input: $input) {
-        ...productListFragment
+        ...productFragment
     }
 }
 
 mutation DeleteProduct($input: DeleteProductInput!) {
     deleteProduct(input: $input) {
-        ...productListFragment
+        ...productFragment
     }
 }
 
 mutation UpdateProduct($input: UpdateProductInput!) {
     updateProduct(input: $input) {
-        ...productDetailFragment
+        ...productFragment
     }
 }

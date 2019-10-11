@@ -9,9 +9,16 @@
 /* Begin PBXBuildFile section */
 		694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00B1234F785B000157DD /* GraphQLAPI.swift */; };
 		694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E0234F9D2C000157DD /* ProductsViewController.swift */; };
-		694C00E3234F9D35000157DD /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductsViewController.xib */; };
+		694C00E3234F9D35000157DD /* ProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductViewController.xib */; };
 		694C00E5234F9F4E000157DD /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E4234F9F4E000157DD /* NSObject+Extension.swift */; };
 		694C00E8234FA72B000157DD /* Apollo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E7234FA72B000157DD /* Apollo.swift */; };
+		697C45812350465900A4583D /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697C45802350465900A4583D /* ProductViewController.swift */; };
+		697C458423504C7800A4583D /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 697C458223504C7700A4583D /* TextFieldTableViewCell.xib */; };
+		697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697C458323504C7700A4583D /* TextFieldTableViewCell.swift */; };
+		69866D2023504FF7008B8318 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */; };
+		69866D2123504FF7008B8318 /* TextViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */; };
+		69866D23235054CC008B8318 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69866D22235054CC008B8318 /* Product.swift */; };
+		69866D27235062EC008B8318 /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69866D26235062EC008B8318 /* ProductsViewController.xib */; };
 		698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */; };
 		698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */; };
 		698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE63234F14CF00FCFB38 /* Assets.xcassets */; };
@@ -38,9 +45,16 @@
 /* Begin PBXFileReference section */
 		694C00B1234F785B000157DD /* GraphQLAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQLAPI.swift; sourceTree = "<group>"; };
 		694C00E0234F9D2C000157DD /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
-		694C00E2234F9D35000157DD /* ProductsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
+		694C00E2234F9D35000157DD /* ProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductViewController.xib; sourceTree = "<group>"; };
 		694C00E4234F9F4E000157DD /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		694C00E7234FA72B000157DD /* Apollo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apollo.swift; sourceTree = "<group>"; };
+		697C45802350465900A4583D /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		697C458223504C7700A4583D /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		697C458323504C7700A4583D /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
+		69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewTableViewCell.xib; sourceTree = "<group>"; };
+		69866D22235054CC008B8318 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		69866D26235062EC008B8318 /* ProductsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
 		698BFE57234F14CC00FCFB38 /* ZIGZAG_GraphQLCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZIGZAG_GraphQLCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,9 +99,46 @@
 			isa = PBXGroup;
 			children = (
 				694C00E0234F9D2C000157DD /* ProductsViewController.swift */,
-				694C00E2234F9D35000157DD /* ProductsViewController.xib */,
+				69866D26235062EC008B8318 /* ProductsViewController.xib */,
+				697C45802350465900A4583D /* ProductViewController.swift */,
+				694C00E2234F9D35000157DD /* ProductViewController.xib */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		694C00E9235044CC000157DD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				694C00E4234F9F4E000157DD /* NSObject+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		697C458623504C8300A4583D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				697C458323504C7700A4583D /* TextFieldTableViewCell.swift */,
+				697C458223504C7700A4583D /* TextFieldTableViewCell.xib */,
+				69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */,
+				69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		69866D2423505FF5008B8318 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				694C00E7234FA72B000157DD /* Apollo.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		69866D2523506003008B8318 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				69866D22235054CC008B8318 /* Product.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		698BFE4E234F14CC00FCFB38 = {
@@ -112,9 +163,11 @@
 			children = (
 				698BFE5A234F14CC00FCFB38 /* AppDelegate.swift */,
 				698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */,
-				694C00E7234FA72B000157DD /* Apollo.swift */,
+				69866D2523506003008B8318 /* Models */,
 				694C00E6234FA71F000157DD /* ViewControllers */,
-				694C00E4234F9F4E000157DD /* NSObject+Extension.swift */,
+				697C458623504C8300A4583D /* Cells */,
+				69866D2423505FF5008B8318 /* Network */,
+				694C00E9235044CC000157DD /* Extensions */,
 				694C00B4234F8F50000157DD /* GraphQL */,
 				694C00B3234F8F46000157DD /* Assets */,
 				698BFE68234F14CF00FCFB38 /* Info.plist */,
@@ -192,8 +245,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				698BFE75234F1DBB00FCFB38 /* Queries.graphql in Resources */,
+				69866D2123504FF7008B8318 /* TextViewTableViewCell.xib in Resources */,
 				698BFE67234F14CF00FCFB38 /* LaunchScreen.storyboard in Resources */,
-				694C00E3234F9D35000157DD /* ProductsViewController.xib in Resources */,
+				69866D27235062EC008B8318 /* ProductsViewController.xib in Resources */,
+				697C458423504C7800A4583D /* TextFieldTableViewCell.xib in Resources */,
+				694C00E3234F9D35000157DD /* ProductViewController.xib in Resources */,
 				698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,9 +303,13 @@
 				694C00E5234F9F4E000157DD /* NSObject+Extension.swift in Sources */,
 				694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */,
 				698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */,
+				697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */,
 				694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */,
 				694C00E8234FA72B000157DD /* Apollo.swift in Sources */,
+				697C45812350465900A4583D /* ProductViewController.swift in Sources */,
+				69866D23235054CC008B8318 /* Product.swift in Sources */,
 				698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */,
+				69866D2023504FF7008B8318 /* TextViewTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
