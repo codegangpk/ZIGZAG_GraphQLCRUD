@@ -14,5 +14,5 @@ struct NetworkConfig {
     }
     
     static let environment: NetworkEnvironment = .test
-    static let croquisUUIDHeader = ["Croquis-UUID": "00000000-0000-0000-0000-000000000000"]
+    static let croquisUUIDHeader = ["Croquis-UUID": "CODEGANG-0000-0000-0000-000000000000"]
 }

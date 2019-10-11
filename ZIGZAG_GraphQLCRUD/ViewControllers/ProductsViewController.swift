@@ -50,6 +50,8 @@ class ProductsViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductListStateUpdated(_:)), notification: .didProductListRequestUpdated)
+        
         fetchProducts()
     }
 }
@@ -87,17 +89,15 @@ extension ProductsViewController: UITableViewDelegate {
 
 extension ProductsViewController {
     private func fetchProducts() {
-        ZigZagAPI.fetch(query: ProductListQuery(id_list: nil)) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let graphQLResult):
-                self.products = graphQLResult.data?.productList.itemList.compactMap { Product(productListFragment: $0.fragments.productListFragment) } ?? []
-                print(self.products)
-            case .failure(let error):
-                NSLog("Error while fetching query: \(error.localizedDescription)")
-            }
-        }
+        ZAPINotificationCenter.post(notification: .didProductListRequested)
+    }
+    
+    @objc private func onDidProductListStateUpdated(_ notification: Notification) {
+        guard let data = notification.userInfo else { return }
+        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIManager.State else { return }
+        guard let products = data[ZAPINotificationCenter.UserInfoKey.products] as? [Product] else { return }
+        
+        self.products = products
     }
     
     private func updateDataSource(with products: [Product]) {

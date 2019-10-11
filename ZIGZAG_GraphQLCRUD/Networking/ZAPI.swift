@@ -8,10 +8,10 @@
 
 import Apollo
 
-class ZigZagAPI {
-    static let shared = ZigZagAPI()
+class ZAPI {
+    static let shared = ZAPI()
     
-    var baseURL: URL {
+    private var baseURL: URL {
         switch NetworkConfig.environment {
         default:
             return URL(string: "http://test.recruit.croquis.com:28500/")!
@@ -21,7 +21,7 @@ class ZigZagAPI {
     private (set) lazy var client = ApolloClient(networkTransport: networkTransport)
 }
 
-extension ZigZagAPI: HTTPNetworkTransportPreflightDelegate {
+extension ZAPI: HTTPNetworkTransportPreflightDelegate {
     func networkTransport(_ networkTransport: HTTPNetworkTransport, shouldSend request: URLRequest) -> Bool {
         return true
     }

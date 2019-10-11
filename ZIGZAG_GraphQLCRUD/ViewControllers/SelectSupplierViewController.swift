@@ -104,12 +104,13 @@ extension SelectSupplierViewController: UITableViewDelegate {
 
 extension SelectSupplierViewController {
     private func fetchProducts() {
-        ZigZagAPI.fetch(query: SupplierListQuery(id_list: nil)) { [weak self] (result) in
+        ZAPI.fetch(SupplierListQuery(id_list: nil)) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
             case .success(let graphQLResult):
                 self.suppliers = graphQLResult.data?.supplierList.itemList.compactMap { Supplier(supplierFragment: $0.fragments.supplierFragment) } ?? []
+                print(self.suppliers)
             case .failure(let error):
                 NSLog("Error while fetching query: \(error.localizedDescription)")
             }

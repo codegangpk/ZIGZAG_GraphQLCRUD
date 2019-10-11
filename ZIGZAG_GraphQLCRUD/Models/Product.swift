@@ -44,6 +44,19 @@ struct Product {
         self.dateCreated = productListFragment.dateCreated
         self.dateUpdatd = productListFragment.dateUpdated
     }
+    
+    init?(productDetailFragment: ProductDetailFragment) {
+        let id = productDetailFragment.id
+        guard let nameKo = productDetailFragment.nameKo else { return nil }
+        guard let price = productDetailFragment.price else { return nil }
+        guard let supplierFragment = productDetailFragment.supplier?.fragments.supplierFragment else { return nil }
+        guard let supplier = Supplier(supplierFragment: supplierFragment) else { return nil }
+        
+        self.init(id: id, nameKo: nameKo, price: price, supplier: supplier)
+        
+        self.nameEn = productDetailFragment.nameEn
+        self.descriptionKo = productDetailFragment.descriptionKo
+    }
 }
 
 struct Supplier {

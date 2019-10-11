@@ -205,7 +205,18 @@ extension ProductViewController {
     }
     
     @objc private func onAddDone() {
+//        guard let supplierId = product.supplier?.id else { return }
+//        guard let nameKo = product.nameKo else { return }
+//        guard let price = product.price else { return }
+        
         dismiss(animated: true, completion: nil)
+        
+        let createProductInput = CreateProductInput(supplierId: "1", nameKo: "한국 어어어어1", price: 40000)
+        
+        ZAPINotificationCenter.post(
+            notification: .didCreateProductRequested,
+            userInfo: [.createProductInput: createProductInput]
+        )
     }
     
     @objc private func onEditDone() {
