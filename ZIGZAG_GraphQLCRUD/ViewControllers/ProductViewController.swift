@@ -13,6 +13,14 @@ private enum Section: CaseIterable {
     case name
     case description
     case supplierInfo
+    
+    var title: String? {
+        switch self {
+        case .description:  return "제품 설명"
+        case .supplierInfo: return "제품 정보"
+        default:            return nil
+        }
+    }
 }
 
 private enum Row: Hashable {
@@ -23,6 +31,12 @@ private enum Row: Hashable {
     
     case price
     case supplier
+}
+
+private class TableViewDiffableDataSource: UITableViewDiffableDataSource<Section, Row> {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.snapshot().sectionIdentifiers[section].title
+    }
 }
 
 class ProductViewController: UIViewController {
@@ -74,8 +88,8 @@ class ProductViewController: UIViewController {
 }
 
 extension ProductViewController {
-    private func setupDataSource() -> UITableViewDiffableDataSource<Section, Row> {
-        return UITableViewDiffableDataSource(tableView: self.tableView) { [weak self] (tableView, indexPath, row) -> UITableViewCell? in
+    private func setupDataSource() -> TableViewDiffableDataSource {
+        return TableViewDiffableDataSource(tableView: self.tableView) { [weak self] (tableView, indexPath, row) -> UITableViewCell? in
             guard let self = self else { return nil }
             
             switch row {
@@ -85,19 +99,23 @@ extension ProductViewController {
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.reuseIdentifier, for: indexPath) as! TextFieldTableViewCell
+                if case .view = self.mode {
+                    cell.isUserInteractionEnabled = false
+                }
+                
                 if case .nameKorean = row {
                     cell.textField.text = self.product.nameKo
                     cell.textField.placeholder = "%L%: 한국어 상품명"
                 } else if case .nameEnglish = row {
-                    cell.textField.text = self.product.nameEn
+                    cell.textField.text = self.product.nameEn?.isEmpty == false ? self.product.nameEn : "%L%: 영어 상품명 없음"
                     cell.textField.placeholder = "%L%: 영어 상품명"
                 } else if case .price = row {
                     //TODO: number pad
-                    if let price = self.product.price {
-                        cell.textField.text = String(price)
+                    if let priceKRW = self.product.price?.priceKRW {
+                        cell.textField.text = priceKRW
                     } else {
                         if case .view = self.mode {
-                            cell.textField.text = "%L%: 가겨 없음"
+                            cell.textField.text = "%L%: 가격 없음"
                         }
                     }
                     cell.textField.placeholder = "%L%: 상품 가격"

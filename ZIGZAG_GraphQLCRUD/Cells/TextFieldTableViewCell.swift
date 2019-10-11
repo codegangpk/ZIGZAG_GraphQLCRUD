@@ -40,6 +40,8 @@ class TextFieldTableViewCell: UITableViewCell {
 extension TextFieldTableViewCell {
     private func commonInit() {
         selectionStyle = .none
+        isUserInteractionEnabled = true
+        
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.returnKeyType = .done
         textField.enablesReturnKeyAutomatically = true
