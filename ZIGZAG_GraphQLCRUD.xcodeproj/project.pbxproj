@@ -122,14 +122,13 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		694C00E9235044CC000157DD /* CommonExtensions */ = {
+		694C00E9235044CC000157DD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				694C00E4234F9F4E000157DD /* NSObject+Extension.swift */,
-				69B6624F23508AF800F23D0D /* String+Extension.swift */,
-				69B6625C23509E7A00F23D0D /* Error+Extension.swift */,
+				69B662642350ADFF00F23D0D /* ZigZagAPI+Extension.swift */,
+				69B662662350B01E00F23D0D /* Common */,
 			);
-			path = CommonExtensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		697C458623504C8300A4583D /* Cells */ = {
@@ -148,7 +147,6 @@
 			children = (
 				694C00E7234FA72B000157DD /* ZigZagAPI.swift */,
 				69B662622350AAA300F23D0D /* ZigZagAPIProtocol.swift */,
-				69B662642350ADFF00F23D0D /* ZigZagAPI+Extension.swift */,
 				69B662602350A41B00F23D0D /* NetworkConfig.swift */,
 			);
 			path = Networking;
@@ -188,7 +186,7 @@
 				694C00E6234FA71F000157DD /* ViewControllers */,
 				697C458623504C8300A4583D /* Cells */,
 				69866D2423505FF5008B8318 /* Networking */,
-				694C00E9235044CC000157DD /* CommonExtensions */,
+				694C00E9235044CC000157DD /* Extensions */,
 				694C00B4234F8F50000157DD /* GraphQL */,
 				694C00B3234F8F46000157DD /* Assets */,
 				698BFE68234F14CF00FCFB38 /* Info.plist */,
@@ -202,6 +200,16 @@
 				698BFE6F234F1A0100FCFB38 /* Apollo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		69B662662350B01E00F23D0D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				694C00E4234F9F4E000157DD /* NSObject+Extension.swift */,
+				69B6624F23508AF800F23D0D /* String+Extension.swift */,
+				69B6625C23509E7A00F23D0D /* Error+Extension.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
