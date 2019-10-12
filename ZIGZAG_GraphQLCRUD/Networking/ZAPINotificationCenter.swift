@@ -9,19 +9,19 @@
 import Foundation
 
 enum ZigZagAPINotification: String {
-    case didProductListRequested        = "DidProductListRequested"
-    case didProductRequested            = "DidProductRequested"
-    case didSupplierListRequested       = "DidSupplierListRequested"
-    case didCreateProductRequested      = "DidCreateProductRequested"
-    case didDeleteProductRequested      = "DidDeleteProductRequested"
-    case didEditProductRequested        = "DidEditProductRequested"
+    case didProductRequested              = "DidProductRequested"
+    case didProductListRequested          = "DidProductListRequested"
+    case didSupplierListRequested         = "DidSupplierListRequested"
+    case didCreateProductRequested        = "DidCreateProductRequested"
+    case didDeleteProductRequested        = "DidDeleteProductRequested"
+    case didUpdateProductRequested        = "DidUpdateProductRequested"
     
-    case didProductListRequestUpdated   = "DidProductListRequestUpdated"
-    case didProductStateRequestUpdated  = "DidProductStateRequestUpdated"
-    case didSupplierListRequestUpdated  = "DidSupplierListRequestUpdated"
-    case didCreateProductRequestUpdated = "DidCreateProductRequestUpdated"
-    case didDeleteProductRequestUpdated = "DidDeleteProductRequestUpdated"
-    case didEditProductRequestUpdated   = "DidEditProductRequestUpdated"
+    case didProductRequestUpdated         = "DidProductStateRequestUpdated"
+    case didProductListRequestUpdated     = "DidProductListRequestUpdated"
+    case didSupplierListRequestUpdated    = "DidSupplierListRequestUpdated"
+    case didCreateProductRequestUpdated   = "DidCreateProductRequestUpdated"
+    case didDeleteProductRequestUpdated   = "DidDeleteProductRequestUpdated"
+    case didUpdateProductRequestUpdated   = "DidUpdateProductRequestUpdated"
     
     var name: Notification.Name {
         return Notification.Name(rawValue: self.rawValue)
@@ -42,10 +42,14 @@ extension ZAPINotificationCenter {
     enum UserInfoKey: String {
         case state = "state"
         
+        case productId = "productId"
+        
         case product = "product"
         case products = "products"
         case suppliers = "suppliers"
         
         case createProductInput = "createProductInput"
+        case deleteProductInput = "deleteProductInput"
+        case updateProductInput = "updateProductInput"
     }
 }
