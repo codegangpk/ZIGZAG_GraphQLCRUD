@@ -10,6 +10,8 @@
 		6917F19E2350CCF60039BA8E /* ZAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F19D2350CCF60039BA8E /* ZAPIManager.swift */; };
 		6917F1A02350CE090039BA8E /* Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F19F2350CE090039BA8E /* Notification.Name.swift */; };
 		6917F1A22350F3690039BA8E /* ZAPINotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */; };
+		692B3C6B2351AC8D0007F746 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B3C692351AC8D0007F746 /* ProductTableViewCell.swift */; };
+		692B3C6C2351AC8D0007F746 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692B3C6A2351AC8D0007F746 /* ProductTableViewCell.xib */; };
 		694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00B1234F785B000157DD /* GraphQLAPI.swift */; };
 		694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E0234F9D2C000157DD /* ProductsViewController.swift */; };
 		694C00E3234F9D35000157DD /* ProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductViewController.xib */; };
@@ -56,6 +58,8 @@
 		6917F19D2350CCF60039BA8E /* ZAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPIManager.swift; sourceTree = "<group>"; };
 		6917F19F2350CE090039BA8E /* Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.Name.swift; sourceTree = "<group>"; };
 		6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPINotificationCenter.swift; sourceTree = "<group>"; };
+		692B3C692351AC8D0007F746 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		692B3C6A2351AC8D0007F746 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		694C00B1234F785B000157DD /* GraphQLAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQLAPI.swift; sourceTree = "<group>"; };
 		694C00E0234F9D2C000157DD /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		694C00E2234F9D35000157DD /* ProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductViewController.xib; sourceTree = "<group>"; };
@@ -97,6 +101,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		692B3C642351A3F70007F746 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				697C458323504C7700A4583D /* TextFieldTableViewCell.swift */,
+				697C458223504C7700A4583D /* TextFieldTableViewCell.xib */,
+				69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */,
+				69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		694C00B3234F8F46000157DD /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,10 +155,9 @@
 		697C458623504C8300A4583D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				697C458323504C7700A4583D /* TextFieldTableViewCell.swift */,
-				697C458223504C7700A4583D /* TextFieldTableViewCell.xib */,
-				69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */,
-				69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */,
+				692B3C692351AC8D0007F746 /* ProductTableViewCell.swift */,
+				692B3C6A2351AC8D0007F746 /* ProductTableViewCell.xib */,
+				692B3C642351A3F70007F746 /* Common */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -289,6 +303,7 @@
 				69866D27235062EC008B8318 /* ProductsViewController.xib in Resources */,
 				697C458423504C7800A4583D /* TextFieldTableViewCell.xib in Resources */,
 				694C00E3234F9D35000157DD /* ProductViewController.xib in Resources */,
+				692B3C6C2351AC8D0007F746 /* ProductTableViewCell.xib in Resources */,
 				698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +356,7 @@
 			files = (
 				694C00E5234F9F4E000157DD /* NSObject+Extension.swift in Sources */,
 				694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */,
+				692B3C6B2351AC8D0007F746 /* ProductTableViewCell.swift in Sources */,
 				69B6625D23509E7B00F23D0D /* Error+Extension.swift in Sources */,
 				698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */,
 				697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */,

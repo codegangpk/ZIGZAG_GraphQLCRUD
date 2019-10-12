@@ -47,8 +47,9 @@ class ProductsViewController: UIViewController {
     override func viewDidLoad() {
         setupNavigationItem()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
+        tableView.register(ProductTableViewCell.nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
+        tableView.reloadData()
         
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductListStateUpdated(_:)), notification: .didProductListRequestUpdated)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated(_:)), notification: .didCreateProductRequestUpdated)
@@ -59,11 +60,11 @@ class ProductsViewController: UIViewController {
 
 extension ProductsViewController {
     private func setupDataSource() -> UITableViewDiffableDataSource<Section, Row> {
-        return UITableViewDiffableDataSource(tableView: self.tableView) { (tableView, indexPath, row) -> UITableViewCell? in
+        return UITableViewDiffableDataSource(tableView: tableView) { (tableView, indexPath, row) -> UITableViewCell? in
             switch row {
             case .item(let product):
-                let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
-                cell.textLabel?.text = product.nameKo
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProductTableViewCell.reuseIdentifier, for: indexPath) as! ProductTableViewCell
+                cell.configure(with: product)
                 return cell
             }
         }

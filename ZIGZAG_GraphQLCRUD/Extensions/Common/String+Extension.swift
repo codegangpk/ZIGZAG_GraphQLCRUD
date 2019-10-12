@@ -8,7 +8,8 @@
 
 import Foundation
 
-extension Int {
+typealias Price = Int
+extension Price {
     var priceKRW: String? {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
