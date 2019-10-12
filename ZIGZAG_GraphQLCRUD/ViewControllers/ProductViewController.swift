@@ -106,6 +106,7 @@ extension ProductViewController {
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.reuseIdentifier, for: indexPath) as! TextFieldTableViewCell
+                
                 if case .view = self.mode {
                     cell.isUserInteractionEnabled = false
                 }
@@ -117,15 +118,15 @@ extension ProductViewController {
                     cell.textField.text = self.product.nameEn?.isEmpty == false ? self.product.nameEn : "%L%: 영어 상품명 없음"
                     cell.textField.placeholder = "%L%: 영어 상품명"
                 } else if case .price = row {
-                    //TODO: number pad
-                    if let priceKRW = self.product.price?.priceKRW {
-                        cell.textField.text = priceKRW
+                    cell.textField.keyboardType = .numberPad
+                    cell.textField.placeholder = "%L%: 상품 가격"
+                    if case .view = self.mode {
+                        cell.textField.text = self.product.price?.priceKRW ?? "%L%: 가격 없음"
                     } else {
-                        if case .view = self.mode {
-                            cell.textField.text = "%L%: 가격 없음"
+                        if let price = self.product.price {
+                            cell.textField.text = String(price)
                         }
                     }
-                    cell.textField.placeholder = "%L%: 상품 가격"
                 } else if case .supplier = row {
                     cell.textField.text = self.product.supplier?.name
                     cell.textField.placeholder = "%L%: 공급사"
@@ -167,10 +168,6 @@ extension ProductViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .leastNonzeroMagnitude
     }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
 }
 
 extension ProductViewController {
@@ -202,10 +199,11 @@ extension ProductViewController {
         case .add:
             navigationItem.title = "%L%: 상품 추가"
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onAddDone))
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onAddCanceled))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCanceled))
         case .edit:
             navigationItem.title = "%L%: 상품 편집"
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onEditDone))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCanceled))
         }
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
     }
@@ -230,11 +228,11 @@ extension ProductViewController {
         )
     }
     
-    @objc private func onAddCanceled() {
+    @objc private func onEditDone() {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func onEditDone() {
+    @objc private func onCanceled() {
         dismiss(animated: true, completion: nil)
     }
 }
