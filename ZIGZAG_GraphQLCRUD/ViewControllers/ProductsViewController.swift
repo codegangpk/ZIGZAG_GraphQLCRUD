@@ -51,6 +51,7 @@ class ProductsViewController: UIViewController {
         tableView.dataSource = dataSource
         
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductListStateUpdated(_:)), notification: .didProductListRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated(_:)), notification: .didCreateProductRequestUpdated)
         
         fetchProducts()
     }
@@ -92,6 +93,13 @@ extension ProductsViewController {
         ZAPINotificationCenter.post(notification: .didProductListRequested)
     }
     
+    @objc private func onDidCreateProductRequestUpdated(_ notification: Notification) {
+        guard let data = notification.userInfo else { return }
+        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        print("created Product: \(product)")
+        fetchProducts()
+    }
+    
     @objc private func onDidProductListStateUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
         guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIManager.State else { return }
@@ -107,7 +115,8 @@ extension ProductsViewController {
         snapshot.appendSections(Section.allCases)
         
         var rows: [Row] = []
-        products.forEach { rows.append(.item($0)) }
+        products.sorted(by: { $0.dateCreated?.compare($1.dateCreated ?? Date(timeIntervalSince1970: 0)) == .orderedDescending }).forEach { rows.append(.item($0)) }
+        
         snapshot.appendItems(rows, toSection: .list)
         
         dataSource.defaultRowAnimation = .fade

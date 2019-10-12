@@ -83,6 +83,8 @@ class ProductViewController: UIViewController {
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated(_:)), notification: ZigZagAPINotification.didCreateProductRequestUpdated)
+        
         updateDataSource(with: product)
     }
 }
@@ -209,10 +211,7 @@ extension ProductViewController {
 //        guard let nameKo = product.nameKo else { return }
 //        guard let price = product.price else { return }
         
-        dismiss(animated: true, completion: nil)
-        
-        let createProductInput = CreateProductInput(supplierId: "1", nameKo: "한국 어어어어1", price: 40000)
-        
+        let createProductInput = CreateProductInput(supplierId: "1", nameKo: "한국 어어어어3", price: 40000)
         ZAPINotificationCenter.post(
             notification: .didCreateProductRequested,
             userInfo: [.createProductInput: createProductInput]
@@ -220,6 +219,15 @@ extension ProductViewController {
     }
     
     @objc private func onEditDone() {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ProductViewController {
+    @objc private func onDidCreateProductRequestUpdated(_ notification: Notification) {
+        guard let data = notification.userInfo else { return }
+        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        
         dismiss(animated: true, completion: nil)
     }
 }
