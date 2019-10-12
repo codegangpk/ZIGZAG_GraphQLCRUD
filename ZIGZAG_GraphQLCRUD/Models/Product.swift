@@ -15,8 +15,8 @@ struct Product {
     var descriptionKo: String?
     var price: Int?
     var supplier: Supplier?
-    var dateCreated: Double?
-    var dateUpdatd: Double?
+    var dateCreated: Date?
+    var dateUpdated: Date?
     
     init() { }
     
@@ -27,11 +27,11 @@ struct Product {
         self.supplier = supplier
     }
     
-    init?(productFragment: ProductFragment) {
-        let id = productFragment.id
-        guard let nameKo = productFragment.nameKo else { return nil }
-        guard let price = productFragment.price else { return nil }
-        guard let supplierFragment = productFragment.supplier?.fragments.supplierFragment else { return nil }
+    init?(productListFragment: ProductListFragment) {
+        let id = productListFragment.id
+        guard let nameKo = productListFragment.nameKo else { return nil }
+        guard let price = productListFragment.price else { return nil }
+        guard let supplierFragment = productListFragment.supplier?.fragments.supplierFragment else { return nil }
         guard let supplier = Supplier(supplierFragment: supplierFragment) else { return nil }
         
         //TODO: data isEmpty validation check
@@ -40,10 +40,22 @@ struct Product {
         
         self.init(id: id, nameKo: nameKo, price: price, supplier: supplier)
         
-        self.nameEn = productFragment.nameEn
-        self.descriptionKo = productFragment.descriptionKo
-        self.dateCreated = productFragment.dateCreated
-        self.dateUpdatd = productFragment.dateUpdated
+        self.nameEn = productListFragment.nameEn
+        self.dateCreated = Date(timeIntervalSince1970: productListFragment.dateCreated)
+        self.dateUpdated = Date(timeIntervalSince1970: productListFragment.dateUpdated)
+    }
+    
+    init?(productDetailFragment: ProductDetailFragment) {
+        let id = productDetailFragment.id
+        guard let nameKo = productDetailFragment.nameKo else { return nil }
+        guard let price = productDetailFragment.price else { return nil }
+        guard let supplierFragment = productDetailFragment.supplier?.fragments.supplierFragment else { return nil }
+        guard let supplier = Supplier(supplierFragment: supplierFragment) else { return nil }
+        
+        self.init(id: id, nameKo: nameKo, price: price, supplier: supplier)
+        
+        self.nameEn = productDetailFragment.nameEn
+        self.descriptionKo = productDetailFragment.descriptionKo
     }
 }
 

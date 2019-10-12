@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6917F19E2350CCF60039BA8E /* ZAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F19D2350CCF60039BA8E /* ZAPIManager.swift */; };
+		6917F1A02350CE090039BA8E /* Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F19F2350CE090039BA8E /* Notification.Name.swift */; };
+		6917F1A22350F3690039BA8E /* ZAPINotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */; };
 		694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00B1234F785B000157DD /* GraphQLAPI.swift */; };
 		694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E0234F9D2C000157DD /* ProductsViewController.swift */; };
 		694C00E3234F9D35000157DD /* ProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductViewController.xib */; };
 		694C00E5234F9F4E000157DD /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E4234F9F4E000157DD /* NSObject+Extension.swift */; };
-		694C00E8234FA72B000157DD /* Apollo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E7234FA72B000157DD /* Apollo.swift */; };
+		694C00E8234FA72B000157DD /* ZAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E7234FA72B000157DD /* ZAPI.swift */; };
 		697C45812350465900A4583D /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697C45802350465900A4583D /* ProductViewController.swift */; };
 		697C458423504C7800A4583D /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 697C458223504C7700A4583D /* TextFieldTableViewCell.xib */; };
 		697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697C458323504C7700A4583D /* TextFieldTableViewCell.swift */; };
@@ -29,6 +32,10 @@
 		698BFE71234F1A0100FCFB38 /* Apollo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 698BFE6F234F1A0100FCFB38 /* Apollo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		698BFE75234F1DBB00FCFB38 /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE74234F1DBB00FCFB38 /* Queries.graphql */; };
 		69B6625023508AF800F23D0D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B6624F23508AF800F23D0D /* String+Extension.swift */; };
+		69B6625D23509E7B00F23D0D /* Error+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B6625C23509E7A00F23D0D /* Error+Extension.swift */; };
+		69B662612350A41B00F23D0D /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B662602350A41B00F23D0D /* NetworkConfig.swift */; };
+		69B662632350AAA300F23D0D /* ZAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B662622350AAA300F23D0D /* ZAPIProtocol.swift */; };
+		69B662652350ADFF00F23D0D /* ZAPI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B662642350ADFF00F23D0D /* ZAPI+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,11 +53,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6917F19D2350CCF60039BA8E /* ZAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPIManager.swift; sourceTree = "<group>"; };
+		6917F19F2350CE090039BA8E /* Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.Name.swift; sourceTree = "<group>"; };
+		6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPINotificationCenter.swift; sourceTree = "<group>"; };
 		694C00B1234F785B000157DD /* GraphQLAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQLAPI.swift; sourceTree = "<group>"; };
 		694C00E0234F9D2C000157DD /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		694C00E2234F9D35000157DD /* ProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductViewController.xib; sourceTree = "<group>"; };
 		694C00E4234F9F4E000157DD /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
-		694C00E7234FA72B000157DD /* Apollo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apollo.swift; sourceTree = "<group>"; };
+		694C00E7234FA72B000157DD /* ZAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPI.swift; sourceTree = "<group>"; };
 		697C45802350465900A4583D /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		697C458223504C7700A4583D /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		697C458323504C7700A4583D /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -69,6 +79,10 @@
 		698BFE6F234F1A0100FCFB38 /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/iOS/Apollo.framework; sourceTree = "<group>"; };
 		698BFE74234F1DBB00FCFB38 /* Queries.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		69B6624F23508AF800F23D0D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		69B6625C23509E7A00F23D0D /* Error+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+Extension.swift"; sourceTree = "<group>"; };
+		69B662602350A41B00F23D0D /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
+		69B662622350AAA300F23D0D /* ZAPIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPIProtocol.swift; sourceTree = "<group>"; };
+		69B662642350ADFF00F23D0D /* ZAPI+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZAPI+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,8 +131,8 @@
 		694C00E9235044CC000157DD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				694C00E4234F9F4E000157DD /* NSObject+Extension.swift */,
-				69B6624F23508AF800F23D0D /* String+Extension.swift */,
+				69B662642350ADFF00F23D0D /* ZAPI+Extension.swift */,
+				69B662662350B01E00F23D0D /* Common */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -134,12 +148,16 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		69866D2423505FF5008B8318 /* Network */ = {
+		69866D2423505FF5008B8318 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				694C00E7234FA72B000157DD /* Apollo.swift */,
+				6917F19D2350CCF60039BA8E /* ZAPIManager.swift */,
+				694C00E7234FA72B000157DD /* ZAPI.swift */,
+				69B662622350AAA300F23D0D /* ZAPIProtocol.swift */,
+				69B662602350A41B00F23D0D /* NetworkConfig.swift */,
+				6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */,
 			);
-			path = Network;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		69866D2523506003008B8318 /* Models */ = {
@@ -175,7 +193,7 @@
 				69866D2523506003008B8318 /* Models */,
 				694C00E6234FA71F000157DD /* ViewControllers */,
 				697C458623504C8300A4583D /* Cells */,
-				69866D2423505FF5008B8318 /* Network */,
+				69866D2423505FF5008B8318 /* Networking */,
 				694C00E9235044CC000157DD /* Extensions */,
 				694C00B4234F8F50000157DD /* GraphQL */,
 				694C00B3234F8F46000157DD /* Assets */,
@@ -190,6 +208,17 @@
 				698BFE6F234F1A0100FCFB38 /* Apollo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		69B662662350B01E00F23D0D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6917F19F2350CE090039BA8E /* Notification.Name.swift */,
+				694C00E4234F9F4E000157DD /* NSObject+Extension.swift */,
+				69B6624F23508AF800F23D0D /* String+Extension.swift */,
+				69B6625C23509E7A00F23D0D /* Error+Extension.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,12 +341,19 @@
 			files = (
 				694C00E5234F9F4E000157DD /* NSObject+Extension.swift in Sources */,
 				694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */,
+				69B6625D23509E7B00F23D0D /* Error+Extension.swift in Sources */,
 				698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */,
 				697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */,
+				69B662652350ADFF00F23D0D /* ZAPI+Extension.swift in Sources */,
 				69B6625023508AF800F23D0D /* String+Extension.swift in Sources */,
+				6917F1A22350F3690039BA8E /* ZAPINotificationCenter.swift in Sources */,
+				6917F19E2350CCF60039BA8E /* ZAPIManager.swift in Sources */,
+				6917F1A02350CE090039BA8E /* Notification.Name.swift in Sources */,
 				694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */,
 				69866D29235076C2008B8318 /* SelectSupplierViewController.swift in Sources */,
-				694C00E8234FA72B000157DD /* Apollo.swift in Sources */,
+				694C00E8234FA72B000157DD /* ZAPI.swift in Sources */,
+				69B662612350A41B00F23D0D /* NetworkConfig.swift in Sources */,
+				69B662632350AAA300F23D0D /* ZAPIProtocol.swift in Sources */,
 				697C45812350465900A4583D /* ProductViewController.swift in Sources */,
 				69866D23235054CC008B8318 /* Product.swift in Sources */,
 				698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */,

@@ -50,6 +50,9 @@ class ProductsViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductListStateUpdated(_:)), notification: .didProductListRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated(_:)), notification: .didCreateProductRequestUpdated)
+        
         fetchProducts()
     }
 }
@@ -87,25 +90,33 @@ extension ProductsViewController: UITableViewDelegate {
 
 extension ProductsViewController {
     private func fetchProducts() {
-        let _ = Apollo.shared.client.fetch(query: ProductListQuery(id_list: nil)) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let graphQLResult):
-                self.products = graphQLResult.data?.productList.itemList.compactMap { Product(productFragment: $0.fragments.productFragment) } ?? []
-                print(self.products)
-            case .failure(let error):
-                NSLog("Error while fetching query: \(error.localizedDescription)")
-            }
-        }
+        ZAPINotificationCenter.post(notification: .didProductListRequested)
+    }
+    
+    @objc private func onDidCreateProductRequestUpdated(_ notification: Notification) {
+        guard let data = notification.userInfo else { return }
+        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        print("created Product: \(product)")
+        fetchProducts()
+    }
+    
+    @objc private func onDidProductListStateUpdated(_ notification: Notification) {
+        guard let data = notification.userInfo else { return }
+        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIManager.State else { return }
+        guard let products = data[ZAPINotificationCenter.UserInfoKey.products] as? [Product] else { return }
+        
+        self.products = products
     }
     
     private func updateDataSource(with products: [Product]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
+        snapshot.deleteAllItems()
+        
         snapshot.appendSections(Section.allCases)
         
         var rows: [Row] = []
-        products.forEach { rows.append(.item($0)) }
+        products.sorted(by: { $0.dateCreated?.compare($1.dateCreated ?? Date(timeIntervalSince1970: 0)) == .orderedDescending }).forEach { rows.append(.item($0)) }
+        
         snapshot.appendItems(rows, toSection: .list)
         
         dataSource.defaultRowAnimation = .fade

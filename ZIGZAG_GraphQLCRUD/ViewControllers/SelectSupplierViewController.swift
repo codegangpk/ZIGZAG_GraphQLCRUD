@@ -63,6 +63,8 @@ class SelectSupplierViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidSupplierListRequestUpdated(_:)), notification: .didSupplierListRequestUpdated)
+        
         fetchProducts()
     }
 }
@@ -104,20 +106,20 @@ extension SelectSupplierViewController: UITableViewDelegate {
 
 extension SelectSupplierViewController {
     private func fetchProducts() {
-        let _ = Apollo.shared.client.fetch(query: SupplierListQuery(id_list: nil)) { [weak self] (result) in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let graphQLResult):
-                self.suppliers = graphQLResult.data?.supplierList.itemList.compactMap { Supplier(supplierFragment: $0.fragments.supplierFragment) } ?? []
-            case .failure(let error):
-                NSLog("Error while fetching query: \(error.localizedDescription)")
-            }
-        }
+        ZAPINotificationCenter.post(notification: .didSupplierListRequested)
+    }
+    
+    @objc private func onDidSupplierListRequestUpdated(_ notification: Notification) {
+        guard let data = notification.userInfo else { return }
+        guard let suppliers = data[ZAPINotificationCenter.UserInfoKey.suppliers] as? [Supplier] else { return }
+        
+        self.suppliers = suppliers
     }
     
     private func updateDataSource(with suppliers: [Supplier]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
+        snapshot.deleteAllItems()
+        
         snapshot.appendSections(Section.allCases)
         
         var rows: [Row] = []

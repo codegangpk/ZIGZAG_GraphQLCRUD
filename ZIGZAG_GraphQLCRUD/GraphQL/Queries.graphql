@@ -3,11 +3,10 @@ fragment supplierFragment on Supplier {
     name
 }
 
-fragment productFragment on Product {
+fragment productListFragment on Product {
     id
     name_ko
     name_en
-    description_ko
     price
     supplier {
         ...supplierFragment
@@ -16,17 +15,28 @@ fragment productFragment on Product {
     date_updated
 }
 
+fragment productDetailFragment on Product {
+    id
+    name_ko
+    name_en
+    description_ko
+    price
+    supplier {
+        ...supplierFragment
+    }
+}
+
 query ProductList($id_list: [ID!]) {
     product_list(id_list: $id_list) {
         item_list {
-            ...productFragment
+            ...productListFragment
         }
     }
 }
 
 query Product($id: ID) {
     product(id: $id) {
-        ...productFragment
+        ...productDetailFragment
     }
 }
 
@@ -40,18 +50,18 @@ query SupplierList($id_list: [ID!]) {
 
 mutation CreateProduct($input: CreateProductInput!) {
     createProduct(input: $input) {
-        ...productFragment
+        ...productDetailFragment
     }
 }
 
 mutation DeleteProduct($input: DeleteProductInput!) {
     deleteProduct(input: $input) {
-        ...productFragment
+        ...productDetailFragment
     }
 }
 
 mutation UpdateProduct($input: UpdateProductInput!) {
     updateProduct(input: $input) {
-        ...productFragment
+        ...productDetailFragment
     }
 }
