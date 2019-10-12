@@ -25,7 +25,7 @@ class ZAPIManager {
         
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequested(_:)), notification: .didCreateProductRequested)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidDeleteProductRequested(_:)), notification: .didDeleteProductRequested)
-        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequested(_:)), notification: .didProductListRequested)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequested(_:)), notification: .didUpdateProductRequested)
     }
     
     deinit {
@@ -168,7 +168,7 @@ extension ZAPIManager {
                 newState = .failed
                 print(error)
             }
-            ZAPINotificationCenter.post(notification: .didCreateProductRequestUpdated, userInfo: [.state: newState, .product: product as Any])
+            ZAPINotificationCenter.post(notification: .didDeleteProductRequestUpdated, userInfo: [.state: newState, .product: product as Any])
         }
     }
     
@@ -198,7 +198,7 @@ extension ZAPIManager {
                 newState = .failed
                 print(error)
             }
-            ZAPINotificationCenter.post(notification: .didCreateProductRequestUpdated, userInfo: [.state: newState, .product: product as Any])
+            ZAPINotificationCenter.post(notification: .didUpdateProductRequestUpdated, userInfo: [.state: newState, .product: product as Any])
         }
     }
 }

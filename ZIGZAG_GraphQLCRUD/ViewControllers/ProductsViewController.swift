@@ -41,6 +41,7 @@ class ProductsViewController: UIViewController {
     private var products: [Product] = [] {
         didSet {
             updateDataSource(with: products)
+            tableView.reloadData()
         }
     }
     
@@ -53,6 +54,8 @@ class ProductsViewController: UIViewController {
         
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductListStateUpdated(_:)), notification: .didProductListRequestUpdated)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated(_:)), notification: .didCreateProductRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidDeleteProductRequestUpdated(_:)), notification: .didDeleteProductRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequestUpdated(_:)), notification: .didUpdateProductRequestUpdated)
         
         updateDataSource(with: products)
         fetchProducts()
@@ -94,22 +97,7 @@ extension ProductsViewController {
     private func fetchProducts() {
         ZAPINotificationCenter.post(notification: .didProductListRequested)
     }
-    
-    @objc private func onDidCreateProductRequestUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
-        print("created Product: \(product)")
-        fetchProducts()
-    }
-    
-    @objc private func onDidProductListStateUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIManager.State else { return }
-        guard let products = data[ZAPINotificationCenter.UserInfoKey.products] as? [Product] else { return }
-        
-        self.products = products
-    }
-    
+
     private func updateDataSource(with products: [Product]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.deleteAllItems()
@@ -137,5 +125,37 @@ extension ProductsViewController {
         let productViewController = ProductViewController(mode: .add)
         let productNavigationController = UINavigationController(rootViewController: productViewController)
         navigationController?.present(productNavigationController, animated: true, completion: nil)
+    }
+}
+
+extension ProductsViewController {
+    @objc private func onDidProductListStateUpdated(_ notification: Notification) {
+        guard let data = notification.userInfo else { return }
+        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIManager.State else { return }
+        guard let products = data[ZAPINotificationCenter.UserInfoKey.products] as? [Product] else { return }
+        
+        self.products = products
+    }
+    
+    @objc private func onDidCreateProductRequestUpdated(_ notification: Notification) {
+        guard let data = notification.userInfo else { return }
+        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        
+        print("created Product: \(product)")
+        fetchProducts()
+    }
+    
+    @objc private func onDidUpdateProductRequestUpdated(_ notification: Notification) {
+        guard let data = notification.userInfo else { return }
+        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        
+        fetchProducts()
+    }
+    
+    @objc private func onDidDeleteProductRequestUpdated(_ notification: Notification) {
+        guard let data = notification.userInfo else { return }
+        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        
+        fetchProducts()
     }
 }
