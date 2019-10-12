@@ -15,8 +15,8 @@ struct Product {
     var descriptionKo: String?
     var price: Int?
     var supplier: Supplier?
-    var dateCreated: Double?
-    var dateUpdatd: Double?
+    var dateCreated: Date?
+    var dateUpdated: Date?
     
     init() { }
     
@@ -41,8 +41,8 @@ struct Product {
         self.init(id: id, nameKo: nameKo, price: price, supplier: supplier)
         
         self.nameEn = productListFragment.nameEn
-        self.dateCreated = productListFragment.dateCreated
-        self.dateUpdatd = productListFragment.dateUpdated
+        self.dateCreated = Date(timeIntervalSince1970: productListFragment.dateCreated)
+        self.dateUpdated = Date(timeIntervalSince1970: productListFragment.dateUpdated)
     }
     
     init?(productDetailFragment: ProductDetailFragment) {
