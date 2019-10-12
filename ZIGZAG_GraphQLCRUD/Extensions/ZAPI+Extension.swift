@@ -23,7 +23,7 @@ extension ZAPI: ZAPIProtocol {
     }
     
     @discardableResult
-    static func fetch<Query>(_ query: Query, cachePolicy: Apollo.CachePolicy = .returnCacheDataElseFetch, context: UnsafeMutableRawPointer? = nil, queue: DispatchQueue = DispatchQueue.main, resultHandler: Apollo.GraphQLResultHandler<Query.Data>?) -> Apollo.Cancellable where Query : Apollo.GraphQLQuery {
+    static func fetch<Query>(_ query: Query, cachePolicy: Apollo.CachePolicy = .fetchIgnoringCacheCompletely, context: UnsafeMutableRawPointer? = nil, queue: DispatchQueue = DispatchQueue.main, resultHandler: Apollo.GraphQLResultHandler<Query.Data>?) -> Apollo.Cancellable where Query : Apollo.GraphQLQuery {
         return shared.client.fetch(query: query, cachePolicy: cachePolicy, context: context, queue: queue, resultHandler: resultHandler)
     }
     
