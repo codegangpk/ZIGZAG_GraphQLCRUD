@@ -10,15 +10,17 @@ import UIKit
 import Apollo
 
 private enum Section: CaseIterable {
-    case name
-    case description
+    case nameInfo
+    case descriptionInfo
+    case priceInfo
     case supplierInfo
     
     var title: String? {
         switch self {
-        case .description:  return "제품 설명"
-        case .supplierInfo: return "제품 정보"
-        default:            return nil
+        case .nameInfo:         return "L%L: 상품명"
+        case .descriptionInfo:  return "%L%: 상세 설명"
+        case .priceInfo:        return "L%L: 상품 가격"
+        case .supplierInfo: return "%L%: 공급자 정보"
         }
     }
 }
@@ -78,7 +80,6 @@ class ProductViewController: UIViewController {
     override func viewDidLoad() {
         setupNavigationItem(mode: mode)
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.reuseIdentifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
@@ -97,7 +98,11 @@ extension ProductViewController {
             switch row {
             case .descriptionKorean:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.reuseIdentifier, for: indexPath) as! TextViewTableViewCell
-                cell.textView.text = self.product.descriptionKo
+                cell.textView.text = "%L%: 상세 설명 없음"
+                if case .view = self.mode {
+                    cell.textViewHeightLayoutConstraint.constant = ceil(cell.textView.sizeThatFits(CGSize(width: cell.textView.frame.width, height: .infinity)).height)
+                    cell.isUserInteractionEnabled = false
+                }
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.reuseIdentifier, for: indexPath) as! TextFieldTableViewCell
@@ -162,6 +167,10 @@ extension ProductViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .leastNonzeroMagnitude
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 }
 
 extension ProductViewController {
@@ -169,15 +178,17 @@ extension ProductViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.deleteAllItems()
         
-        snapshot.appendSections(Section.allCases)
-        
         if case .add = mode {
-            snapshot.appendItems([.nameKorean], toSection: .name)
-            snapshot.appendItems([.price, .supplier], toSection: .supplierInfo)
+            snapshot.appendSections([.nameInfo, .priceInfo, .supplierInfo])
+            snapshot.appendItems([.nameKorean], toSection: .nameInfo)
+            snapshot.appendItems([.price], toSection: .priceInfo)
+            snapshot.appendItems([.supplier], toSection: .supplierInfo)
         } else  {
-            snapshot.appendItems([.nameKorean, .nameEnglish], toSection: .name)
-            snapshot.appendItems([.descriptionKorean], toSection: .description)
-            snapshot.appendItems([.price, .supplier], toSection: .supplierInfo)
+            snapshot.appendSections(Section.allCases)
+            snapshot.appendItems([.nameKorean, .nameEnglish], toSection: .nameInfo)
+            snapshot.appendItems([.descriptionKorean], toSection: .descriptionInfo)
+            snapshot.appendItems([.price], toSection: .priceInfo)
+            snapshot.appendItems([.supplier], toSection: .supplierInfo)
         }
         
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -191,6 +202,7 @@ extension ProductViewController {
         case .add:
             navigationItem.title = "%L%: 상품 추가"
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onAddDone))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onAddCanceled))
         case .edit:
             navigationItem.title = "%L%: 상품 편집"
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onEditDone))
@@ -216,6 +228,10 @@ extension ProductViewController {
             notification: .didCreateProductRequested,
             userInfo: [.createProductInput: createProductInput]
         )
+    }
+    
+    @objc private func onAddCanceled() {
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func onEditDone() {

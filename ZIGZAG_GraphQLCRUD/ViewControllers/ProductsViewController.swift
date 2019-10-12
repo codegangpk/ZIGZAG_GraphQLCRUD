@@ -49,11 +49,12 @@ class ProductsViewController: UIViewController {
         
         tableView.register(ProductTableViewCell.nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
-        tableView.reloadData()
+        
         
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductListStateUpdated(_:)), notification: .didProductListRequestUpdated)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated(_:)), notification: .didCreateProductRequestUpdated)
         
+        updateDataSource(with: products)
         fetchProducts()
     }
 }

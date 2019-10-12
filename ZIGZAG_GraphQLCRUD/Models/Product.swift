@@ -13,7 +13,7 @@ struct Product {
     var nameKo: String?
     var nameEn: String?
     var descriptionKo: String?
-    var price: Price?
+    var price: Int?
     var supplier: Supplier?
     var dateCreated: Date?
     var dateUpdated: Date?
