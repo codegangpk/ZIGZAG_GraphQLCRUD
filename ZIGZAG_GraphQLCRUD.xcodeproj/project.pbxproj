@@ -13,12 +13,14 @@
 		692B3C6B2351AC8D0007F746 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B3C692351AC8D0007F746 /* ProductTableViewCell.swift */; };
 		692B3C6C2351AC8D0007F746 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692B3C6A2351AC8D0007F746 /* ProductTableViewCell.xib */; };
 		694BD8322351C0BC0091DAC9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD8312351C0BC0091DAC9 /* String+Extension.swift */; };
+		694BD8352352FED30091DAC9 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD8332352FED30091DAC9 /* ProductViewController.swift */; };
+		694BD8362352FED30091DAC9 /* ProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694BD8342352FED30091DAC9 /* ProductViewController.xib */; };
 		694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00B1234F785B000157DD /* GraphQLAPI.swift */; };
 		694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E0234F9D2C000157DD /* ProductsViewController.swift */; };
-		694C00E3234F9D35000157DD /* ProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductViewController.xib */; };
+		694C00E3234F9D35000157DD /* ProductFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductFormViewController.xib */; };
 		694C00E5234F9F4E000157DD /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E4234F9F4E000157DD /* NSObject+Extension.swift */; };
 		694C00E8234FA72B000157DD /* ZAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E7234FA72B000157DD /* ZAPI.swift */; };
-		697C45812350465900A4583D /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697C45802350465900A4583D /* ProductViewController.swift */; };
+		697C45812350465900A4583D /* ProductFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697C45802350465900A4583D /* ProductFormViewController.swift */; };
 		697C458423504C7800A4583D /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 697C458223504C7700A4583D /* TextFieldTableViewCell.xib */; };
 		697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697C458323504C7700A4583D /* TextFieldTableViewCell.swift */; };
 		69866D2023504FF7008B8318 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */; };
@@ -62,12 +64,14 @@
 		692B3C692351AC8D0007F746 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		692B3C6A2351AC8D0007F746 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		694BD8312351C0BC0091DAC9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		694BD8332352FED30091DAC9 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		694BD8342352FED30091DAC9 /* ProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductViewController.xib; sourceTree = "<group>"; };
 		694C00B1234F785B000157DD /* GraphQLAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQLAPI.swift; sourceTree = "<group>"; };
 		694C00E0234F9D2C000157DD /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
-		694C00E2234F9D35000157DD /* ProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductViewController.xib; sourceTree = "<group>"; };
+		694C00E2234F9D35000157DD /* ProductFormViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductFormViewController.xib; sourceTree = "<group>"; };
 		694C00E4234F9F4E000157DD /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		694C00E7234FA72B000157DD /* ZAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPI.swift; sourceTree = "<group>"; };
-		697C45802350465900A4583D /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		697C45802350465900A4583D /* ProductFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFormViewController.swift; sourceTree = "<group>"; };
 		697C458223504C7700A4583D /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		697C458323504C7700A4583D /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -137,8 +141,10 @@
 			children = (
 				694C00E0234F9D2C000157DD /* ProductsViewController.swift */,
 				69866D26235062EC008B8318 /* ProductsViewController.xib */,
-				697C45802350465900A4583D /* ProductViewController.swift */,
-				694C00E2234F9D35000157DD /* ProductViewController.xib */,
+				694BD8332352FED30091DAC9 /* ProductViewController.swift */,
+				694BD8342352FED30091DAC9 /* ProductViewController.xib */,
+				697C45802350465900A4583D /* ProductFormViewController.swift */,
+				694C00E2234F9D35000157DD /* ProductFormViewController.xib */,
 				69866D28235076C2008B8318 /* SelectSupplierViewController.swift */,
 				69866D2A235076CC008B8318 /* SelectSupplierViewController.xib */,
 			);
@@ -303,9 +309,10 @@
 				69866D2123504FF7008B8318 /* TextViewTableViewCell.xib in Resources */,
 				69866D2B235076CC008B8318 /* SelectSupplierViewController.xib in Resources */,
 				698BFE67234F14CF00FCFB38 /* LaunchScreen.storyboard in Resources */,
+				694BD8362352FED30091DAC9 /* ProductViewController.xib in Resources */,
 				69866D27235062EC008B8318 /* ProductsViewController.xib in Resources */,
 				697C458423504C7800A4583D /* TextFieldTableViewCell.xib in Resources */,
-				694C00E3234F9D35000157DD /* ProductViewController.xib in Resources */,
+				694C00E3234F9D35000157DD /* ProductFormViewController.xib in Resources */,
 				692B3C6C2351AC8D0007F746 /* ProductTableViewCell.xib in Resources */,
 				698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */,
 			);
@@ -371,10 +378,11 @@
 				6917F1A02350CE090039BA8E /* Notification.Name.swift in Sources */,
 				694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */,
 				69866D29235076C2008B8318 /* SelectSupplierViewController.swift in Sources */,
+				694BD8352352FED30091DAC9 /* ProductViewController.swift in Sources */,
 				694C00E8234FA72B000157DD /* ZAPI.swift in Sources */,
 				69B662612350A41B00F23D0D /* NetworkConfig.swift in Sources */,
 				69B662632350AAA300F23D0D /* ZAPIProtocol.swift in Sources */,
-				697C45812350465900A4583D /* ProductViewController.swift in Sources */,
+				697C45812350465900A4583D /* ProductFormViewController.swift in Sources */,
 				69866D23235054CC008B8318 /* Product.swift in Sources */,
 				698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */,
 				69866D2023504FF7008B8318 /* TextViewTableViewCell.swift in Sources */,

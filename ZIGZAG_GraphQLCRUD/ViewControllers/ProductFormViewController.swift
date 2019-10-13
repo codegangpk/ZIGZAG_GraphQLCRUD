@@ -2,7 +2,7 @@
 //  ProductViewController.swift
 //  ZIGZAG_GraphQLCRUD
 //
-//  Created by Paul Kim on 2019/10/13.
+//  Created by Paul Kim on 2019/10/11.
 //  Copyright © 2019 Paul Kim. All rights reserved.
 //
 
@@ -14,7 +14,6 @@ private enum Section: CaseIterable {
     case descriptionInfo
     case priceInfo
     case supplierInfo
-    case deleteProduct
     
     var title: String? {
         switch self {
@@ -22,7 +21,6 @@ private enum Section: CaseIterable {
         case .descriptionInfo:  return "%L%: 상세 설명"
         case .priceInfo:        return "L%L: 상품 가격"
         case .supplierInfo:     return "%L%: 공급자 정보"
-        default:                return nil
         }
     }
 }
@@ -35,8 +33,6 @@ private enum Row: Hashable {
     
     case price
     case supplier
-    
-    case delete
 }
 
 private class TableViewDiffableDataSource: UITableViewDiffableDataSource<Section, Row> {
@@ -45,21 +41,26 @@ private class TableViewDiffableDataSource: UITableViewDiffableDataSource<Section
     }
 }
 
-class ProductViewController: UIViewController {
+class ProductFormViewController: UIViewController {
+    enum Mode {
+        case add
+        case edit(Product)
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     private lazy var dataSource = setupDataSource()
     
-    private var productId: String
-    private var product: Product? {
-        didSet {
-            if let product = product {
-                updateDataSource(with: product)
-            }
-        }
-    }
+    private let mode: Mode
+    private var product: Product
     
-    init(productId: String) {
-        self.productId = productId
+    init(mode: Mode) {
+        self.mode = mode
+        
+        if case .edit(let product) = mode {
+            self.product = product
+        } else {
+            self.product = Product()
+        }
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -69,23 +70,21 @@ class ProductViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        setupNavigationItem()
+        setupNavigationItem(mode: mode)
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.reuseIdentifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         
-        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductRequestUpdated(_:)), notification: .didProductRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated(_:)), notification: .didCreateProductRequestUpdated)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequestUpdated(_:)), notification: .didUpdateProductRequestUpdated)
-        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidDeleteProductRequestUpdated(_:)), notification: .didDeleteProductRequestUpdated)
         
         updateDataSource(with: product)
-        fetchProduct(with: productId)
     }
 }
 
-extension ProductViewController {
+extension ProductFormViewController {
     private func setupDataSource() -> TableViewDiffableDataSource {
         return TableViewDiffableDataSource(tableView: self.tableView) { [weak self] (tableView, indexPath, row) -> UITableViewCell? in
             guard let self = self else { return nil }
@@ -94,52 +93,44 @@ extension ProductViewController {
             case .descriptionKorean:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.reuseIdentifier, for: indexPath) as! TextViewTableViewCell
                 cell.textView.text = "%L%: 상세 설명 없음"
-                cell.textViewHeightLayoutConstraint.constant = ceil(cell.textView.sizeThatFits(CGSize(width: cell.textView.frame.width, height: .infinity)).height)
-                cell.isUserInteractionEnabled = false
-                return cell
-            case .delete:
-                let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
-                cell.textLabel?.text = "%L%: 제품 삭제하기"
-                cell.textLabel?.textColor = .red
-                cell.textLabel?.textAlignment = .center
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.reuseIdentifier, for: indexPath) as! TextFieldTableViewCell
                 
-                cell.isUserInteractionEnabled = false
-                
                 if case .nameKorean = row {
-                    cell.textField.text = self.product?.nameKo
+                    cell.textField.text = self.product.nameKo
                     cell.textField.placeholder = "%L%: 한국어 상품명"
                     cell.textFieldDidChange = { [weak self] textField in
                         guard let self = self else { return }
                         
-                        self.product?.nameKo = textField.text
+                        self.product.nameKo = textField.text
                     }
                 } else if case .nameEnglish = row {
-                    cell.textField.text = self.product?.nameEn?.isEmpty == false ? self.product?.nameEn : "%L%: 영어 상품명 없음"
+                    cell.textField.text = self.product.nameEn?.isEmpty == false ? self.product.nameEn : "%L%: 영어 상품명 없음"
                     cell.textField.placeholder = "%L%: 영어 상품명"
                     cell.textFieldDidChange = { [weak self] textField in
                         guard let self = self else { return }
                         
-                        self.product?.nameEn = textField.text
+                        self.product.nameEn = textField.text
                     }
                 } else if case .price = row {
                     cell.textField.keyboardType = .numberPad
                     cell.textField.placeholder = "%L%: 상품 가격"
-                    cell.textField.text = self.product?.price?.priceKRW ?? "%L%: 가격 없음"
+                    if let price = self.product.price {
+                        cell.textField.text = String(price)
+                    }
                     cell.textFieldDidChange = { [weak self] textField in
                         guard let self = self else { return }
                         guard let text = textField.text else { return }
                         guard let price = Int(text) else { return }
                         
-                        self.product?.price = price
+                        self.product.price = price
                     }
                 } else if case .supplier = row {
-                    cell.textField.text = self.product?.supplier?.name
+                    cell.textField.text = self.product.supplier?.name
                     cell.textField.placeholder = "%L%: 공급사"
                     cell.textField.isUserInteractionEnabled = false
-                    cell.accessoryType = .none
+                    cell.accessoryType = .disclosureIndicator
                 }
                 return cell
             }
@@ -147,15 +138,21 @@ extension ProductViewController {
     }
 }
 
-extension ProductViewController: UITableViewDelegate {
+extension ProductFormViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let row = dataSource.itemIdentifier(for: indexPath) else { return }
         
-        if case .delete = row {
-            let deleteProductInput = DeleteProductInput(id: productId)
-            ZAPINotificationCenter.post(notification: .didDeleteProductRequested, userInfo: [.deleteProductInput: deleteProductInput])
+        if case .supplier = row {
+            let suppliersViewController = SelectSupplierViewController(selectedSupplier: product.supplier) { [weak self] (selectSupplierViewController, selectedSupplier) in
+                guard let self = self else { return }
+                
+                self.product.supplier = selectedSupplier
+                self.updateDataSource(with: self.product)
+                self.navigationController?.popViewController(animated: true)
+            }
+            navigationController?.pushViewController(suppliersViewController, animated: true)
         }
     }
     
@@ -164,64 +161,92 @@ extension ProductViewController: UITableViewDelegate {
     }
 }
 
-extension ProductViewController {
-    private func fetchProduct(with productId: String) {
-        ZAPINotificationCenter.post(notification: .didProductRequested, object: self, userInfo: [.productId: productId])
-    }
-    
-    private func updateDataSource(with product: Product?) {
+extension ProductFormViewController {
+    private func updateDataSource(with product: Product) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.deleteAllItems()
-
-        if product != nil {
-            snapshot.appendSections(Section.allCases)
-            
+        
+        if case .add = mode {
+            snapshot.appendSections([.nameInfo, .priceInfo, .supplierInfo])
+            snapshot.appendItems([.nameKorean], toSection: .nameInfo)
+            snapshot.appendItems([.price], toSection: .priceInfo)
+            snapshot.appendItems([.supplier], toSection: .supplierInfo)
+        } else {
+            snapshot.appendSections([.nameInfo, .descriptionInfo, .priceInfo, .supplierInfo])
             snapshot.appendItems([.nameKorean, .nameEnglish], toSection: .nameInfo)
             snapshot.appendItems([.descriptionKorean], toSection: .descriptionInfo)
             snapshot.appendItems([.price], toSection: .priceInfo)
             snapshot.appendItems([.supplier], toSection: .supplierInfo)
-            snapshot.appendItems([.delete], toSection: .deleteProduct)
         }
         
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
-    private func setupNavigationItem() {
-        navigationItem.title = "%L%: 상품 상세"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(onEdit))
+    private func setupNavigationItem(mode: Mode) {
+        switch mode {
+        case .add:
+            navigationItem.title = "%L%: 상품 추가"
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onAddDone))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCanceled))
+        case .edit:
+            navigationItem.title = "%L%: 상품 편집"
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onEditDone))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCanceled))
+        }
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
     }
 }
 
-extension ProductViewController {
+extension ProductFormViewController {
     @objc private func onEdit() {
-        guard let product = product else { return }
-        
         let productViewController = ProductFormViewController(mode: .edit(product))
         let productNavigationController = UINavigationController(rootViewController: productViewController)
         navigationController?.present(productNavigationController, animated: true, completion: nil)
     }
+    
+    @objc private func onAddDone() {
+        guard let supplierId = product.supplier?.id else { return }
+        guard let nameKo = product.nameKo else { return }
+        guard let price = product.price else { return }
+        
+        let createProductInput = CreateProductInput(supplierId: supplierId, nameKo: nameKo, price: price)
+        ZAPINotificationCenter.post(
+            notification: .didCreateProductRequested,
+            userInfo: [.createProductInput: createProductInput]
+        )
+    }
+    
+    @objc private func onEditDone() {
+        //TODO: cell에 empty string 대응
+        guard let productId = product.id else { return }
+        guard let nameKo = product.nameKo else { return }
+        guard let price = product.price else { return }
+        
+        let nameEn = product.nameEn ?? ""
+        let descriptionEn = ""
+        let descriptionKo = product.descriptionKo ?? ""
+        
+        let updateProductInput = UpdateProductInput(id: productId, nameKo: nameKo, nameEn: nameEn, descriptionKo: descriptionKo, descriptionEn: descriptionEn, price: price)
+        ZAPINotificationCenter.post(notification: .didUpdateProductRequested, userInfo: [.updateProductInput: updateProductInput])
+    }
+    
+    @objc private func onCanceled() {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
-extension ProductViewController {
-    @objc private func onDidProductRequestUpdated(_ notification: Notification) {
+extension ProductFormViewController {
+    @objc private func onDidCreateProductRequestUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        guard data[ZAPINotificationCenter.UserInfoKey.product] as? Product != nil else { return }
         
-        self.product = product
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func onDidUpdateProductRequestUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
-
-        self.product = product
-    }
-    
-    @objc private func onDidDeleteProductRequestUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
         guard let _ = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
         
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
 }

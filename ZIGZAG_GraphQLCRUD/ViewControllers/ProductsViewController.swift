@@ -86,7 +86,8 @@ extension ProductsViewController: UITableViewDelegate {
         
         switch row {
         case .item(let product):
-            let productViewController = ProductViewController(mode: .view(product))
+            guard let productId = product.id else { return }
+            let productViewController = ProductViewController(productId: productId)
             navigationController?.pushViewController(productViewController, animated: true)
         }
     }
@@ -125,7 +126,7 @@ extension ProductsViewController {
 
 extension ProductsViewController {
     @objc private func onAdd() {
-        let productViewController = ProductViewController(mode: .add)
+        let productViewController = ProductFormViewController(mode: .add)
         let productNavigationController = UINavigationController(rootViewController: productViewController)
         navigationController?.present(productNavigationController, animated: true, completion: nil)
     }
@@ -134,7 +135,7 @@ extension ProductsViewController {
 extension ProductsViewController {
     @objc private func onDidProductListStateUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIManager.State else { return }
+        guard let _ = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIManager.State else { return }
         guard let products = data[ZAPINotificationCenter.UserInfoKey.products] as? [Product] else { return }
         
         self.products = products
