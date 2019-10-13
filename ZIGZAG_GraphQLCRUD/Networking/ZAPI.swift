@@ -17,7 +17,15 @@ class ZAPI {
             return URL(string: "http://test.recruit.croquis.com:28500/")!
         }
     }
-    private lazy var networkTransport = HTTPNetworkTransport(url: baseURL, delegate: self)
+    private var urlSession: URLSession {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 10
+        let urlSession = URLSession(configuration: configuration)
+        return urlSession
+        
+    }
+    private lazy var networkTransport = HTTPNetworkTransport(url: baseURL, session: urlSession, delegate: self)
+    
     private (set) lazy var client = ApolloClient(networkTransport: networkTransport)
 }
 
