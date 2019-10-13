@@ -10,17 +10,21 @@ import Foundation
 
 enum ZigZagAPINotification: String {
     case didProductRequested              = "DidProductRequested"
-    case didProductListRequested          = "DidProductListRequested"
-    case didSupplierListRequested         = "DidSupplierListRequested"
-    case didCreateProductRequested        = "DidCreateProductRequested"
-    case didDeleteProductRequested        = "DidDeleteProductRequested"
-    case didUpdateProductRequested        = "DidUpdateProductRequested"
-    
     case didProductRequestUpdated         = "DidProductStateRequestUpdated"
+    
+    case didProductListRequested          = "DidProductListRequested"
     case didProductListRequestUpdated     = "DidProductListRequestUpdated"
+    
+    case didSupplierListRequested         = "DidSupplierListRequested"
     case didSupplierListRequestUpdated    = "DidSupplierListRequestUpdated"
+    
+    case didCreateProductRequested        = "DidCreateProductRequested"
     case didCreateProductRequestUpdated   = "DidCreateProductRequestUpdated"
+    
+    case didDeleteProductRequested        = "DidDeleteProductRequested"
     case didDeleteProductRequestUpdated   = "DidDeleteProductRequestUpdated"
+    
+    case didUpdateProductRequested        = "DidUpdateProductRequested"
     case didUpdateProductRequestUpdated   = "DidUpdateProductRequestUpdated"
     
     var name: Notification.Name {
@@ -43,10 +47,6 @@ extension ZAPINotificationCenter {
         case zAPIState = "zAPIState"
         
         case productId = "productId"
-        
-        case product = "product"
-        case products = "products"
-        case suppliers = "suppliers"
         
         case createProductInput = "createProductInput"
         case deleteProductInput = "deleteProductInput"
