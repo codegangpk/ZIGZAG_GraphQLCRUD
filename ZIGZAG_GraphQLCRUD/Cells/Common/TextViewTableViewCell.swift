@@ -10,6 +10,7 @@ import UIKit
 
 class TextViewTableViewCell: UITableViewCell {
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textViewHeightLayoutConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +37,7 @@ class TextViewTableViewCell: UITableViewCell {
 
 extension TextViewTableViewCell {
     private func commonInit() {
+        textViewHeightLayoutConstraint.constant = ceil("한\n글\n한\n글\n한".boundedRect(maxWidth: textView.frame.width, font: UIFont.preferredFont(forTextStyle: .body)).height)
         textView.text.removeAll()
         
         selectionStyle = .none

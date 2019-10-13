@@ -18,6 +18,13 @@ struct Product {
     var dateCreated: Date?
     var dateUpdated: Date?
     
+    var isValidInfo: Bool {
+        let isValid = nameKo?.isEmpty == false &&
+            price != nil && price! >= 0 &&
+            supplier != nil
+        return isValid
+    }
+    
     init() { }
     
     init(id: String, nameKo: String, price: Int, supplier: Supplier) {
@@ -34,15 +41,11 @@ struct Product {
         guard let supplierFragment = productListFragment.supplier?.fragments.supplierFragment else { return nil }
         guard let supplier = Supplier(supplierFragment: supplierFragment) else { return nil }
         
-        //TODO: data isEmpty validation check
-//        guard nameKo.isEmpty == false else { return nil }
-//        guard supplierFragment.name.isEmpty == false else { return nil }
-        
         self.init(id: id, nameKo: nameKo, price: price, supplier: supplier)
         
-        self.nameEn = productListFragment.nameEn
-        self.dateCreated = Date(timeIntervalSince1970: productListFragment.dateCreated)
-        self.dateUpdated = Date(timeIntervalSince1970: productListFragment.dateUpdated)
+        self.nameEn = productListFragment.nameEn ?? ""
+        self.dateCreated = Date(timeIntervalSince1970: productListFragment.dateCreated / 1000)
+        self.dateUpdated = Date(timeIntervalSince1970: productListFragment.dateUpdated / 1000)
     }
     
     init?(productDetailFragment: ProductDetailFragment) {
@@ -54,8 +57,8 @@ struct Product {
         
         self.init(id: id, nameKo: nameKo, price: price, supplier: supplier)
         
-        self.nameEn = productDetailFragment.nameEn
-        self.descriptionKo = productDetailFragment.descriptionKo
+        self.nameEn = productDetailFragment.nameEn ?? ""
+        self.descriptionKo = productDetailFragment.descriptionKo ?? ""
     }
 }
 

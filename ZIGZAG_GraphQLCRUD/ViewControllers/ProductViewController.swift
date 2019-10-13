@@ -2,7 +2,7 @@
 //  ProductViewController.swift
 //  ZIGZAG_GraphQLCRUD
 //
-//  Created by Paul Kim on 2019/10/11.
+//  Created by Paul Kim on 2019/10/13.
 //  Copyright © 2019 Paul Kim. All rights reserved.
 //
 
@@ -10,15 +10,14 @@ import UIKit
 import Apollo
 
 private enum Section: CaseIterable {
-    case name
-    case description
-    case supplierInfo
+    case basicInfo
+    case descriptionInfo
+    case deleteProduct
     
     var title: String? {
         switch self {
-        case .description:  return "제품 설명"
-        case .supplierInfo: return "제품 정보"
-        default:            return nil
+        case .descriptionInfo:  return "%L%: 요약 설명"
+        default:                return nil
         }
     }
 }
@@ -26,11 +25,12 @@ private enum Section: CaseIterable {
 private enum Row: Hashable {
     case nameKorean
     case nameEnglish
+    case price
+    case supplier
     
     case descriptionKorean
     
-    case price
-    case supplier
+    case delete
 }
 
 private class TableViewDiffableDataSource: UITableViewDiffableDataSource<Section, Row> {
@@ -40,33 +40,20 @@ private class TableViewDiffableDataSource: UITableViewDiffableDataSource<Section
 }
 
 class ProductViewController: UIViewController {
-    enum Mode {
-        case view(Product)
-        case add
-        case edit(Product)
-    }
-    
     @IBOutlet weak var tableView: UITableView!
     private lazy var dataSource = setupDataSource()
     
-    private let mode: Mode
-    
-    private var product: Product {
+    private var productId: String
+    private var product: Product? {
         didSet {
-            updateDataSource(with: product)
+            if let product = product {
+                updateDataSource(with: product)
+            }
         }
     }
     
-    init(mode: Mode) {
-        self.mode = mode
-        
-        if case .view(let product) = mode {
-            self.product = product
-        } else if case .edit(let product) = mode {
-            self.product = product
-        } else {
-            self.product = Product()
-        }
+    init(productId: String) {
+        self.productId = productId
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -76,16 +63,23 @@ class ProductViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        setupNavigationItem(mode: mode)
+        setupNavigationItem()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
-        tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.reuseIdentifier)
+        tableView.register(BasicTableViewCell.nib, forCellReuseIdentifier: BasicTableViewCell.reuseIdentifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         
-        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated(_:)), notification: ZigZagAPINotification.didCreateProductRequestUpdated)
+        let refreshControl = UIRefreshControl()
+        refreshControl.layer.zPosition = -1
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+        
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductRequestUpdated(_:)), notification: .didProductRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequestUpdated(_:)), notification: .didUpdateProductRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidDeleteProductRequestUpdated(_:)), notification: .didDeleteProductRequestUpdated)
         
         updateDataSource(with: product)
+        fetchProduct(with: productId)
     }
 }
 
@@ -97,39 +91,29 @@ extension ProductViewController {
             switch row {
             case .descriptionKorean:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.reuseIdentifier, for: indexPath) as! TextViewTableViewCell
-                cell.textView.text = self.product.descriptionKo
+                cell.textView.text = self.product?.descriptionKo ?? "%L%: (요약 설명 미제공)"
+                cell.textViewHeightLayoutConstraint.constant = ceil(cell.textView.sizeThatFits(CGSize(width: cell.textView.frame.width, height: .infinity)).height)
+                cell.isUserInteractionEnabled = false
+                return cell
+            case .delete:
+                let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.reuseIdentifier, for: indexPath) as! BasicTableViewCell
+                cell.label?.text = "%L%: 제품 삭제하기"
+                cell.label?.textColor = .red
+                cell.label?.textAlignment = .center
                 return cell
             default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.reuseIdentifier, for: indexPath) as! TextFieldTableViewCell
-                if case .view = self.mode {
-                    cell.isUserInteractionEnabled = false
-                }
+                let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.reuseIdentifier, for: indexPath) as! BasicTableViewCell
+                
+                cell.isUserInteractionEnabled = false
                 
                 if case .nameKorean = row {
-                    cell.textField.text = self.product.nameKo
-                    cell.textField.placeholder = "%L%: 한국어 상품명"
+                    cell.label.text = self.product?.nameKo
                 } else if case .nameEnglish = row {
-                    cell.textField.text = self.product.nameEn?.isEmpty == false ? self.product.nameEn : "%L%: 영어 상품명 없음"
-                    cell.textField.placeholder = "%L%: 영어 상품명"
+                    cell.label.text = self.product?.nameEn?.isEmpty == false ? self.product?.nameEn : "%L%: (영어 상품명 미제공)"
                 } else if case .price = row {
-                    //TODO: number pad
-                    if let priceKRW = self.product.price?.priceKRW {
-                        cell.textField.text = priceKRW
-                    } else {
-                        if case .view = self.mode {
-                            cell.textField.text = "%L%: 가격 없음"
-                        }
-                    }
-                    cell.textField.placeholder = "%L%: 상품 가격"
+                    cell.label.text = self.product?.price?.priceKRW ?? "%L%: (가격 미제공)"
                 } else if case .supplier = row {
-                    cell.textField.text = self.product.supplier?.name
-                    cell.textField.placeholder = "%L%: 공급사"
-                    cell.textField.isUserInteractionEnabled = false
-                    if case .view = self.mode {
-                        cell.accessoryType = .none
-                    } else {
-                        cell.accessoryType = .disclosureIndicator
-                    }
+                    cell.label.text = self.product?.supplier?.name
                 }
                 return cell
             }
@@ -143,19 +127,9 @@ extension ProductViewController: UITableViewDelegate {
         
         guard let row = dataSource.itemIdentifier(for: indexPath) else { return }
         
-        if case .supplier = row {
-            switch mode {
-            case .add, .edit:
-                let suppliersViewController = SelectSupplierViewController(selectedSupplier: product.supplier) { [weak self] (selectSupplierViewController, selectedSupplier) in
-                    guard let self = self else { return }
-                    
-                    self.product.supplier = selectedSupplier
-                    self.navigationController?.popViewController(animated: true)
-                }
-                navigationController?.pushViewController(suppliersViewController, animated: true)
-            default:
-                break
-            }
+        if case .delete = row {
+            let deleteProductInput = DeleteProductInput(id: productId)
+            ZAPINotificationCenter.post(notification: .didDeleteProductRequested, userInfo: [.deleteProductInput: deleteProductInput])
         }
     }
     
@@ -165,69 +139,98 @@ extension ProductViewController: UITableViewDelegate {
 }
 
 extension ProductViewController {
-    private func updateDataSource(with product: Product) {
+    private func fetchProduct(with productId: String) {
+        ZAPINotificationCenter.post(notification: .didProductRequested, object: self, userInfo: [.productId: productId])
+    }
+    
+    private func updateDataSource(with product: Product?) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.deleteAllItems()
-        
-        snapshot.appendSections(Section.allCases)
-        
-        if case .add = mode {
-            snapshot.appendItems([.nameKorean], toSection: .name)
-            snapshot.appendItems([.price, .supplier], toSection: .supplierInfo)
-        } else  {
-            snapshot.appendItems([.nameKorean, .nameEnglish], toSection: .name)
-            snapshot.appendItems([.descriptionKorean], toSection: .description)
-            snapshot.appendItems([.price, .supplier], toSection: .supplierInfo)
+
+        if product != nil {
+            snapshot.appendSections(Section.allCases)
+            
+            snapshot.appendItems([.nameKorean, .nameEnglish, .price, .supplier], toSection: .basicInfo)
+            snapshot.appendItems([.descriptionKorean], toSection: .descriptionInfo)
+            snapshot.appendItems([.delete], toSection: .deleteProduct)
         }
         
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
-    private func setupNavigationItem(mode: Mode) {
-        switch mode {
-        case .view:
-            navigationItem.title = "%L%: 상품 상세"
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(onEdit))
-        case .add:
-            navigationItem.title = "%L%: 상품 추가"
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onAddDone))
-        case .edit:
-            navigationItem.title = "%L%: 상품 편집"
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onEditDone))
-        }
+    private func setupNavigationItem() {
+        navigationItem.title = "%L%: 상품 상세"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(onEdit))
         navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
     }
 }
 
 extension ProductViewController {
     @objc private func onEdit() {
-        let productViewController = ProductViewController(mode: .edit(product))
+        guard let product = product else { return }
+        
+        let productViewController = ProductFormViewController(mode: .edit(product))
         let productNavigationController = UINavigationController(rootViewController: productViewController)
         navigationController?.present(productNavigationController, animated: true, completion: nil)
     }
     
-    @objc private func onAddDone() {
-//        guard let supplierId = product.supplier?.id else { return }
-//        guard let nameKo = product.nameKo else { return }
-//        guard let price = product.price else { return }
-        
-        let createProductInput = CreateProductInput(supplierId: "1", nameKo: "한국 어어어어3", price: 40000)
-        ZAPINotificationCenter.post(
-            notification: .didCreateProductRequested,
-            userInfo: [.createProductInput: createProductInput]
-        )
-    }
-    
-    @objc private func onEditDone() {
-        dismiss(animated: true, completion: nil)
+    @objc private func refreshData(_ refreshControl: UIRefreshControl) {
+        fetchProduct(with: productId)
     }
 }
 
 extension ProductViewController {
-    @objc private func onDidCreateProductRequestUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+    @objc private func onDidProductRequestUpdated(_ notification: Notification) {
+        guard let state = notification.zAPIState else { return }
         
-        dismiss(animated: true, completion: nil)
+        switch state {
+        case .loading:
+            tableView.isScrollEnabled = false
+        case .success(let product):
+            guard let product = product as? Product else { return }
+            
+            tableView.isScrollEnabled = true
+            tableView.refreshControl?.endRefreshing()
+            self.product = product
+        case .failed:
+            tableView.isScrollEnabled = true
+            tableView.refreshControl?.endRefreshing()
+            showNetworkErrorAlert()
+        default:
+            break
+        }
+    }
+    
+    @objc private func onDidUpdateProductRequestUpdated(_ notification: Notification) {
+        guard let state = notification.zAPIState else { return }
+        
+        if case .success(let product) = state {
+            guard let product = product as? Product else { return }
+            
+            self.product = product
+        }
+    }
+    
+    @objc private func onDidDeleteProductRequestUpdated(_ notification: Notification) {
+        guard let state = notification.zAPIState else { return }
+            
+        switch state {
+        case .loading:
+            showLoader()
+        case .success:
+            hideLoader()
+            if let navigationView = navigationController?.view {
+                HudView.hud(inView: navigationView, text: "삭제 완료", animated: true) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        case .failed:
+            hideLoader()
+            showNetworkErrorAlert()
+        default:
+            break
+        }
     }
 }

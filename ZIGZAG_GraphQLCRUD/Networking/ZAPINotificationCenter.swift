@@ -40,7 +40,7 @@ class ZAPINotificationCenter {
 
 extension ZAPINotificationCenter {
     enum UserInfoKey: String {
-        case state = "state"
+        case zAPIState = "zAPIState"
         
         case productId = "productId"
         
@@ -51,5 +51,13 @@ extension ZAPINotificationCenter {
         case createProductInput = "createProductInput"
         case deleteProductInput = "deleteProductInput"
         case updateProductInput = "updateProductInput"
+    }
+}
+
+extension Notification {
+    var zAPIState: ZAPIState? {
+        guard let zAPIState = userInfo?[ZAPINotificationCenter.UserInfoKey.zAPIState] as? ZAPIState else { return nil }
+        
+        return zAPIState
     }
 }

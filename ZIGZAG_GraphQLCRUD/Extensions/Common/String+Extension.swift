@@ -2,17 +2,19 @@
 //  String+Extension.swift
 //  ZIGZAG_GraphQLCRUD
 //
-//  Created by Paul Kim on 2019/10/11.
+//  Created by Paul Kim on 2019/10/12.
 //  Copyright © 2019 Paul Kim. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-extension Int {
-    var priceKRW: String? {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencyCode = "KRW"
-        return formatter.string(from: self as NSNumber)
-    }
+extension String {
+    public func boundedRect(maxWidth: CGFloat, font: UIFont) -> CGRect {
+           return self.boundingRect(
+               with: CGSize(width: maxWidth, height: 999999),
+               options: .usesLineFragmentOrigin,
+               attributes: [NSAttributedString.Key.font: font],
+               context: nil
+           )
+       }
 }

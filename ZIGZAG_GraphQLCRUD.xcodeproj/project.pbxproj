@@ -8,14 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		6917F19E2350CCF60039BA8E /* ZAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F19D2350CCF60039BA8E /* ZAPIManager.swift */; };
-		6917F1A02350CE090039BA8E /* Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F19F2350CE090039BA8E /* Notification.Name.swift */; };
 		6917F1A22350F3690039BA8E /* ZAPINotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */; };
+		692B3C6B2351AC8D0007F746 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B3C692351AC8D0007F746 /* ProductTableViewCell.swift */; };
+		692B3C6C2351AC8D0007F746 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692B3C6A2351AC8D0007F746 /* ProductTableViewCell.xib */; };
+		694BD8322351C0BC0091DAC9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD8312351C0BC0091DAC9 /* String+Extension.swift */; };
+		694BD8352352FED30091DAC9 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD8332352FED30091DAC9 /* ProductViewController.swift */; };
+		694BD8362352FED30091DAC9 /* ProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694BD8342352FED30091DAC9 /* ProductViewController.xib */; };
+		694BD83D2353177C0091DAC9 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694BD83B2353177C0091DAC9 /* BasicTableViewCell.xib */; };
+		694BD83E2353177C0091DAC9 /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD83C2353177C0091DAC9 /* BasicTableViewCell.swift */; };
+		694BD84423531A350091DAC9 /* ZAPIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84323531A350091DAC9 /* ZAPIState.swift */; };
+		694BD846235333020091DAC9 /* TableFooterLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD845235333020091DAC9 /* TableFooterLoadingView.swift */; };
+		694BD84923534DDC0091DAC9 /* KeyboardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84823534DDC0091DAC9 /* KeyboardAnimation.swift */; };
+		694BD84B23535AAE0091DAC9 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84A23535AAE0091DAC9 /* UIViewController+Extension.swift */; };
+		694BD84E235370530091DAC9 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84D235370530091DAC9 /* HudView.swift */; };
+		694BD850235370DC0091DAC9 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84F235370DC0091DAC9 /* Functions.swift */; };
 		694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00B1234F785B000157DD /* GraphQLAPI.swift */; };
 		694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E0234F9D2C000157DD /* ProductsViewController.swift */; };
-		694C00E3234F9D35000157DD /* ProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductViewController.xib */; };
+		694C00E3234F9D35000157DD /* ProductFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductFormViewController.xib */; };
 		694C00E5234F9F4E000157DD /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E4234F9F4E000157DD /* NSObject+Extension.swift */; };
 		694C00E8234FA72B000157DD /* ZAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E7234FA72B000157DD /* ZAPI.swift */; };
-		697C45812350465900A4583D /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697C45802350465900A4583D /* ProductViewController.swift */; };
+		697C45812350465900A4583D /* ProductFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697C45802350465900A4583D /* ProductFormViewController.swift */; };
 		697C458423504C7800A4583D /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 697C458223504C7700A4583D /* TextFieldTableViewCell.xib */; };
 		697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697C458323504C7700A4583D /* TextFieldTableViewCell.swift */; };
 		69866D2023504FF7008B8318 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */; };
@@ -31,7 +43,7 @@
 		698BFE70234F1A0100FCFB38 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698BFE6F234F1A0100FCFB38 /* Apollo.framework */; };
 		698BFE71234F1A0100FCFB38 /* Apollo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 698BFE6F234F1A0100FCFB38 /* Apollo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		698BFE75234F1DBB00FCFB38 /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 698BFE74234F1DBB00FCFB38 /* Queries.graphql */; };
-		69B6625023508AF800F23D0D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B6624F23508AF800F23D0D /* String+Extension.swift */; };
+		69B6625023508AF800F23D0D /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B6624F23508AF800F23D0D /* Int+Extension.swift */; };
 		69B6625D23509E7B00F23D0D /* Error+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B6625C23509E7A00F23D0D /* Error+Extension.swift */; };
 		69B662612350A41B00F23D0D /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B662602350A41B00F23D0D /* NetworkConfig.swift */; };
 		69B662632350AAA300F23D0D /* ZAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B662622350AAA300F23D0D /* ZAPIProtocol.swift */; };
@@ -54,14 +66,26 @@
 
 /* Begin PBXFileReference section */
 		6917F19D2350CCF60039BA8E /* ZAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPIManager.swift; sourceTree = "<group>"; };
-		6917F19F2350CE090039BA8E /* Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.Name.swift; sourceTree = "<group>"; };
 		6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPINotificationCenter.swift; sourceTree = "<group>"; };
+		692B3C692351AC8D0007F746 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		692B3C6A2351AC8D0007F746 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
+		694BD8312351C0BC0091DAC9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		694BD8332352FED30091DAC9 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		694BD8342352FED30091DAC9 /* ProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductViewController.xib; sourceTree = "<group>"; };
+		694BD83B2353177C0091DAC9 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
+		694BD83C2353177C0091DAC9 /* BasicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
+		694BD84323531A350091DAC9 /* ZAPIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPIState.swift; sourceTree = "<group>"; };
+		694BD845235333020091DAC9 /* TableFooterLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableFooterLoadingView.swift; sourceTree = "<group>"; };
+		694BD84823534DDC0091DAC9 /* KeyboardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAnimation.swift; sourceTree = "<group>"; };
+		694BD84A23535AAE0091DAC9 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		694BD84D235370530091DAC9 /* HudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
+		694BD84F235370DC0091DAC9 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		694C00B1234F785B000157DD /* GraphQLAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQLAPI.swift; sourceTree = "<group>"; };
 		694C00E0234F9D2C000157DD /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
-		694C00E2234F9D35000157DD /* ProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductViewController.xib; sourceTree = "<group>"; };
+		694C00E2234F9D35000157DD /* ProductFormViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductFormViewController.xib; sourceTree = "<group>"; };
 		694C00E4234F9F4E000157DD /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		694C00E7234FA72B000157DD /* ZAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPI.swift; sourceTree = "<group>"; };
-		697C45802350465900A4583D /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		697C45802350465900A4583D /* ProductFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFormViewController.swift; sourceTree = "<group>"; };
 		697C458223504C7700A4583D /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		697C458323504C7700A4583D /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -78,7 +102,7 @@
 		698BFE68234F14CF00FCFB38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		698BFE6F234F1A0100FCFB38 /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/iOS/Apollo.framework; sourceTree = "<group>"; };
 		698BFE74234F1DBB00FCFB38 /* Queries.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
-		69B6624F23508AF800F23D0D /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		69B6624F23508AF800F23D0D /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		69B6625C23509E7A00F23D0D /* Error+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+Extension.swift"; sourceTree = "<group>"; };
 		69B662602350A41B00F23D0D /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		69B662622350AAA300F23D0D /* ZAPIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPIProtocol.swift; sourceTree = "<group>"; };
@@ -97,6 +121,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		692B3C642351A3F70007F746 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				694BD83C2353177C0091DAC9 /* BasicTableViewCell.swift */,
+				694BD83B2353177C0091DAC9 /* BasicTableViewCell.xib */,
+				697C458323504C7700A4583D /* TextFieldTableViewCell.swift */,
+				697C458223504C7700A4583D /* TextFieldTableViewCell.xib */,
+				69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */,
+				69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		694BD8472353330F0091DAC9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				694BD84D235370530091DAC9 /* HudView.swift */,
+				694BD845235333020091DAC9 /* TableFooterLoadingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		694BD84C23536B600091DAC9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				694BD84823534DDC0091DAC9 /* KeyboardAnimation.swift */,
+				694BD84F235370DC0091DAC9 /* Functions.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		694C00B3234F8F46000157DD /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,8 +175,10 @@
 			children = (
 				694C00E0234F9D2C000157DD /* ProductsViewController.swift */,
 				69866D26235062EC008B8318 /* ProductsViewController.xib */,
-				697C45802350465900A4583D /* ProductViewController.swift */,
-				694C00E2234F9D35000157DD /* ProductViewController.xib */,
+				694BD8332352FED30091DAC9 /* ProductViewController.swift */,
+				694BD8342352FED30091DAC9 /* ProductViewController.xib */,
+				697C45802350465900A4583D /* ProductFormViewController.swift */,
+				694C00E2234F9D35000157DD /* ProductFormViewController.xib */,
 				69866D28235076C2008B8318 /* SelectSupplierViewController.swift */,
 				69866D2A235076CC008B8318 /* SelectSupplierViewController.xib */,
 			);
@@ -140,10 +197,9 @@
 		697C458623504C8300A4583D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				697C458323504C7700A4583D /* TextFieldTableViewCell.swift */,
-				697C458223504C7700A4583D /* TextFieldTableViewCell.xib */,
-				69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */,
-				69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */,
+				692B3C692351AC8D0007F746 /* ProductTableViewCell.swift */,
+				692B3C6A2351AC8D0007F746 /* ProductTableViewCell.xib */,
+				692B3C642351A3F70007F746 /* Common */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -151,11 +207,12 @@
 		69866D2423505FF5008B8318 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */,
 				6917F19D2350CCF60039BA8E /* ZAPIManager.swift */,
+				694BD84323531A350091DAC9 /* ZAPIState.swift */,
 				694C00E7234FA72B000157DD /* ZAPI.swift */,
 				69B662622350AAA300F23D0D /* ZAPIProtocol.swift */,
 				69B662602350A41B00F23D0D /* NetworkConfig.swift */,
-				6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -192,9 +249,11 @@
 				698BFE5C234F14CC00FCFB38 /* SceneDelegate.swift */,
 				69866D2523506003008B8318 /* Models */,
 				694C00E6234FA71F000157DD /* ViewControllers */,
+				694BD8472353330F0091DAC9 /* Views */,
 				697C458623504C8300A4583D /* Cells */,
 				69866D2423505FF5008B8318 /* Networking */,
 				694C00E9235044CC000157DD /* Extensions */,
+				694BD84C23536B600091DAC9 /* Utilities */,
 				694C00B4234F8F50000157DD /* GraphQL */,
 				694C00B3234F8F46000157DD /* Assets */,
 				698BFE68234F14CF00FCFB38 /* Info.plist */,
@@ -213,9 +272,10 @@
 		69B662662350B01E00F23D0D /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				6917F19F2350CE090039BA8E /* Notification.Name.swift */,
+				694BD84A23535AAE0091DAC9 /* UIViewController+Extension.swift */,
 				694C00E4234F9F4E000157DD /* NSObject+Extension.swift */,
-				69B6624F23508AF800F23D0D /* String+Extension.swift */,
+				69B6624F23508AF800F23D0D /* Int+Extension.swift */,
+				694BD8312351C0BC0091DAC9 /* String+Extension.swift */,
 				69B6625C23509E7A00F23D0D /* Error+Extension.swift */,
 			);
 			path = Common;
@@ -282,13 +342,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				694BD83D2353177C0091DAC9 /* BasicTableViewCell.xib in Resources */,
 				698BFE75234F1DBB00FCFB38 /* Queries.graphql in Resources */,
 				69866D2123504FF7008B8318 /* TextViewTableViewCell.xib in Resources */,
 				69866D2B235076CC008B8318 /* SelectSupplierViewController.xib in Resources */,
 				698BFE67234F14CF00FCFB38 /* LaunchScreen.storyboard in Resources */,
+				694BD8362352FED30091DAC9 /* ProductViewController.xib in Resources */,
 				69866D27235062EC008B8318 /* ProductsViewController.xib in Resources */,
 				697C458423504C7800A4583D /* TextFieldTableViewCell.xib in Resources */,
-				694C00E3234F9D35000157DD /* ProductViewController.xib in Resources */,
+				694C00E3234F9D35000157DD /* ProductFormViewController.xib in Resources */,
+				692B3C6C2351AC8D0007F746 /* ProductTableViewCell.xib in Resources */,
 				698BFE64234F14CF00FCFB38 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,22 +402,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				694BD84B23535AAE0091DAC9 /* UIViewController+Extension.swift in Sources */,
 				694C00E5234F9F4E000157DD /* NSObject+Extension.swift in Sources */,
+				694BD8322351C0BC0091DAC9 /* String+Extension.swift in Sources */,
 				694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */,
+				692B3C6B2351AC8D0007F746 /* ProductTableViewCell.swift in Sources */,
 				69B6625D23509E7B00F23D0D /* Error+Extension.swift in Sources */,
 				698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */,
+				694BD850235370DC0091DAC9 /* Functions.swift in Sources */,
 				697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */,
 				69B662652350ADFF00F23D0D /* ZAPI+Extension.swift in Sources */,
-				69B6625023508AF800F23D0D /* String+Extension.swift in Sources */,
+				694BD84423531A350091DAC9 /* ZAPIState.swift in Sources */,
+				694BD83E2353177C0091DAC9 /* BasicTableViewCell.swift in Sources */,
+				69B6625023508AF800F23D0D /* Int+Extension.swift in Sources */,
+				694BD84E235370530091DAC9 /* HudView.swift in Sources */,
 				6917F1A22350F3690039BA8E /* ZAPINotificationCenter.swift in Sources */,
 				6917F19E2350CCF60039BA8E /* ZAPIManager.swift in Sources */,
-				6917F1A02350CE090039BA8E /* Notification.Name.swift in Sources */,
 				694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */,
 				69866D29235076C2008B8318 /* SelectSupplierViewController.swift in Sources */,
+				694BD846235333020091DAC9 /* TableFooterLoadingView.swift in Sources */,
+				694BD8352352FED30091DAC9 /* ProductViewController.swift in Sources */,
 				694C00E8234FA72B000157DD /* ZAPI.swift in Sources */,
 				69B662612350A41B00F23D0D /* NetworkConfig.swift in Sources */,
 				69B662632350AAA300F23D0D /* ZAPIProtocol.swift in Sources */,
-				697C45812350465900A4583D /* ProductViewController.swift in Sources */,
+				697C45812350465900A4583D /* ProductFormViewController.swift in Sources */,
+				694BD84923534DDC0091DAC9 /* KeyboardAnimation.swift in Sources */,
 				69866D23235054CC008B8318 /* Product.swift in Sources */,
 				698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */,
 				69866D2023504FF7008B8318 /* TextViewTableViewCell.swift in Sources */,

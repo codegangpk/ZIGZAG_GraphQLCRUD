@@ -9,32 +9,32 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductViewController" customModule="ZIGZAG_GraphQLCRUD" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="lWk-7h-ilS" id="eAf-7w-Ucb"/>
-                <outlet property="view" destination="iN0-l3-epB" id="bO6-Zk-SDI"/>
+                <outlet property="tableView" destination="WgD-c9-f2F" id="g7b-QB-D9H"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="lWk-7h-ilS">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="WgD-c9-f2F">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="AhE-Qx-kPa"/>
+                        <outlet property="delegate" destination="-1" id="Ld2-Eo-zpy"/>
                     </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="lWk-7h-ilS" secondAttribute="trailing" id="0Co-17-F4B"/>
-                <constraint firstItem="lWk-7h-ilS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="N1a-YW-gb7"/>
-                <constraint firstItem="lWk-7h-ilS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bww-je-Voa"/>
-                <constraint firstAttribute="bottom" secondItem="lWk-7h-ilS" secondAttribute="bottom" id="zKl-DM-epm"/>
+                <constraint firstItem="WgD-c9-f2F" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="3Eq-jP-tX8"/>
+                <constraint firstItem="WgD-c9-f2F" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Oxb-LM-pDc"/>
+                <constraint firstItem="WgD-c9-f2F" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QUi-ps-WPw"/>
+                <constraint firstAttribute="bottom" secondItem="WgD-c9-f2F" secondAttribute="bottom" id="dKj-Jm-k7A"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="141" y="154"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="134"/>
         </view>
     </objects>
 </document>
