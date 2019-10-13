@@ -60,8 +60,13 @@ class SelectSupplierViewController: UIViewController {
     override func viewDidLoad() {
         setupNavigationItem()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
+        tableView.register(BasicTableViewCell.nib, forCellReuseIdentifier: BasicTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.layer.zPosition = -1
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidSupplierListRequestUpdated(_:)), notification: .didSupplierListRequestUpdated)
         
@@ -76,8 +81,8 @@ extension SelectSupplierViewController {
             
             switch row {
             case .item(let supplier):
-                let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
-                cell.textLabel?.text = supplier.name
+                let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.reuseIdentifier, for: indexPath) as! BasicTableViewCell
+                cell.label?.text = supplier.name
                 if supplier.id == self.selectedSupplier?.id {
                     cell.accessoryType = .checkmark
                 } else {
@@ -102,18 +107,15 @@ extension SelectSupplierViewController: UITableViewDelegate {
             completion(self, supplier)
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNonzeroMagnitude
+    }
 }
 
 extension SelectSupplierViewController {
     private func fetchProducts() {
         ZAPINotificationCenter.post(notification: .didSupplierListRequested)
-    }
-    
-    @objc private func onDidSupplierListRequestUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let suppliers = data[ZAPINotificationCenter.UserInfoKey.suppliers] as? [Supplier] else { return }
-        
-        self.suppliers = suppliers
     }
     
     private func updateDataSource(with suppliers: [Supplier]) {
@@ -131,5 +133,33 @@ extension SelectSupplierViewController {
     
     private func setupNavigationItem() {
         navigationItem.title = "%L%: 공급사 선택"
+    }
+    
+    @objc private func refreshData(_ refreshControl: UIRefreshControl) {
+        fetchProducts()
+    }
+}
+
+extension SelectSupplierViewController {
+    @objc private func onDidSupplierListRequestUpdated(_ notification: Notification) {
+        guard let data = notification.userInfo else { return }
+        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
+        
+        switch state {
+        case .loading:
+            tableView.tableFooterView = TableFooterLoadingView()
+        case .success(let suppliers):
+            guard let suppliers = suppliers as? [Supplier] else { return }
+            
+            tableView.tableFooterView = nil
+            tableView.refreshControl?.endRefreshing()
+            self.suppliers = suppliers
+        case .failed:
+            tableView.tableFooterView = nil
+            tableView.refreshControl?.endRefreshing()
+            //TODO: handle fail
+        default:
+            break
+        }
     }
 }

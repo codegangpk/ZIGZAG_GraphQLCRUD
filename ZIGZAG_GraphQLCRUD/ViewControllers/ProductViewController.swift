@@ -205,15 +205,22 @@ extension ProductViewController {
     
     @objc private func onDidUpdateProductRequestUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
-
-        self.product = product
+        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
+        
+        if case .success(let product) = state {
+            guard let product = product as? Product else { return }
+            
+            self.product = product
+        }
     }
     
     @objc private func onDidDeleteProductRequestUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard let _ = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
-        
-        navigationController?.popViewController(animated: true)
+        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
+            
+        //TODO: handle fail
+        if case .success = state {
+            navigationController?.popViewController(animated: true)
+        }
     }
 }

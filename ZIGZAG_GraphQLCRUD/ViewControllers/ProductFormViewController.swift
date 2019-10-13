@@ -249,15 +249,23 @@ extension ProductFormViewController {
 extension ProductFormViewController {
     @objc private func onDidCreateProductRequestUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard data[ZAPINotificationCenter.UserInfoKey.product] as? Product != nil else { return }
-        
-        dismiss(animated: true, completion: nil)
+        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
+
+        if case .success = state {
+            dismiss(animated: true, completion: nil)
+        } else if case .failed = state {
+            //TODO: handle error
+        }
     }
     
     @objc private func onDidUpdateProductRequestUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard let _ = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
         
-        dismiss(animated: true, completion: nil)
+        if case .success = state {
+            dismiss(animated: true, completion: nil)
+        } else {
+            //TODO: handle error
+        }
     }
 }
