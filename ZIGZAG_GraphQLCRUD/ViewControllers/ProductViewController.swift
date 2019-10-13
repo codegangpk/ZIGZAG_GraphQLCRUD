@@ -16,7 +16,7 @@ private enum Section: CaseIterable {
     
     var title: String? {
         switch self {
-        case .descriptionInfo:  return "%L%: 상세 설명"
+        case .descriptionInfo:  return "%L%: 요약 설명"
         default:                return nil
         }
     }
@@ -91,7 +91,7 @@ extension ProductViewController {
             switch row {
             case .descriptionKorean:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.reuseIdentifier, for: indexPath) as! TextViewTableViewCell
-                cell.textView.text = self.product?.descriptionKo ?? "%L%: (상세 설명 미제공)"
+                cell.textView.text = self.product?.descriptionKo ?? "%L%: (요약 설명 미제공)"
                 cell.textViewHeightLayoutConstraint.constant = ceil(cell.textView.sizeThatFits(CGSize(width: cell.textView.frame.width, height: .infinity)).height)
                 cell.isUserInteractionEnabled = false
                 return cell

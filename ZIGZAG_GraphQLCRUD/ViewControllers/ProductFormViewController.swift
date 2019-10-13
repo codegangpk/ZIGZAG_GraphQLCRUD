@@ -19,8 +19,8 @@ private enum Section: CaseIterable {
         switch self {
         case .nameInfo:         return "%L%: 상품명"
         case .priceInfo:        return "%L%: 상품 가격"
-        case .supplierInfo:     return "%L%: 공급자 정보"
-        case .descriptionInfo:  return "%L%: 상세 설명"
+        case .supplierInfo:     return "%L%: 공급사 정보"
+        case .descriptionInfo:  return "%L%: 요약 설명"
         }
     }
 }
