@@ -146,15 +146,15 @@ extension SelectSupplierViewController {
         
         switch state {
         case .loading:
-            tableView.tableFooterView = TableFooterLoadingView()
+            tableView.isScrollEnabled = false
         case .success(let suppliers):
             guard let suppliers = suppliers as? [Supplier] else { return }
             
-            tableView.tableFooterView = nil
+            tableView.isScrollEnabled = true
             tableView.refreshControl?.endRefreshing()
             self.suppliers = suppliers
         case .failed:
-            tableView.tableFooterView = nil
+            tableView.isScrollEnabled = true
             tableView.refreshControl?.endRefreshing()
             showNetworkErrorAlert()
         default:

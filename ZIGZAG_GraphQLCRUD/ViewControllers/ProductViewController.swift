@@ -185,16 +185,15 @@ extension ProductViewController {
         
         switch state {
         case .loading:
-            tableView.tableFooterView = TableFooterLoadingView()
+            tableView.isScrollEnabled = false
         case .success(let product):
             guard let product = product as? Product else { return }
             
-            tableView.tableFooterView = nil
+            tableView.isScrollEnabled = true
             tableView.refreshControl?.endRefreshing()
-            
             self.product = product
         case .failed:
-            tableView.tableFooterView = nil
+            tableView.isScrollEnabled = true
             tableView.refreshControl?.endRefreshing()
             showNetworkErrorAlert()
         default:

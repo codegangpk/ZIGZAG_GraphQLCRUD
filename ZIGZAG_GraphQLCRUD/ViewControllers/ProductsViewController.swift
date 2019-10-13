@@ -89,8 +89,6 @@ extension ProductsViewController: UITableViewDelegate {
             guard let productId = product.id else { return }
             let productViewController = ProductViewController(productId: productId)
             navigationController?.pushViewController(productViewController, animated: true)
-        default:
-            break
         }
     }
     
@@ -143,15 +141,15 @@ extension ProductsViewController {
         
         switch state {
         case .loading:
-            tableView.tableFooterView = TableFooterLoadingView()
+            tableView.isScrollEnabled = false
+            tableView.refreshControl?.beginRefreshing()
         case .success(let products):
             guard let products = products as? [Product] else { return }
-            
-            tableView.tableFooterView = nil
+            tableView.isScrollEnabled = true
             tableView.refreshControl?.endRefreshing()
             updateDataSource(with: products)
         case .failed:
-            tableView.tableFooterView = nil
+            tableView.isScrollEnabled = true
             tableView.refreshControl?.endRefreshing()
             showNetworkErrorAlert()
         default:
