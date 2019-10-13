@@ -38,6 +38,7 @@ private enum Row: Hashable {
     var nextRowForAdd: Row? {
         switch self {
         case .nameKorean: return .price
+        case .price: return .supplier
         default: return nil
         }
     }
@@ -46,6 +47,8 @@ private enum Row: Hashable {
         switch self {
         case .nameKorean: return .nameEnglish
         case .nameEnglish: return .price
+        case .price: return .supplier
+        case .supplier: return .descriptionKorean
         default: return nil
         }
     }
@@ -178,16 +181,26 @@ extension ProductFormViewController {
                 } else if case .price = row {
                     cell.textField.keyboardType = .numberPad
                     cell.textField.placeholder = "%L%: 상품 가격 (필수값)"
+                    cell.addDoneButtonToolBar()
                     if let price = self.product.price {
                         cell.textField.text = String(price)
                     }
                     cell.textFieldDidChange = { [weak self] textField in
                         guard let self = self else { return }
-                        guard let text = textField.text else { return }
-                        guard let price = Int(text) else { return }
+                        guard let text = textField.text, text.isEmpty == false else { return }
+                        guard let price = Int32(text) else {
+                            textField.text = String(self.product.price!)
+                            return
+                        }
                         
-                        self.product.price = price
+                        textField.text = String(price)
+                        self.product.price = Int(price)
                         self.validateDoneButton()
+                    }
+                    cell.textFieldDidEndOnExit = { [weak self] (textField) in
+                        guard let self = self else { return }
+                        
+                        self.activateNextInput(for: .price)
                     }
                 } else if case .supplier = row {
                     cell.textField.text = self.product.supplier?.name
@@ -209,17 +222,7 @@ extension ProductFormViewController: UITableViewDelegate {
         guard let row = dataSource.itemIdentifier(for: indexPath) else { return }
         
         if case .supplier = row {
-            let suppliersViewController = SelectSupplierViewController(selectedSupplier: product.supplier) { [weak self] (selectSupplierViewController, selectedSupplier) in
-                guard let self = self else { return }
-                
-                self.product.supplier = selectedSupplier
-                self.updateDataSource(with: self.product)
-                
-                self.validateDoneButton()
-                self.navigationController?.popViewController(animated: true)
-                self.activateNextInput(for: .supplier)
-            }
-            navigationController?.pushViewController(suppliersViewController, animated: true)
+            self.pickSupplier()
         } else {
             tableView.cellForRow(at: indexPath)?.becomeFirstResponder()
         }
@@ -306,9 +309,26 @@ extension ProductFormViewController {
             nextRow = nextRowForEdit
         }
         
-        if let indexPath = dataSource.indexPath(for: nextRow) {
+        if case .supplier = nextRow {
+            pickSupplier()
+        } else {
+            guard let indexPath = dataSource.indexPath(for: nextRow) else { return }
             tableView.cellForRow(at: indexPath)?.becomeFirstResponder()
         }
+    }
+    
+    private func pickSupplier() {
+        let suppliersViewController = SelectSupplierViewController(selectedSupplier: product.supplier) { [weak self] (selectSupplierViewController, selectedSupplier) in
+            guard let self = self else { return }
+            
+            self.product.supplier = selectedSupplier
+            self.updateDataSource(with: self.product)
+            
+            self.validateDoneButton()
+            self.navigationController?.popViewController(animated: true)
+            self.activateNextInput(for: .supplier)
+        }
+        navigationController?.pushViewController(suppliersViewController, animated: true)
     }
     
     private func validateDoneButton() {

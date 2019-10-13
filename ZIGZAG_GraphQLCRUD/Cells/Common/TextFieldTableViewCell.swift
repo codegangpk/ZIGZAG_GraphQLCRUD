@@ -46,6 +46,7 @@ extension TextFieldTableViewCell {
         textField.returnKeyType = .done
         textField.keyboardType = .default
         textField.clearButtonMode = .whileEditing
+        textField.inputAccessoryView = nil
         
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         textField.addTarget(self, action: #selector(textFieldDidEndOnExit(_:)), for: .editingDidEndOnExit)
@@ -57,6 +58,15 @@ extension TextFieldTableViewCell {
     
     @objc func textFieldDidEndOnExit(_ textField: UITextField) {
         textFieldDidEndOnExit?(textField)
+    }
+    
+    @objc func addDoneButtonToolBar() {
+        let toolBar = UIToolbar()
+        let doneBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(textFieldDidEndOnExit(_:)))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        toolBar.setItems([flexibleSpace, doneBarButtonItem], animated: true)
+        toolBar.sizeToFit()
+        textField.inputAccessoryView = toolBar
     }
 }
 
