@@ -151,7 +151,6 @@ extension ZAPIManager {
                 {
                     newState = .success(product)
                 }
-                print(graphQLResult)
             case .failure(let error):
                 NSLog("Error while performing mutation: \(error.localizedDescription)")
             }
@@ -180,7 +179,6 @@ extension ZAPIManager {
                 {
                     newState = .success(product)
                 }
-                print(graphQLResult)
             case .failure(let error):
                 NSLog("Error while performing mutation: \(error.localizedDescription)")
             }
