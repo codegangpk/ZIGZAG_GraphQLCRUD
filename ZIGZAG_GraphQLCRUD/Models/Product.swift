@@ -38,10 +38,6 @@ struct Product {
         guard let supplierFragment = productListFragment.supplier?.fragments.supplierFragment else { return nil }
         guard let supplier = Supplier(supplierFragment: supplierFragment) else { return nil }
         
-        //TODO: data isEmpty validation check
-//        guard nameKo.isEmpty == false else { return nil }
-//        guard supplierFragment.name.isEmpty == false else { return nil }
-        
         self.init(id: id, nameKo: nameKo, price: price, supplier: supplier)
         
         self.nameEn = productListFragment.nameEn

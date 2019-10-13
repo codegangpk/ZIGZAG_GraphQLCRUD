@@ -157,7 +157,7 @@ extension SelectSupplierViewController {
         case .failed:
             tableView.tableFooterView = nil
             tableView.refreshControl?.endRefreshing()
-            //TODO: handle fail
+            showNetworkErrorAlert()
         default:
             break
         }

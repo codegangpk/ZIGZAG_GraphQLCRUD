@@ -342,24 +342,11 @@ extension ProductFormViewController {
     
     @objc private func onCanceled() {
         if isMeaningfulUserAction {
-            let title: String
             if case .add = mode {
-                title = "%L%: 새 상품 등록을 그만두시겠습니까?"
+                showEndEditAlert(title: "%L%: 새 상품 등록을 그만두시겠습니까?")
             } else {
-                title = "%L%: 이 변경사항을 폐기하겠습니까?"
+                showEndEditAlert(title: "%L%: 이 변경사항을 폐기하겠습니까?")
             }
-            let alertController = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
-            
-            let discardAction = UIAlertAction(title: "%L%: 변경사항 폐기", style: .default) { [weak self] (_) in
-                guard let self = self else { return }
-                
-                self.dismiss(animated: true, completion: nil)
-            }
-            let cancelAction = UIAlertAction(title: "%L%: 계속 편집하기", style: .cancel)
-            alertController.addAction(discardAction)
-            alertController.addAction(cancelAction)
-            
-            present(alertController, animated: true)
         } else {
             dismiss(animated: true, completion: nil)
         }
@@ -371,10 +358,17 @@ extension ProductFormViewController {
         guard let data = notification.userInfo else { return }
         guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
 
-        if case .success = state {
+        switch state {
+        case .loading:
+            showLoader()
+        case .failed:
+            hideLoader()
+            showNetworkErrorAlert()
+        case .success:
+            hideLoader()
             dismiss(animated: true, completion: nil)
-        } else if case .failed = state {
-            //TODO: handle error
+        default:
+            break
         }
     }
     
@@ -382,10 +376,17 @@ extension ProductFormViewController {
         guard let data = notification.userInfo else { return }
         guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
         
-        if case .success = state {
+        switch state {
+        case .loading:
+            showLoader()
+        case .failed:
+            hideLoader()
+            showNetworkErrorAlert()
+        case .success:
+            hideLoader()
             dismiss(animated: true, completion: nil)
-        } else {
-            //TODO: handle error
+        default:
+            break
         }
     }
 }
@@ -401,7 +402,6 @@ extension ProductFormViewController {
             
             self.tableView.contentInset.bottom = keyboardHeight
             self.tableView.verticalScrollIndicatorInsets.bottom = keyboardHeight
-            
             
             if let descriptionKoreanIndexPath = self.dataSource.indexPath(for: .descriptionKorean),
                 let descriptionKoreanCell = self.tableView.cellForRow(at: descriptionKoreanIndexPath) as? TextViewTableViewCell,

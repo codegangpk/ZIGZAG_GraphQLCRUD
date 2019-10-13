@@ -197,7 +197,7 @@ extension ProductViewController {
         case .failed:
             tableView.tableFooterView = nil
             tableView.refreshControl?.endRefreshing()
-            //TODO: networkError
+            showNetworkErrorAlert()
         default:
             break
         }
@@ -218,9 +218,17 @@ extension ProductViewController {
         guard let data = notification.userInfo else { return }
         guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
             
-        //TODO: handle fail
-        if case .success = state {
+        switch state {
+        case .loading:
+            showLoader()
+        case .success:
+            hideLoader()
             navigationController?.popViewController(animated: true)
+        case .failed:
+            hideLoader()
+            showNetworkErrorAlert()
+        default:
+            break
         }
     }
 }

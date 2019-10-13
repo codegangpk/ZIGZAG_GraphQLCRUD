@@ -164,6 +164,7 @@ extension ProductsViewController {
         case .failed:
             tableView.tableFooterView = nil
             tableView.refreshControl?.endRefreshing()
+            showNetworkErrorAlert()
         default:
             break
         }
