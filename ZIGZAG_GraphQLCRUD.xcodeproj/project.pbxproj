@@ -22,6 +22,8 @@
 		694BD846235333020091DAC9 /* TableFooterLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD845235333020091DAC9 /* TableFooterLoadingView.swift */; };
 		694BD84923534DDC0091DAC9 /* KeyboardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84823534DDC0091DAC9 /* KeyboardAnimation.swift */; };
 		694BD84B23535AAE0091DAC9 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84A23535AAE0091DAC9 /* UIViewController+Extension.swift */; };
+		694BD84E235370530091DAC9 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84D235370530091DAC9 /* HudView.swift */; };
+		694BD850235370DC0091DAC9 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84F235370DC0091DAC9 /* Functions.swift */; };
 		694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00B1234F785B000157DD /* GraphQLAPI.swift */; };
 		694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E0234F9D2C000157DD /* ProductsViewController.swift */; };
 		694C00E3234F9D35000157DD /* ProductFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductFormViewController.xib */; };
@@ -80,6 +82,8 @@
 		694BD845235333020091DAC9 /* TableFooterLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableFooterLoadingView.swift; sourceTree = "<group>"; };
 		694BD84823534DDC0091DAC9 /* KeyboardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAnimation.swift; sourceTree = "<group>"; };
 		694BD84A23535AAE0091DAC9 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		694BD84D235370530091DAC9 /* HudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
+		694BD84F235370DC0091DAC9 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		694C00B1234F785B000157DD /* GraphQLAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQLAPI.swift; sourceTree = "<group>"; };
 		694C00E0234F9D2C000157DD /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		694C00E2234F9D35000157DD /* ProductFormViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductFormViewController.xib; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 		694BD8472353330F0091DAC9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				694BD84D235370530091DAC9 /* HudView.swift */,
 				694BD845235333020091DAC9 /* TableFooterLoadingView.swift */,
 			);
 			path = Views;
@@ -148,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				694BD84823534DDC0091DAC9 /* KeyboardAnimation.swift */,
+				694BD84F235370DC0091DAC9 /* Functions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -410,11 +416,13 @@
 				692B3C6B2351AC8D0007F746 /* ProductTableViewCell.swift in Sources */,
 				69B6625D23509E7B00F23D0D /* Error+Extension.swift in Sources */,
 				698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */,
+				694BD850235370DC0091DAC9 /* Functions.swift in Sources */,
 				697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */,
 				69B662652350ADFF00F23D0D /* ZAPI+Extension.swift in Sources */,
 				694BD84423531A350091DAC9 /* ZAPIState.swift in Sources */,
 				694BD83E2353177C0091DAC9 /* BasicTableViewCell.swift in Sources */,
 				69B6625023508AF800F23D0D /* Int+Extension.swift in Sources */,
+				694BD84E235370530091DAC9 /* HudView.swift in Sources */,
 				6917F1A22350F3690039BA8E /* ZAPINotificationCenter.swift in Sources */,
 				6917F19E2350CCF60039BA8E /* ZAPIManager.swift in Sources */,
 				694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */,

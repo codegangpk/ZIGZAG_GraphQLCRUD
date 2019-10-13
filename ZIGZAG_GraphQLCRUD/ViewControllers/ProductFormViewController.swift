@@ -365,7 +365,13 @@ extension ProductFormViewController {
             showNetworkErrorAlert()
         case .success:
             hideLoader()
-            dismiss(animated: true, completion: nil)
+            if let navigationView = navigationController?.view {
+                HudView.hud(inView: navigationView, text: "생성 완료", animated: true) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
         default:
             break
         }
@@ -382,7 +388,13 @@ extension ProductFormViewController {
             showNetworkErrorAlert()
         case .success:
             hideLoader()
-            dismiss(animated: true, completion: nil)
+            if let navigationView = navigationController?.view {
+                HudView.hud(inView: navigationView, text: "업데이트 완료", animated: true) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
         default:
             break
         }

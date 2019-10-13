@@ -220,7 +220,13 @@ extension ProductViewController {
             showLoader()
         case .success:
             hideLoader()
-            navigationController?.popViewController(animated: true)
+            if let navigationView = navigationController?.view {
+                HudView.hud(inView: navigationView, text: "삭제 완료", animated: true) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
         case .failed:
             hideLoader()
             showNetworkErrorAlert()
