@@ -45,11 +45,7 @@ extension Row: Equatable {
 class ProductsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    private lazy var tableFooterLoadingView: UIActivityIndicatorView = {
-        let indicatorView = UIActivityIndicatorView(style: .medium)
-        indicatorView.startAnimating()
-        return indicatorView
-    }()
+    private lazy var tableFooterLoadingView = TableFooterLoadingView()
     
     private lazy var dataSource = setupDataSource()
     
@@ -60,15 +56,15 @@ class ProductsViewController: UIViewController {
         tableView.register(LoadingTableViewCell.nib, forCellReuseIdentifier: LoadingTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         
-        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductListStateUpdated(_:)), notification: .didProductListRequestUpdated)
-        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated), notification: .didCreateProductRequestUpdated)
-        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidDeleteProductRequestUpdated), notification: .didDeleteProductRequestUpdated)
-        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequestUpdated), notification: .didUpdateProductRequestUpdated)
-        
         let refreshControl = UIRefreshControl()
         refreshControl.layer.zPosition = -1
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
+        
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductListStateUpdated(_:)), notification: .didProductListRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated), notification: .didCreateProductRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidDeleteProductRequestUpdated), notification: .didDeleteProductRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequestUpdated), notification: .didUpdateProductRequestUpdated)
         
         updateDataSource()
         fetchProducts()
@@ -158,7 +154,7 @@ extension ProductsViewController {
         
         switch state {
         case .loading:
-            tableView.tableFooterView = tableFooterLoadingView
+            tableView.tableFooterView = TableFooterLoadingView()
         case .success(let products):
             guard let products = products as? [Product] else { return }
             

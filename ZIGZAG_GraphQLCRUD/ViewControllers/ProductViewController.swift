@@ -69,6 +69,11 @@ class ProductViewController: UIViewController {
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.layer.zPosition = -1
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+        
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductRequestUpdated(_:)), notification: .didProductRequestUpdated)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequestUpdated(_:)), notification: .didUpdateProductRequestUpdated)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidDeleteProductRequestUpdated(_:)), notification: .didDeleteProductRequestUpdated)
@@ -168,14 +173,34 @@ extension ProductViewController {
         let productNavigationController = UINavigationController(rootViewController: productViewController)
         navigationController?.present(productNavigationController, animated: true, completion: nil)
     }
+    
+    @objc private func refreshData(_ refreshControl: UIRefreshControl) {
+        fetchProduct(with: productId)
+    }
 }
 
 extension ProductViewController {
     @objc private func onDidProductRequestUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
         
-        self.product = product
+        switch state {
+        case .loading:
+            tableView.tableFooterView = TableFooterLoadingView()
+        case .success(let product):
+            guard let product = product as? Product else { return }
+            
+            tableView.tableFooterView = nil
+            tableView.refreshControl?.endRefreshing()
+            
+            self.product = product
+        case .failed:
+            tableView.tableFooterView = nil
+            tableView.refreshControl?.endRefreshing()
+            //TODO: networkError
+        default:
+            break
+        }
     }
     
     @objc private func onDidUpdateProductRequestUpdated(_ notification: Notification) {
