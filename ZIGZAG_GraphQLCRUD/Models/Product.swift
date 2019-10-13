@@ -19,7 +19,10 @@ struct Product {
     var dateUpdated: Date?
     
     var isValidInfo: Bool {
-        return nameKo?.isEmpty == false && price != nil && supplier != nil
+        let isValid = nameKo?.isEmpty == false &&
+            price != nil && price! >= 0 &&
+            supplier != nil
+        return isValid
     }
     
     init() { }
@@ -40,9 +43,9 @@ struct Product {
         
         self.init(id: id, nameKo: nameKo, price: price, supplier: supplier)
         
-        self.nameEn = productListFragment.nameEn
-        self.dateCreated = Date(timeIntervalSince1970: productListFragment.dateCreated)
-        self.dateUpdated = Date(timeIntervalSince1970: productListFragment.dateUpdated)
+        self.nameEn = productListFragment.nameEn ?? ""
+        self.dateCreated = Date(timeIntervalSince1970: productListFragment.dateCreated / 1000)
+        self.dateUpdated = Date(timeIntervalSince1970: productListFragment.dateUpdated / 1000)
     }
     
     init?(productDetailFragment: ProductDetailFragment) {
@@ -54,8 +57,8 @@ struct Product {
         
         self.init(id: id, nameKo: nameKo, price: price, supplier: supplier)
         
-        self.nameEn = productDetailFragment.nameEn
-        self.descriptionKo = productDetailFragment.descriptionKo
+        self.nameEn = productDetailFragment.nameEn ?? ""
+        self.descriptionKo = productDetailFragment.descriptionKo ?? ""
     }
 }
 
