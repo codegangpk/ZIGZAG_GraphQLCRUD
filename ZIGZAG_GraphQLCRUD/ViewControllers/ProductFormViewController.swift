@@ -93,6 +93,7 @@ extension ProductFormViewController {
             case .descriptionKorean:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.reuseIdentifier, for: indexPath) as! TextViewTableViewCell
                 cell.textView.text = self.product.descriptionKo
+                cell.textView.delegate = self
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.reuseIdentifier, for: indexPath) as! TextFieldTableViewCell
@@ -158,6 +159,14 @@ extension ProductFormViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .leastNonzeroMagnitude
+    }
+}
+
+extension ProductFormViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        guard let text = textView.text else { return }
+        
+        product.descriptionKo = text
     }
 }
 
