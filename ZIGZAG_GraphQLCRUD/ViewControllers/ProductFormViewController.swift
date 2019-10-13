@@ -70,7 +70,11 @@ class ProductFormViewController: UIViewController {
     private lazy var dataSource = setupDataSource()
     
     private let mode: Mode
-    private var product: Product
+    private var product: Product {
+        didSet {
+            validateDoneButton()
+        }
+    }
     private var productEditSnapShot: Product?
     
     private var isMeaningfulUserAction: Bool {
@@ -157,7 +161,6 @@ extension ProductFormViewController {
                         guard let self = self else { return }
                         
                         self.product.nameKo = textField.text
-                        self.validateDoneButton()
                     }
                     cell.textFieldDidEndOnExit = { [weak self] (textField) in
                         guard let self = self else { return }
@@ -171,7 +174,6 @@ extension ProductFormViewController {
                         guard let self = self else { return }
                         
                         self.product.nameEn = textField.text
-                        self.validateDoneButton()
                     }
                     cell.textFieldDidEndOnExit = { [weak self] (textField) in
                         guard let self = self else { return }
@@ -187,7 +189,10 @@ extension ProductFormViewController {
                     }
                     cell.textFieldDidChange = { [weak self] textField in
                         guard let self = self else { return }
-                        guard let text = textField.text, text.isEmpty == false else { return }
+                        guard let text = textField.text, text.isEmpty == false else {
+                            self.product.price = nil
+                            return
+                        }
                         guard let price = Int32(text) else {
                             textField.text = String(self.product.price!)
                             return
@@ -195,7 +200,6 @@ extension ProductFormViewController {
                         
                         textField.text = String(price)
                         self.product.price = Int(price)
-                        self.validateDoneButton()
                     }
                     cell.textFieldDidEndOnExit = { [weak self] (textField) in
                         guard let self = self else { return }
@@ -318,13 +322,12 @@ extension ProductFormViewController {
     }
     
     private func pickSupplier() {
-        let suppliersViewController = SelectSupplierViewController(selectedSupplier: product.supplier) { [weak self] (selectSupplierViewController, selectedSupplier) in
+        let suppliersViewController = SelectSupplierViewController(selectedSupplier: product.supplier) { [weak self] (_, selectedSupplier) in
             guard let self = self else { return }
             
             self.product.supplier = selectedSupplier
             self.updateDataSource(with: self.product)
             
-            self.validateDoneButton()
             self.navigationController?.popViewController(animated: true)
             self.activateNextInput(for: .supplier)
         }
@@ -339,6 +342,8 @@ extension ProductFormViewController {
         guard let supplierId = product.supplier?.id else { return }
         guard let nameKo = product.nameKo else { return }
         guard let price = product.price else { return }
+        
+        view.endEditing(true)
         
         let createProductInput = CreateProductInput(supplierId: supplierId, nameKo: nameKo, price: price)
         ZAPINotificationCenter.post(
@@ -355,6 +360,8 @@ extension ProductFormViewController {
         let nameEn = product.nameEn ?? ""
         let descriptionEn = ""
         let descriptionKo = product.descriptionKo ?? ""
+        
+        view.endEditing(true)
         
         let updateProductInput = UpdateProductInput(id: productId, nameKo: nameKo, nameEn: nameEn, descriptionKo: descriptionKo, descriptionEn: descriptionEn, price: price)
         ZAPINotificationCenter.post(notification: .didUpdateProductRequested, userInfo: [.updateProductInput: updateProductInput])
