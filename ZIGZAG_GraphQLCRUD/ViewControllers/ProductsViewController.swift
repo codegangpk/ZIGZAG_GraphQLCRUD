@@ -15,6 +15,7 @@ private enum Section: CaseIterable {
 
 private enum Row: Hashable {
     case item(Product)
+    case loading
     
     func hash(into hasher: inout Hasher) {
         switch self {
@@ -24,6 +25,8 @@ private enum Row: Hashable {
             hasher.combine(product.nameEn)
             hasher.combine(product.supplier?.name)
             hasher.combine(product.price)
+        default:
+            return
         }
     }
 }
@@ -33,6 +36,8 @@ extension Row: Equatable {
         switch (lhs, rhs) {
         case (.item(let leftProduct), .item(let rightProduct)):
             return leftProduct.id == rightProduct.id
+        default:
+            return false
         }
     }
 }
@@ -40,27 +45,32 @@ extension Row: Equatable {
 class ProductsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    private lazy var dataSource = setupDataSource()
+    private lazy var tableFooterLoadingView: UIActivityIndicatorView = {
+        let indicatorView = UIActivityIndicatorView(style: .medium)
+        indicatorView.startAnimating()
+        return indicatorView
+    }()
     
-    private var products: [Product] = [] {
-        didSet {
-            updateDataSource(with: products)
-        }
-    }
+    private lazy var dataSource = setupDataSource()
     
     override func viewDidLoad() {
         setupNavigationItem()
         
         tableView.register(ProductTableViewCell.nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
+        tableView.register(LoadingTableViewCell.nib, forCellReuseIdentifier: LoadingTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         
-        
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductListStateUpdated(_:)), notification: .didProductListRequestUpdated)
-        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated(_:)), notification: .didCreateProductRequestUpdated)
-        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidDeleteProductRequestUpdated(_:)), notification: .didDeleteProductRequestUpdated)
-        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequestUpdated(_:)), notification: .didUpdateProductRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated), notification: .didCreateProductRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidDeleteProductRequestUpdated), notification: .didDeleteProductRequestUpdated)
+        ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequestUpdated), notification: .didUpdateProductRequestUpdated)
         
-        updateDataSource(with: products)
+        let refreshControl = UIRefreshControl()
+        refreshControl.layer.zPosition = -1
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+        
+        updateDataSource()
         fetchProducts()
     }
 }
@@ -72,6 +82,10 @@ extension ProductsViewController {
             case .item(let product):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProductTableViewCell.reuseIdentifier, for: indexPath) as! ProductTableViewCell
                 cell.configure(with: product)
+                return cell
+            case .loading:
+                let cell = tableView.dequeueReusableCell(withIdentifier: LoadingTableViewCell.reuseIdentifier, for: indexPath) as! LoadingTableViewCell
+                cell.spinner.startAnimating()
                 return cell
             }
         }
@@ -89,6 +103,8 @@ extension ProductsViewController: UITableViewDelegate {
             guard let productId = product.id else { return }
             let productViewController = ProductViewController(productId: productId)
             navigationController?.pushViewController(productViewController, animated: true)
+        default:
+            break
         }
     }
     
@@ -102,7 +118,7 @@ extension ProductsViewController {
         ZAPINotificationCenter.post(notification: .didProductListRequested)
     }
 
-    private func updateDataSource(with products: [Product]) {
+    private func updateDataSource(with products: [Product] = []) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.deleteAllItems()
         
@@ -110,9 +126,8 @@ extension ProductsViewController {
         
         var rows: [Row] = []
         products.sorted(by: { $0.dateCreated?.compare($1.dateCreated ?? Date(timeIntervalSince1970: 0)) == .orderedDescending }).forEach { rows.append(.item($0)) }
-        
         snapshot.appendItems(rows, toSection: .list)
-        
+
         dataSource.defaultRowAnimation = .fade
         dataSource.apply(snapshot, animatingDifferences: true)
     }
@@ -130,35 +145,43 @@ extension ProductsViewController {
         let productNavigationController = UINavigationController(rootViewController: productViewController)
         navigationController?.present(productNavigationController, animated: true, completion: nil)
     }
+    
+    @objc private func refreshData(_ refreshControl: UIRefreshControl) {
+        fetchProducts()
+    }
 }
 
 extension ProductsViewController {
     @objc private func onDidProductListStateUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard let _ = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIManager.State else { return }
-        guard let products = data[ZAPINotificationCenter.UserInfoKey.products] as? [Product] else { return }
+        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
         
-        self.products = products
+        switch state {
+        case .loading:
+            tableView.tableFooterView = tableFooterLoadingView
+        case .success(let products):
+            guard let products = products as? [Product] else { return }
+            
+            tableView.tableFooterView = nil
+            tableView.refreshControl?.endRefreshing()
+            updateDataSource(with: products)
+        case .failed:
+            tableView.tableFooterView = nil
+            tableView.refreshControl?.endRefreshing()
+        default:
+            break
+        }
     }
     
-    @objc private func onDidCreateProductRequestUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let _ = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
-        
+    @objc private func onDidCreateProductRequestUpdated() {
         fetchProducts()
     }
     
-    @objc private func onDidUpdateProductRequestUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let _ = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
-        
+    @objc private func onDidUpdateProductRequestUpdated() {
         fetchProducts()
     }
     
-    @objc private func onDidDeleteProductRequestUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let _ = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
-        
+    @objc private func onDidDeleteProductRequestUpdated() {
         fetchProducts()
     }
 }

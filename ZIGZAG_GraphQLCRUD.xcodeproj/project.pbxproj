@@ -17,6 +17,9 @@
 		694BD8362352FED30091DAC9 /* ProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694BD8342352FED30091DAC9 /* ProductViewController.xib */; };
 		694BD83D2353177C0091DAC9 /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694BD83B2353177C0091DAC9 /* BasicTableViewCell.xib */; };
 		694BD83E2353177C0091DAC9 /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD83C2353177C0091DAC9 /* BasicTableViewCell.swift */; };
+		694BD841235319B30091DAC9 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD83F235319B20091DAC9 /* LoadingTableViewCell.swift */; };
+		694BD842235319B30091DAC9 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694BD840235319B20091DAC9 /* LoadingTableViewCell.xib */; };
+		694BD84423531A350091DAC9 /* ZAPIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84323531A350091DAC9 /* ZAPIState.swift */; };
 		694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00B1234F785B000157DD /* GraphQLAPI.swift */; };
 		694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E0234F9D2C000157DD /* ProductsViewController.swift */; };
 		694C00E3234F9D35000157DD /* ProductFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductFormViewController.xib */; };
@@ -70,6 +73,9 @@
 		694BD8342352FED30091DAC9 /* ProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductViewController.xib; sourceTree = "<group>"; };
 		694BD83B2353177C0091DAC9 /* BasicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
 		694BD83C2353177C0091DAC9 /* BasicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
+		694BD83F235319B20091DAC9 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
+		694BD840235319B20091DAC9 /* LoadingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingTableViewCell.xib; sourceTree = "<group>"; };
+		694BD84323531A350091DAC9 /* ZAPIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPIState.swift; sourceTree = "<group>"; };
 		694C00B1234F785B000157DD /* GraphQLAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQLAPI.swift; sourceTree = "<group>"; };
 		694C00E0234F9D2C000157DD /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		694C00E2234F9D35000157DD /* ProductFormViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductFormViewController.xib; sourceTree = "<group>"; };
@@ -120,6 +126,8 @@
 				697C458223504C7700A4583D /* TextFieldTableViewCell.xib */,
 				69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */,
 				69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */,
+				694BD83F235319B20091DAC9 /* LoadingTableViewCell.swift */,
+				694BD840235319B20091DAC9 /* LoadingTableViewCell.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -184,6 +192,7 @@
 				69B662622350AAA300F23D0D /* ZAPIProtocol.swift */,
 				69B662602350A41B00F23D0D /* NetworkConfig.swift */,
 				6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */,
+				694BD84323531A350091DAC9 /* ZAPIState.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -317,6 +326,7 @@
 				69866D2B235076CC008B8318 /* SelectSupplierViewController.xib in Resources */,
 				698BFE67234F14CF00FCFB38 /* LaunchScreen.storyboard in Resources */,
 				694BD8362352FED30091DAC9 /* ProductViewController.xib in Resources */,
+				694BD842235319B30091DAC9 /* LoadingTableViewCell.xib in Resources */,
 				69866D27235062EC008B8318 /* ProductsViewController.xib in Resources */,
 				697C458423504C7800A4583D /* TextFieldTableViewCell.xib in Resources */,
 				694C00E3234F9D35000157DD /* ProductFormViewController.xib in Resources */,
@@ -379,12 +389,14 @@
 				698BFE5B234F14CC00FCFB38 /* AppDelegate.swift in Sources */,
 				697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */,
 				69B662652350ADFF00F23D0D /* ZAPI+Extension.swift in Sources */,
+				694BD84423531A350091DAC9 /* ZAPIState.swift in Sources */,
 				694BD83E2353177C0091DAC9 /* BasicTableViewCell.swift in Sources */,
 				69B6625023508AF800F23D0D /* Int+Extension.swift in Sources */,
 				6917F1A22350F3690039BA8E /* ZAPINotificationCenter.swift in Sources */,
 				6917F19E2350CCF60039BA8E /* ZAPIManager.swift in Sources */,
 				6917F1A02350CE090039BA8E /* Notification.Name.swift in Sources */,
 				694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */,
+				694BD841235319B30091DAC9 /* LoadingTableViewCell.swift in Sources */,
 				69866D29235076C2008B8318 /* SelectSupplierViewController.swift in Sources */,
 				694BD8352352FED30091DAC9 /* ProductViewController.swift in Sources */,
 				694C00E8234FA72B000157DD /* ZAPI.swift in Sources */,
