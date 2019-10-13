@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6917F19E2350CCF60039BA8E /* ZAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F19D2350CCF60039BA8E /* ZAPIManager.swift */; };
-		6917F1A02350CE090039BA8E /* Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F19F2350CE090039BA8E /* Notification.Name.swift */; };
 		6917F1A22350F3690039BA8E /* ZAPINotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */; };
 		692B3C6B2351AC8D0007F746 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692B3C692351AC8D0007F746 /* ProductTableViewCell.swift */; };
 		692B3C6C2351AC8D0007F746 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692B3C6A2351AC8D0007F746 /* ProductTableViewCell.xib */; };
@@ -65,7 +64,6 @@
 
 /* Begin PBXFileReference section */
 		6917F19D2350CCF60039BA8E /* ZAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPIManager.swift; sourceTree = "<group>"; };
-		6917F19F2350CE090039BA8E /* Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.Name.swift; sourceTree = "<group>"; };
 		6917F1A12350F3690039BA8E /* ZAPINotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPINotificationCenter.swift; sourceTree = "<group>"; };
 		692B3C692351AC8D0007F746 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		692B3C6A2351AC8D0007F746 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 		69B662662350B01E00F23D0D /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				6917F19F2350CE090039BA8E /* Notification.Name.swift */,
 				694C00E4234F9F4E000157DD /* NSObject+Extension.swift */,
 				69B6624F23508AF800F23D0D /* Int+Extension.swift */,
 				694BD8312351C0BC0091DAC9 /* String+Extension.swift */,
@@ -405,7 +402,6 @@
 				69B6625023508AF800F23D0D /* Int+Extension.swift in Sources */,
 				6917F1A22350F3690039BA8E /* ZAPINotificationCenter.swift in Sources */,
 				6917F19E2350CCF60039BA8E /* ZAPIManager.swift in Sources */,
-				6917F1A02350CE090039BA8E /* Notification.Name.swift in Sources */,
 				694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */,
 				694BD841235319B30091DAC9 /* LoadingTableViewCell.swift in Sources */,
 				69866D29235076C2008B8318 /* SelectSupplierViewController.swift in Sources */,
