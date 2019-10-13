@@ -149,8 +149,7 @@ extension ProductsViewController {
 
 extension ProductsViewController {
     @objc private func onDidProductListStateUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
+        guard let state = notification.zAPIState else { return }
         
         switch state {
         case .loading:

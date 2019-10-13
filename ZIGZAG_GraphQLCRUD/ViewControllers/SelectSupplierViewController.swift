@@ -142,8 +142,7 @@ extension SelectSupplierViewController {
 
 extension SelectSupplierViewController {
     @objc private func onDidSupplierListRequestUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
+        guard let state = notification.zAPIState else { return }
         
         switch state {
         case .loading:

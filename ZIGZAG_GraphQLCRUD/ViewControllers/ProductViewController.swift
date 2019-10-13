@@ -181,8 +181,7 @@ extension ProductViewController {
 
 extension ProductViewController {
     @objc private func onDidProductRequestUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
+        guard let state = notification.zAPIState else { return }
         
         switch state {
         case .loading:
@@ -204,8 +203,7 @@ extension ProductViewController {
     }
     
     @objc private func onDidUpdateProductRequestUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
+        guard let state = notification.zAPIState else { return }
         
         if case .success(let product) = state {
             guard let product = product as? Product else { return }
@@ -215,8 +213,7 @@ extension ProductViewController {
     }
     
     @objc private func onDidDeleteProductRequestUpdated(_ notification: Notification) {
-        guard let data = notification.userInfo else { return }
-        guard let state = data[ZAPINotificationCenter.UserInfoKey.state] as? ZAPIState else { return }
+        guard let state = notification.zAPIState else { return }
             
         switch state {
         case .loading:
