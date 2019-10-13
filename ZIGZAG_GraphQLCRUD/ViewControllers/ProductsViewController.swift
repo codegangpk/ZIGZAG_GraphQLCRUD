@@ -20,6 +20,10 @@ private enum Row: Hashable {
         switch self {
         case .item(let product):
             hasher.combine(product.id)
+            hasher.combine(product.nameKo)
+            hasher.combine(product.nameEn)
+            hasher.combine(product.supplier?.name)
+            hasher.combine(product.price)
         }
     }
 }
@@ -41,7 +45,6 @@ class ProductsViewController: UIViewController {
     private var products: [Product] = [] {
         didSet {
             updateDataSource(with: products)
-            tableView.reloadData()
         }
     }
     
@@ -139,22 +142,21 @@ extension ProductsViewController {
     
     @objc private func onDidCreateProductRequestUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        guard let _ = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
         
-        print("created Product: \(product)")
         fetchProducts()
     }
     
     @objc private func onDidUpdateProductRequestUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        guard let _ = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
         
         fetchProducts()
     }
     
     @objc private func onDidDeleteProductRequestUpdated(_ notification: Notification) {
         guard let data = notification.userInfo else { return }
-        guard let product = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
+        guard let _ = data[ZAPINotificationCenter.UserInfoKey.product] as? Product else { return }
         
         fetchProducts()
     }
