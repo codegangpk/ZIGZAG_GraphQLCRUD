@@ -20,6 +20,7 @@
 		694BD842235319B30091DAC9 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694BD840235319B20091DAC9 /* LoadingTableViewCell.xib */; };
 		694BD84423531A350091DAC9 /* ZAPIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84323531A350091DAC9 /* ZAPIState.swift */; };
 		694BD846235333020091DAC9 /* TableFooterLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD845235333020091DAC9 /* TableFooterLoadingView.swift */; };
+		694BD84923534DDC0091DAC9 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694BD84823534DDC0091DAC9 /* Notification+Extension.swift */; };
 		694C00B2234F785C000157DD /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00B1234F785B000157DD /* GraphQLAPI.swift */; };
 		694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694C00E0234F9D2C000157DD /* ProductsViewController.swift */; };
 		694C00E3234F9D35000157DD /* ProductFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694C00E2234F9D35000157DD /* ProductFormViewController.xib */; };
@@ -76,6 +77,7 @@
 		694BD840235319B20091DAC9 /* LoadingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingTableViewCell.xib; sourceTree = "<group>"; };
 		694BD84323531A350091DAC9 /* ZAPIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAPIState.swift; sourceTree = "<group>"; };
 		694BD845235333020091DAC9 /* TableFooterLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableFooterLoadingView.swift; sourceTree = "<group>"; };
+		694BD84823534DDC0091DAC9 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		694C00B1234F785B000157DD /* GraphQLAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQLAPI.swift; sourceTree = "<group>"; };
 		694C00E0234F9D2C000157DD /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		694C00E2234F9D35000157DD /* ProductFormViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductFormViewController.xib; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				694C00E4234F9F4E000157DD /* NSObject+Extension.swift */,
+				694BD84823534DDC0091DAC9 /* Notification+Extension.swift */,
 				69B6624F23508AF800F23D0D /* Int+Extension.swift */,
 				694BD8312351C0BC0091DAC9 /* String+Extension.swift */,
 				69B6625C23509E7A00F23D0D /* Error+Extension.swift */,
@@ -411,6 +414,7 @@
 				69B662612350A41B00F23D0D /* NetworkConfig.swift in Sources */,
 				69B662632350AAA300F23D0D /* ZAPIProtocol.swift in Sources */,
 				697C45812350465900A4583D /* ProductFormViewController.swift in Sources */,
+				694BD84923534DDC0091DAC9 /* Notification+Extension.swift in Sources */,
 				69866D23235054CC008B8318 /* Product.swift in Sources */,
 				698BFE5D234F14CC00FCFB38 /* SceneDelegate.swift in Sources */,
 				69866D2023504FF7008B8318 /* TextViewTableViewCell.swift in Sources */,

@@ -35,6 +35,20 @@ private enum Row: Hashable {
     
     case descriptionKorean
     
+    var nextRowForAdd: Row? {
+        switch self {
+        case .nameKorean: return .price
+        default: return nil
+        }
+    }
+    
+    var nextRowForEdit: Row? {
+        switch self {
+        case .nameKorean: return .nameEnglish
+        case .nameEnglish: return .price
+        default: return nil
+        }
+    }
 }
 
 private class TableViewDiffableDataSource: UITableViewDiffableDataSource<Section, Row> {
@@ -54,12 +68,30 @@ class ProductFormViewController: UIViewController {
     
     private let mode: Mode
     private var product: Product
+    private var productEditSnapShot: Product?
+    
+    private var isMeaningfulUserAction: Bool {
+        if case .add = mode {
+            let isMeaningful = product.nameKo?.isEmpty == false ||
+                product.price != nil ||
+                product.supplier != nil
+            return isMeaningful
+        } else {
+            let hasUserEdited: Bool = product.nameKo != productEditSnapShot?.nameKo ||
+                product.nameEn != productEditSnapShot?.nameEn ||
+                product.price != productEditSnapShot?.price ||
+                product.supplier?.id != productEditSnapShot?.supplier?.id ||
+                product.descriptionKo != productEditSnapShot?.descriptionKo
+            return hasUserEdited
+        }
+    }
     
     init(mode: Mode) {
         self.mode = mode
         
         if case .edit(let product) = mode {
             self.product = product
+            self.productEditSnapShot = product
         } else {
             self.product = Product()
         }
@@ -74,7 +106,8 @@ class ProductFormViewController: UIViewController {
     override func viewDidLoad() {
         setupNavigationItem(mode: mode)
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
+        navigationController?.presentationController?.delegate = self
+        
         tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.reuseIdentifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
@@ -82,7 +115,21 @@ class ProductFormViewController: UIViewController {
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated(_:)), notification: .didCreateProductRequestUpdated)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequestUpdated(_:)), notification: .didUpdateProductRequestUpdated)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        validateDoneButton()
         updateDataSource(with: product)
+        
+        if let indexPath = dataSource.indexPath(for: .nameKorean) {
+            tableView.cellForRow(at: indexPath)?.becomeFirstResponder()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        view.endEditing(true)
     }
 }
 
@@ -102,11 +149,17 @@ extension ProductFormViewController {
                 
                 if case .nameKorean = row {
                     cell.textField.text = self.product.nameKo
-                    cell.textField.placeholder = "%L%: 한국어 상품명"
+                    cell.textField.placeholder = "%L%: 한국어 상품명 (필수값)"
                     cell.textFieldDidChange = { [weak self] textField in
                         guard let self = self else { return }
                         
                         self.product.nameKo = textField.text
+                        self.validateDoneButton()
+                    }
+                    cell.textFieldDidEndOnExit = { [weak self] (textField) in
+                        guard let self = self else { return }
+                        
+                        self.activateNextInput(for: .nameKorean)
                     }
                 } else if case .nameEnglish = row {
                     cell.textField.text = self.product.nameEn
@@ -115,10 +168,16 @@ extension ProductFormViewController {
                         guard let self = self else { return }
                         
                         self.product.nameEn = textField.text
+                        self.validateDoneButton()
+                    }
+                    cell.textFieldDidEndOnExit = { [weak self] (textField) in
+                        guard let self = self else { return }
+                        
+                        self.activateNextInput(for: .nameEnglish)
                     }
                 } else if case .price = row {
                     cell.textField.keyboardType = .numberPad
-                    cell.textField.placeholder = "%L%: 상품 가격"
+                    cell.textField.placeholder = "%L%: 상품 가격 (필수값)"
                     if let price = self.product.price {
                         cell.textField.text = String(price)
                     }
@@ -128,11 +187,13 @@ extension ProductFormViewController {
                         guard let price = Int(text) else { return }
                         
                         self.product.price = price
+                        self.validateDoneButton()
                     }
                 } else if case .supplier = row {
                     cell.textField.text = self.product.supplier?.name
-                    cell.textField.placeholder = "%L%: 공급사"
+                    cell.textField.placeholder = "%L%: 공급사를 선택하세요 (필수값)"
                     cell.textField.isUserInteractionEnabled = false
+                    cell.selectionStyle = .default
                     cell.accessoryType = .disclosureIndicator
                 }
                 return cell
@@ -153,9 +214,14 @@ extension ProductFormViewController: UITableViewDelegate {
                 
                 self.product.supplier = selectedSupplier
                 self.updateDataSource(with: self.product)
+                
+                self.validateDoneButton()
                 self.navigationController?.popViewController(animated: true)
+                self.activateNextInput(for: .supplier)
             }
             navigationController?.pushViewController(suppliersViewController, animated: true)
+        } else {
+            tableView.cellForRow(at: indexPath)?.becomeFirstResponder()
         }
     }
     
@@ -169,6 +235,24 @@ extension ProductFormViewController: UITextViewDelegate {
         guard let text = textView.text else { return }
         
         product.descriptionKo = text
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.activateNextInput(for: .descriptionKorean)
+    }
+}
+
+extension ProductFormViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return isMeaningfulUserAction == false
+    }
+    
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+       onCanceled()
+    }
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        onCanceled()
     }
 }
 
@@ -209,10 +293,26 @@ extension ProductFormViewController {
 }
 
 extension ProductFormViewController {
-    @objc private func onEdit() {
-        let productViewController = ProductFormViewController(mode: .edit(product))
-        let productNavigationController = UINavigationController(rootViewController: productViewController)
-        navigationController?.present(productNavigationController, animated: true, completion: nil)
+    private func activateNextInput(for row: Row) {
+        let nextRow: Row
+        
+        if case .add = mode {
+            guard let nextRowForAdd = row.nextRowForAdd else { return }
+            
+            nextRow = nextRowForAdd
+        } else {
+            guard let nextRowForEdit = row.nextRowForEdit else { return }
+            
+            nextRow = nextRowForEdit
+        }
+        
+        if let indexPath = dataSource.indexPath(for: nextRow) {
+            tableView.cellForRow(at: indexPath)?.becomeFirstResponder()
+        }
+    }
+    
+    private func validateDoneButton() {
+        navigationItem.rightBarButtonItem?.isEnabled = isMeaningfulUserAction && product.isValidInfo
     }
     
     @objc private func onAddDone() {
@@ -228,7 +328,6 @@ extension ProductFormViewController {
     }
     
     @objc private func onEditDone() {
-        //TODO: cell에 empty string 대응
         guard let productId = product.id else { return }
         guard let nameKo = product.nameKo else { return }
         guard let price = product.price else { return }
@@ -242,7 +341,28 @@ extension ProductFormViewController {
     }
     
     @objc private func onCanceled() {
-        dismiss(animated: true, completion: nil)
+        if isMeaningfulUserAction {
+            let title: String
+            if case .add = mode {
+                title = "%L%: 새 상품 등록을 그만두시겠습니까?"
+            } else {
+                title = "%L%: 이 변경사항을 폐기하겠습니까?"
+            }
+            let alertController = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
+            
+            let discardAction = UIAlertAction(title: "%L%: 변경사항 폐기", style: .default) { [weak self] (_) in
+                guard let self = self else { return }
+                
+                self.dismiss(animated: true, completion: nil)
+            }
+            let cancelAction = UIAlertAction(title: "%L%: 계속 편집하기", style: .cancel)
+            alertController.addAction(discardAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
     }
 }
 
@@ -267,5 +387,43 @@ extension ProductFormViewController {
         } else {
             //TODO: handle error
         }
+    }
+}
+
+extension ProductFormViewController {
+    @objc private func keyboardWillShow(notification: Notification) {
+        guard let animation = notification.keyboardAnimation else { return }
+     
+        let keyboardHeight = animation.frame.height
+        
+        UIView.animate(withDuration: animation.duration, delay: 0, options: animation.options, animations: { [weak self] in
+            guard let self = self else { return }
+            
+            self.tableView.contentInset.bottom = keyboardHeight
+            self.tableView.verticalScrollIndicatorInsets.bottom = keyboardHeight
+            
+            
+            if let descriptionKoreanIndexPath = self.dataSource.indexPath(for: .descriptionKorean),
+                let descriptionKoreanCell = self.tableView.cellForRow(at: descriptionKoreanIndexPath) as? TextViewTableViewCell,
+                descriptionKoreanCell.textView.isFirstResponder
+            {
+                let rowMaxY = descriptionKoreanCell.frame.maxY - self.tableView.contentOffset.y
+                let keyboardOriginY = self.tableView.frame.height - keyboardHeight
+                if rowMaxY > keyboardOriginY {
+                    self.tableView.contentOffset.y += keyboardHeight - (self.tableView.frame.height - rowMaxY)
+                }
+            }
+        }, completion: nil)
+    }
+    
+    @objc private func keyboardWillHide(notification: Notification) {
+        guard let animation = notification.keyboardAnimation else { return }
+        
+        UIView.animate(withDuration: animation.duration, delay: 0, options: animation.options, animations: { [weak self] in
+            guard let self = self else { return }
+            
+            self.tableView.contentInset.bottom = 0
+            self.tableView.verticalScrollIndicatorInsets.bottom = 0
+        }, completion: nil)
     }
 }

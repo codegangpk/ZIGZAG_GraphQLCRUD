@@ -45,7 +45,6 @@ extension TextFieldTableViewCell {
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.returnKeyType = .done
         textField.keyboardType = .default
-        textField.enablesReturnKeyAutomatically = true
         textField.clearButtonMode = .whileEditing
         
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

@@ -18,6 +18,10 @@ struct Product {
     var dateCreated: Date?
     var dateUpdated: Date?
     
+    var isValidInfo: Bool {
+        return nameKo?.isEmpty == false || price != nil || supplier != nil
+    }
+    
     init() { }
     
     init(id: String, nameKo: String, price: Int, supplier: Supplier) {
