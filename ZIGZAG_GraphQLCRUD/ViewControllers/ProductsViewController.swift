@@ -15,7 +15,6 @@ private enum Section: CaseIterable {
 
 private enum Row: Hashable {
     case item(Product)
-    case loading
     
     func hash(into hasher: inout Hasher) {
         switch self {
@@ -25,8 +24,6 @@ private enum Row: Hashable {
             hasher.combine(product.nameEn)
             hasher.combine(product.supplier?.name)
             hasher.combine(product.price)
-        default:
-            return
         }
     }
 }
@@ -36,8 +33,6 @@ extension Row: Equatable {
         switch (lhs, rhs) {
         case (.item(let leftProduct), .item(let rightProduct)):
             return leftProduct.id == rightProduct.id
-        default:
-            return false
         }
     }
 }
@@ -53,7 +48,6 @@ class ProductsViewController: UIViewController {
         setupNavigationItem()
         
         tableView.register(ProductTableViewCell.nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
-        tableView.register(LoadingTableViewCell.nib, forCellReuseIdentifier: LoadingTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         
         let refreshControl = UIRefreshControl()
@@ -78,10 +72,6 @@ extension ProductsViewController {
             case .item(let product):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProductTableViewCell.reuseIdentifier, for: indexPath) as! ProductTableViewCell
                 cell.configure(with: product)
-                return cell
-            case .loading:
-                let cell = tableView.dequeueReusableCell(withIdentifier: LoadingTableViewCell.reuseIdentifier, for: indexPath) as! LoadingTableViewCell
-                cell.spinner.startAnimating()
                 return cell
             }
         }
