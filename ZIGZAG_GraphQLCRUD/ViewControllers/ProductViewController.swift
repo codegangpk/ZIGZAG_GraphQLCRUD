@@ -93,7 +93,7 @@ extension ProductViewController {
             switch row {
             case .descriptionKorean:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.reuseIdentifier, for: indexPath) as! TextViewTableViewCell
-                cell.textView.text = "%L%: 상세 설명 없음"
+                cell.textView.text = "%L%: (상세 설명 미제공)"
                 cell.textViewHeightLayoutConstraint.constant = ceil(cell.textView.sizeThatFits(CGSize(width: cell.textView.frame.width, height: .infinity)).height)
                 cell.isUserInteractionEnabled = false
                 return cell
@@ -117,7 +117,7 @@ extension ProductViewController {
                         self.product?.nameKo = textField.text
                     }
                 } else if case .nameEnglish = row {
-                    cell.textField.text = self.product?.nameEn?.isEmpty == false ? self.product?.nameEn : "%L%: 영어 상품명 없음"
+                    cell.textField.text = self.product?.nameEn?.isEmpty == false ? self.product?.nameEn : "%L%: (영어 상품명 미제공)"
                     cell.textField.placeholder = "%L%: 영어 상품명"
                     cell.textFieldDidChange = { [weak self] textField in
                         guard let self = self else { return }
@@ -127,7 +127,7 @@ extension ProductViewController {
                 } else if case .price = row {
                     cell.textField.keyboardType = .numberPad
                     cell.textField.placeholder = "%L%: 상품 가격"
-                    cell.textField.text = self.product?.price?.priceKRW ?? "%L%: 가격 없음"
+                    cell.textField.text = self.product?.price?.priceKRW ?? "%L%: (가격 미제공)"
                     cell.textFieldDidChange = { [weak self] textField in
                         guard let self = self else { return }
                         guard let text = textField.text else { return }

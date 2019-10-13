@@ -92,7 +92,7 @@ extension ProductFormViewController {
             switch row {
             case .descriptionKorean:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.reuseIdentifier, for: indexPath) as! TextViewTableViewCell
-                cell.textView.text = "%L%: 상세 설명 없음"
+                cell.textView.text = self.product.descriptionKo
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.reuseIdentifier, for: indexPath) as! TextFieldTableViewCell
@@ -106,7 +106,7 @@ extension ProductFormViewController {
                         self.product.nameKo = textField.text
                     }
                 } else if case .nameEnglish = row {
-                    cell.textField.text = self.product.nameEn?.isEmpty == false ? self.product.nameEn : "%L%: 영어 상품명 없음"
+                    cell.textField.text = self.product.nameEn
                     cell.textField.placeholder = "%L%: 영어 상품명"
                     cell.textFieldDidChange = { [weak self] textField in
                         guard let self = self else { return }
