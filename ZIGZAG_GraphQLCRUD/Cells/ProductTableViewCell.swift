@@ -38,11 +38,11 @@ extension ProductTableViewCell {
     }
     
     func configure(with product: Product) {
-        supplierLabel.text = product.supplier?.name
         idLabel.text = product.id
         nameKoLabel.text = product.nameKo
-        nameEnLabel.text = product.nameEn ?? "L%L: English Unavailable"
+        nameEnLabel.text = product.nameEn?.isEmpty == false ? product.nameEn : "%L%: (English Name Unavailable)"
         priceLabel.text = product.price?.priceKRW
+        supplierLabel.text = product.supplier?.name
 
         print(product)
     }

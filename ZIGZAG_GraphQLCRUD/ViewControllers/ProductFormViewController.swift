@@ -11,16 +11,16 @@ import Apollo
 
 private enum Section: CaseIterable {
     case nameInfo
-    case descriptionInfo
     case priceInfo
     case supplierInfo
+    case descriptionInfo
     
     var title: String? {
         switch self {
-        case .nameInfo:         return "L%L: 상품명"
-        case .descriptionInfo:  return "%L%: 상세 설명"
-        case .priceInfo:        return "L%L: 상품 가격"
+        case .nameInfo:         return "%L%: 상품명"
+        case .priceInfo:        return "%L%: 상품 가격"
         case .supplierInfo:     return "%L%: 공급자 정보"
+        case .descriptionInfo:  return "%L%: 상세 설명"
         }
     }
 }
@@ -29,10 +29,12 @@ private enum Row: Hashable {
     case nameKorean
     case nameEnglish
     
+    case price
+    
+    case supplier
+    
     case descriptionKorean
     
-    case price
-    case supplier
 }
 
 private class TableViewDiffableDataSource: UITableViewDiffableDataSource<Section, Row> {
@@ -181,7 +183,7 @@ extension ProductFormViewController {
             snapshot.appendItems([.price], toSection: .priceInfo)
             snapshot.appendItems([.supplier], toSection: .supplierInfo)
         } else {
-            snapshot.appendSections([.nameInfo, .descriptionInfo, .priceInfo, .supplierInfo])
+            snapshot.appendSections(Section.allCases)
             snapshot.appendItems([.nameKorean, .nameEnglish], toSection: .nameInfo)
             snapshot.appendItems([.descriptionKorean], toSection: .descriptionInfo)
             snapshot.appendItems([.price], toSection: .priceInfo)

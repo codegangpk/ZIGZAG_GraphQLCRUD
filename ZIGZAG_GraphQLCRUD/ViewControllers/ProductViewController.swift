@@ -10,18 +10,13 @@ import UIKit
 import Apollo
 
 private enum Section: CaseIterable {
-    case nameInfo
+    case basicInfo
     case descriptionInfo
-    case priceInfo
-    case supplierInfo
     case deleteProduct
     
     var title: String? {
         switch self {
-        case .nameInfo:         return "L%L: 상품명"
         case .descriptionInfo:  return "%L%: 상세 설명"
-        case .priceInfo:        return "L%L: 상품 가격"
-        case .supplierInfo:     return "%L%: 공급자 정보"
         default:                return nil
         }
     }
@@ -30,11 +25,10 @@ private enum Section: CaseIterable {
 private enum Row: Hashable {
     case nameKorean
     case nameEnglish
-    
-    case descriptionKorean
-    
     case price
     case supplier
+    
+    case descriptionKorean
     
     case delete
 }
@@ -71,8 +65,7 @@ class ProductViewController: UIViewController {
     override func viewDidLoad() {
         setupNavigationItem()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
-        tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.reuseIdentifier)
+        tableView.register(BasicTableViewCell.nib, forCellReuseIdentifier: BasicTableViewCell.reuseIdentifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         
@@ -98,48 +91,24 @@ extension ProductViewController {
                 cell.isUserInteractionEnabled = false
                 return cell
             case .delete:
-                let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
-                cell.textLabel?.text = "%L%: 제품 삭제하기"
-                cell.textLabel?.textColor = .red
-                cell.textLabel?.textAlignment = .center
+                let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.reuseIdentifier, for: indexPath) as! BasicTableViewCell
+                cell.label?.text = "%L%: 제품 삭제하기"
+                cell.label?.textColor = .red
+                cell.label?.textAlignment = .center
                 return cell
             default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.reuseIdentifier, for: indexPath) as! TextFieldTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: BasicTableViewCell.reuseIdentifier, for: indexPath) as! BasicTableViewCell
                 
                 cell.isUserInteractionEnabled = false
                 
                 if case .nameKorean = row {
-                    cell.textField.text = self.product?.nameKo
-                    cell.textField.placeholder = "%L%: 한국어 상품명"
-                    cell.textFieldDidChange = { [weak self] textField in
-                        guard let self = self else { return }
-                        
-                        self.product?.nameKo = textField.text
-                    }
+                    cell.label.text = self.product?.nameKo
                 } else if case .nameEnglish = row {
-                    cell.textField.text = self.product?.nameEn?.isEmpty == false ? self.product?.nameEn : "%L%: (영어 상품명 미제공)"
-                    cell.textField.placeholder = "%L%: 영어 상품명"
-                    cell.textFieldDidChange = { [weak self] textField in
-                        guard let self = self else { return }
-                        
-                        self.product?.nameEn = textField.text
-                    }
+                    cell.label.text = self.product?.nameEn?.isEmpty == false ? self.product?.nameEn : "%L%: (영어 상품명 미제공)"
                 } else if case .price = row {
-                    cell.textField.keyboardType = .numberPad
-                    cell.textField.placeholder = "%L%: 상품 가격"
-                    cell.textField.text = self.product?.price?.priceKRW ?? "%L%: (가격 미제공)"
-                    cell.textFieldDidChange = { [weak self] textField in
-                        guard let self = self else { return }
-                        guard let text = textField.text else { return }
-                        guard let price = Int(text) else { return }
-                        
-                        self.product?.price = price
-                    }
+                    cell.label.text = self.product?.price?.priceKRW ?? "%L%: (가격 미제공)"
                 } else if case .supplier = row {
-                    cell.textField.text = self.product?.supplier?.name
-                    cell.textField.placeholder = "%L%: 공급사"
-                    cell.textField.isUserInteractionEnabled = false
-                    cell.accessoryType = .none
+                    cell.label.text = self.product?.supplier?.name
                 }
                 return cell
             }
@@ -176,10 +145,8 @@ extension ProductViewController {
         if product != nil {
             snapshot.appendSections(Section.allCases)
             
-            snapshot.appendItems([.nameKorean, .nameEnglish], toSection: .nameInfo)
+            snapshot.appendItems([.nameKorean, .nameEnglish, .price, .supplier], toSection: .basicInfo)
             snapshot.appendItems([.descriptionKorean], toSection: .descriptionInfo)
-            snapshot.appendItems([.price], toSection: .priceInfo)
-            snapshot.appendItems([.supplier], toSection: .supplierInfo)
             snapshot.appendItems([.delete], toSection: .deleteProduct)
         }
         
