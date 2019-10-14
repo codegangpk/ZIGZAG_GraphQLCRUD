@@ -1,0 +1,67 @@
+fragment supplierFragment on Supplier {
+    id
+    name
+}
+
+fragment productListFragment on Product {
+    id
+    name_ko
+    name_en
+    price
+    supplier {
+        ...supplierFragment
+    }
+    date_created
+    date_updated
+}
+
+fragment productDetailFragment on Product {
+    id
+    name_ko
+    name_en
+    description_ko
+    price
+    supplier {
+        ...supplierFragment
+    }
+}
+
+query ProductList($id_list: [ID!]) {
+    product_list(id_list: $id_list) {
+        item_list {
+            ...productListFragment
+        }
+    }
+}
+
+query Product($id: ID) {
+    product(id: $id) {
+        ...productDetailFragment
+    }
+}
+
+query SupplierList($id_list: [ID!]) {
+    supplier_list(id_list: $id_list) {
+        item_list {
+            ...supplierFragment
+        }
+    }
+}
+
+mutation CreateProduct($input: CreateProductInput!) {
+    createProduct(input: $input) {
+        ...productDetailFragment
+    }
+}
+
+mutation DeleteProduct($input: DeleteProductInput!) {
+    deleteProduct(input: $input) {
+        ...productDetailFragment
+    }
+}
+
+mutation UpdateProduct($input: UpdateProductInput!) {
+    updateProduct(input: $input) {
+        ...productDetailFragment
+    }
+}
