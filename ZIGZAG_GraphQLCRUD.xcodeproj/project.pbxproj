@@ -31,6 +31,7 @@
 		697C458423504C7800A4583D /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 697C458223504C7700A4583D /* TextFieldTableViewCell.xib */; };
 		697C458523504C7800A4583D /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697C458323504C7700A4583D /* TextFieldTableViewCell.swift */; };
 		6983C0542354FC680009EA8D /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6983C0532354FC680009EA8D /* UITableView+Extension.swift */; };
+		6983C056235512770009EA8D /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6983C055235512770009EA8D /* UITextField+Extension.swift */; };
 		69866D2023504FF7008B8318 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */; };
 		69866D2123504FF7008B8318 /* TextViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */; };
 		69866D23235054CC008B8318 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69866D22235054CC008B8318 /* Product.swift */; };
@@ -90,6 +91,7 @@
 		697C458223504C7700A4583D /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		697C458323504C7700A4583D /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		6983C0532354FC680009EA8D /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		6983C055235512770009EA8D /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		69866D1E23504FF7008B8318 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
 		69866D1F23504FF7008B8318 /* TextViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewTableViewCell.xib; sourceTree = "<group>"; };
 		69866D22235054CC008B8318 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			children = (
 				694BD84A23535AAE0091DAC9 /* UIViewController+Extension.swift */,
 				6983C0532354FC680009EA8D /* UITableView+Extension.swift */,
+				6983C055235512770009EA8D /* UITextField+Extension.swift */,
 				694C00E4234F9F4E000157DD /* NSObject+Extension.swift */,
 				69B6624F23508AF800F23D0D /* Int+Extension.swift */,
 				694BD8312351C0BC0091DAC9 /* String+Extension.swift */,
@@ -420,6 +423,7 @@
 				69B6625023508AF800F23D0D /* Int+Extension.swift in Sources */,
 				694BD84E235370530091DAC9 /* HudView.swift in Sources */,
 				6917F1A22350F3690039BA8E /* ZAPINotificationCenter.swift in Sources */,
+				6983C056235512770009EA8D /* UITextField+Extension.swift in Sources */,
 				6917F19E2350CCF60039BA8E /* ZAPIManager.swift in Sources */,
 				694C00E1234F9D2C000157DD /* ProductsViewController.swift in Sources */,
 				69866D29235076C2008B8318 /* SelectSupplierViewController.swift in Sources */,
