@@ -47,6 +47,8 @@ class ProductsViewController: UIViewController {
     override func viewDidLoad() {
         setupNavigationItem()
         
+        view.backgroundColor = tableView.backgroundColor
+        
         tableView.register(ProductTableViewCell.nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         tableView.addRefreshControl(target: self, action: #selector(refreshData(_:)), for: .valueChanged)

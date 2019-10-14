@@ -115,6 +115,8 @@ class ProductFormViewController: UIViewController {
         
         navigationController?.presentationController?.delegate = self
         
+        view.backgroundColor = tableView.backgroundColor
+        
         tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.reuseIdentifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource

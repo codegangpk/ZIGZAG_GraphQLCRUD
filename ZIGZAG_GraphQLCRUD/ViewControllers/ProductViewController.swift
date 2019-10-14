@@ -65,6 +65,8 @@ class ProductViewController: UIViewController {
     override func viewDidLoad() {
         setupNavigationItem()
         
+        view.backgroundColor = tableView.backgroundColor
+        
         tableView.register(BasicTableViewCell.nib, forCellReuseIdentifier: BasicTableViewCell.reuseIdentifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource

@@ -60,6 +60,8 @@ class SelectSupplierViewController: UIViewController {
     override func viewDidLoad() {
         setupNavigationItem()
         
+        view.backgroundColor = tableView.backgroundColor
+        
         tableView.register(BasicTableViewCell.nib, forCellReuseIdentifier: BasicTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
         tableView.addRefreshControl(target: self, action: #selector(refreshData(_:)), for: .valueChanged)
