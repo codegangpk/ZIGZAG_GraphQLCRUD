@@ -74,7 +74,7 @@ class ProductViewController: UIViewController {
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequestUpdated(_:)), notification: .didUpdateProductRequestUpdated)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidDeleteProductRequestUpdated(_:)), notification: .didDeleteProductRequestUpdated)
         
-        updateDataSource(with: product)
+        updateDataSource()
         fetchProduct(with: productId)
     }
 }
@@ -139,7 +139,7 @@ extension ProductViewController {
         ZAPINotificationCenter.post(notification: .didProductRequested, object: self, userInfo: [.productId: productId])
     }
     
-    private func updateDataSource(with product: Product?) {
+    private func updateDataSource(with product: Product? = nil) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.deleteAllItems()
 

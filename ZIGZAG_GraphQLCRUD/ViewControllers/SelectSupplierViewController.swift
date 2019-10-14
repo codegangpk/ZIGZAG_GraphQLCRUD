@@ -66,7 +66,8 @@ class SelectSupplierViewController: UIViewController {
         
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidSupplierListRequestUpdated(_:)), notification: .didSupplierListRequestUpdated)
         
-        fetchProducts()
+        updateDataSource()
+        fetchSuppliers()
     }
 }
 
@@ -110,11 +111,11 @@ extension SelectSupplierViewController: UITableViewDelegate {
 }
 
 extension SelectSupplierViewController {
-    private func fetchProducts() {
+    private func fetchSuppliers() {
         ZAPINotificationCenter.post(notification: .didSupplierListRequested)
     }
     
-    private func updateDataSource(with suppliers: [Supplier]) {
+    private func updateDataSource(with suppliers: [Supplier] = []) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.deleteAllItems()
         
@@ -132,7 +133,7 @@ extension SelectSupplierViewController {
     }
     
     @objc private func refreshData(_ refreshControl: UIRefreshControl) {
-        fetchProducts()
+        fetchSuppliers()
     }
 }
 
