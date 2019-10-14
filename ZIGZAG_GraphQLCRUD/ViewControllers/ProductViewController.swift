@@ -126,8 +126,12 @@ extension ProductViewController: UITableViewDelegate {
         guard let row = dataSource.itemIdentifier(for: indexPath) else { return }
         
         if case .delete = row {
-            let deleteProductInput = DeleteProductInput(id: productId)
-            ZAPINotificationCenter.post(notification: .didDeleteProductRequested, userInfo: [.deleteProductInput: deleteProductInput])
+            showDeleteConfirm { [weak self] in
+                guard let self = self else { return }
+                
+                let deleteProductInput = DeleteProductInput(id: self.productId)
+                ZAPINotificationCenter.post(notification: .didDeleteProductRequested, userInfo: [.deleteProductInput: deleteProductInput])
+            }
         }
     }
     
