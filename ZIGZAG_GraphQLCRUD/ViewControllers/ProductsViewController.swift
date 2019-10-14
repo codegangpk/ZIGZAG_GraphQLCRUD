@@ -49,11 +49,7 @@ class ProductsViewController: UIViewController {
         
         tableView.register(ProductTableViewCell.nib, forCellReuseIdentifier: ProductTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
-        
-        let refreshControl = UIRefreshControl()
-        refreshControl.layer.zPosition = -1
-        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+        tableView.addRefreshControl(target: self, action: #selector(refreshData(_:)), for: .valueChanged)
         
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductListStateUpdated(_:)), notification: .didProductListRequestUpdated)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidCreateProductRequestUpdated), notification: .didCreateProductRequestUpdated)
