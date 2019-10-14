@@ -9,6 +9,23 @@
 import UIKit
 
 extension UIViewController {
+    func showDeleteConfirm(completion: @escaping () -> Void) {
+        let alert = UIAlertController(
+            title: "%L%: 이 상품을 삭제하시겠습니까?",
+            message: "%L%: 삭제한 상품은 복구할 수 없습니다.",
+            preferredStyle: .actionSheet
+        )
+        
+        let noAction = UIAlertAction(title: "%L%: 취소", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "%L%: 삭제하기", style: .default, handler: { (_) in
+            completion()
+        })
+        alert.addAction(noAction)
+        alert.addAction(deleteAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     func showEndEditAlert(title: String) {
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
         

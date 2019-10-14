@@ -9,12 +9,19 @@
 import UIKit
 
 extension String {
-    public func boundedRect(maxWidth: CGFloat, font: UIFont) -> CGRect {
-           return self.boundingRect(
-               with: CGSize(width: maxWidth, height: 999999),
-               options: .usesLineFragmentOrigin,
-               attributes: [NSAttributedString.Key.font: font],
-               context: nil
-           )
-       }
+    func boundedRect(maxWidth: CGFloat, font: UIFont) -> CGRect {
+        return self.boundingRect(
+            with: CGSize(width: maxWidth, height: 999999),
+            options: .usesLineFragmentOrigin,
+            attributes: [NSAttributedString.Key.font: font],
+            context: nil
+        )
+    }
+    
+    mutating func filterDigitsOnly() {
+        let allowedString = "0123456789"
+        self = self.filter {
+            allowedString.contains($0)
+        }
+    }
 }

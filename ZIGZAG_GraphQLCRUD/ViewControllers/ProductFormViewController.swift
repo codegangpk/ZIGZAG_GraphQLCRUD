@@ -115,6 +115,8 @@ class ProductFormViewController: UIViewController {
         
         navigationController?.presentationController?.delegate = self
         
+        view.backgroundColor = tableView.backgroundColor
+        
         tableView.register(TextFieldTableViewCell.nib, forCellReuseIdentifier: TextFieldTableViewCell.reuseIdentifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
@@ -189,10 +191,12 @@ extension ProductFormViewController {
                     }
                     cell.textFieldDidChange = { [weak self] textField in
                         guard let self = self else { return }
-                        guard let text = textField.text, text.isEmpty == false else {
+                        guard var text = textField.text, text.isEmpty == false else {
                             self.product.price = nil
                             return
                         }
+                        text.filterDigitsOnly()
+                        
                         guard let price = Int32(text) else {
                             textField.text = String(self.product.price!)
                             return
@@ -200,6 +204,8 @@ extension ProductFormViewController {
                         
                         textField.text = String(price)
                         self.product.price = Int(price)
+                        textField.setCursor(to: text.count)
+                        textField.setNeedsDisplay()
                     }
                     cell.textFieldDidEndOnExit = { [weak self] (textField) in
                         guard let self = self else { return }

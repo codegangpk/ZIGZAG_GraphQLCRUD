@@ -65,20 +65,18 @@ class ProductViewController: UIViewController {
     override func viewDidLoad() {
         setupNavigationItem()
         
+        view.backgroundColor = tableView.backgroundColor
+        
         tableView.register(BasicTableViewCell.nib, forCellReuseIdentifier: BasicTableViewCell.reuseIdentifier)
         tableView.register(TextViewTableViewCell.nib, forCellReuseIdentifier: TextViewTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
-        
-        let refreshControl = UIRefreshControl()
-        refreshControl.layer.zPosition = -1
-        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+        tableView.addRefreshControl(target: self, action: #selector(refreshData(_:)), for: .valueChanged)
         
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidProductRequestUpdated(_:)), notification: .didProductRequestUpdated)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidUpdateProductRequestUpdated(_:)), notification: .didUpdateProductRequestUpdated)
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidDeleteProductRequestUpdated(_:)), notification: .didDeleteProductRequestUpdated)
         
-        updateDataSource(with: product)
+        updateDataSource()
         fetchProduct(with: productId)
     }
 }
@@ -128,8 +126,12 @@ extension ProductViewController: UITableViewDelegate {
         guard let row = dataSource.itemIdentifier(for: indexPath) else { return }
         
         if case .delete = row {
-            let deleteProductInput = DeleteProductInput(id: productId)
-            ZAPINotificationCenter.post(notification: .didDeleteProductRequested, userInfo: [.deleteProductInput: deleteProductInput])
+            showDeleteConfirm { [weak self] in
+                guard let self = self else { return }
+                
+                let deleteProductInput = DeleteProductInput(id: self.productId)
+                ZAPINotificationCenter.post(notification: .didDeleteProductRequested, userInfo: [.deleteProductInput: deleteProductInput])
+            }
         }
     }
     
@@ -143,7 +145,7 @@ extension ProductViewController {
         ZAPINotificationCenter.post(notification: .didProductRequested, object: self, userInfo: [.productId: productId])
     }
     
-    private func updateDataSource(with product: Product?) {
+    private func updateDataSource(with product: Product? = nil) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.deleteAllItems()
 

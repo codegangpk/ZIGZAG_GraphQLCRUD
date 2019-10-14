@@ -60,17 +60,16 @@ class SelectSupplierViewController: UIViewController {
     override func viewDidLoad() {
         setupNavigationItem()
         
+        view.backgroundColor = tableView.backgroundColor
+        
         tableView.register(BasicTableViewCell.nib, forCellReuseIdentifier: BasicTableViewCell.reuseIdentifier)
         tableView.dataSource = dataSource
-        
-        let refreshControl = UIRefreshControl()
-        refreshControl.layer.zPosition = -1
-        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+        tableView.addRefreshControl(target: self, action: #selector(refreshData(_:)), for: .valueChanged)
         
         ZAPINotificationCenter.addObserver(observer: self, selector: #selector(onDidSupplierListRequestUpdated(_:)), notification: .didSupplierListRequestUpdated)
         
-        fetchProducts()
+        updateDataSource()
+        fetchSuppliers()
     }
 }
 
@@ -114,11 +113,11 @@ extension SelectSupplierViewController: UITableViewDelegate {
 }
 
 extension SelectSupplierViewController {
-    private func fetchProducts() {
+    private func fetchSuppliers() {
         ZAPINotificationCenter.post(notification: .didSupplierListRequested)
     }
     
-    private func updateDataSource(with suppliers: [Supplier]) {
+    private func updateDataSource(with suppliers: [Supplier] = []) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.deleteAllItems()
         
@@ -136,7 +135,7 @@ extension SelectSupplierViewController {
     }
     
     @objc private func refreshData(_ refreshControl: UIRefreshControl) {
-        fetchProducts()
+        fetchSuppliers()
     }
 }
 
